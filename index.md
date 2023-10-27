@@ -8,6 +8,7 @@ layout: default
 * Лекция 1. [Что такое Scala?](lectures/scala_lecture_1.html)
 * Лекция 2. [Scala Basic. От переменных до ООП](lectures/scala_lecture_2.html)
 * Лекция 4. [Функциональное программирование. Концепция (PowerPoint)](lectures/scala_lecture_4.pptx)
+* Лекция 5. [Функциональное программирование. Type classes и абстракции для ФП](lectures/scala_lecture_5.html)
 
 
 ### Домашние задания
