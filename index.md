@@ -6,7 +6,7 @@ layout: default
 ### Лекции
 
 * Лекция 1. [Что такое Scala?](lectures/scala_lecture_1.html)
-* Лекция 4. [Функциональное программирование. Концепция](PowerPoint)(lectures/scala_lecture_4.pptx)
+* Лекция 4. [Функциональное программирование. Концепция (PowerPoint)](lectures/scala_lecture_4.pptx)
 
 
 ### Домашние задания
