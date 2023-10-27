@@ -633,6 +633,52 @@ object MapReduce extends App {
             соответственным образом выполняет команду</p>
         </section>
         <section>
+            <h2>И ещё пара type classов</h2>
+            <h3>Foldable</h3>
+            <div class="code-block">
+                <pre><code class="scala">
+  trait Foldable[F[_]] extends UnorderedFoldable[F] with FoldableNFunctions[F] {
+    def foldLeft[A, B](fa: F[A], b: B)(f: (B, A) => B): B
+    def foldRight[A, B](fa: F[A], lb: Eval[B])(f: (A, Eval[B]) => Eval[B]): Eval[B]
+  }
+                </code></pre>
+            </div>
+            <p>Foldable это List, Option, Map.</p>
+            <p>Foldable автоматически предоставляет ещё ряд полезных функций:</p>
+            <div class="code-block">
+                <pre><code class="scala">
+  def find[A](fa: F[A])(f: A => Boolean): Option[A]
+  def exists[A](fa: F[A])(p: A => Boolean): Boolean
+  def maximumOption[A](fa: F[A])(implicit A: Order[A]): Option[A]
+  def maximumByOption[A, B: Order](fa: F[A])(f: A => B): Option[A]
+  def foldMap[A, B](fa: F[A])(f: A => B)(implicit B: Monoid[B]): B
+  def toList[A](fa: F[A]): List[A]
+                </code></pre>
+            </div>
+        </section>
+        <section>
+            <h2>И ещё пара type classов</h2>
+            <h3>Traverse</h3>
+            <div class="code-block">
+                <pre><code class="scala">
+  trait Traverse[F[_]] extends Functor[F] with Foldable[F] with UnorderedTraverse[F] {
+    def traverse[G[_]: Applicative, A, B](fa: F[A])(f: A => G[B]): G[F[B]]
+  }
+                </code></pre>
+            </div>
+            <p>Traverse позволяет поменять контексты местами или обернуть контекст в дополнительный контекст</p>
+            <div class="code-block">
+                <pre><code class="scala">
+  val example: List[Option[Int]] = Option(1).traverse(x => List(x))
+
+  val listOfFuture: List[Future[Int]] = List(Future.successful(1), Future.successful(2))
+  val futureOfLists: Future[List[Int]]= Future.sequence(listOfFuture)
+  val futureOfLists2: Future[List[Int]]= listOfFuture.sequence
+  val futureOfLists3: Future[List[Int]]= listOfFuture.traverse(identity)
+                </code></pre>
+            </div>
+        </section>
+        <section>
             <h4>А сколько вообще type classов?</h4>
             <img style="height: 1000px" src="img/lecture_5/cats.svg">
         </section>
