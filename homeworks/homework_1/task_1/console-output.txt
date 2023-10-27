@@ -1,0 +1,19 @@
+/Users/anas.y.novikova/Library/Java/JavaVirtualMachines/temurin-17.0.8.1/Contents/Home/bin/java "-javaagent:/Users/anas.y.novikova/Library/Application Support/JetBrains/Toolbox/apps/IDEA-C/ch-0/232.9921.47/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=61746:/Users/anas.y.novikova/Library/Application Support/JetBrains/Toolbox/apps/IDEA-C/ch-0/232.9921.47/IntelliJ IDEA CE.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath "/Users/anas.y.novikova/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.13.12.jar:/Users/anas.y.novikova/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.13.12.jar:/Users/anas.y.novikova/.ivy2/cache/org.scala-lang/scala-compiler/jars/scala-compiler-2.13.12.jar:/Users/anas.y.novikova/.ivy2/cache/io.github.java-diff-utils/java-diff-utils/jars/java-diff-utils-4.12.jar:/Users/anas.y.novikova/.ivy2/cache/org.jline/jline/jars/jline-3.22.0.jar:/Users/anas.y.novikova/.ivy2/cache/net.java.dev.jna/jna/jars/jna-5.13.0.jar:/Users/anas.y.novikova/Library/Application Support/JetBrains/Toolbox/apps/IDEA-C/ch-0/232.9921.47/IntelliJ IDEA CE.app.plugins/Scala/lib/runners.jar" scala.tools.nsc.MainGenericRunner -usejavacp -Xjline:off
+Welcome to Scala 2.13.12 (OpenJDK 64-Bit Server VM, Java 17.0.8.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> def result(name: String, greeting: String): String = s"$greeting, Scala! This is $name"
+def result(name: String, greeting: String): String
+
+scala> print(result("Nastya", "Hello"))
+Hello, Scala! This is Nastya
+scala> print(result("Nastya", "Hola"))
+Hola, Scala! This is Nastya
+scala> print(result("Nastya", "Guten tag"))
+Guten tag, Scala! This is Nastya
+scala> print(result("aytsaN", "Hello"))
+Hello, Scala! This is aytsaN
+scala> print(result("aytsaN", "Hola"))
+Hola, Scala! This is aytsaN
+scala> print(result("aytsaN", "Guten tag"))
+Guten tag, Scala! This is aytsaN
