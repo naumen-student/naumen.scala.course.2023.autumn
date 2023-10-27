@@ -6,6 +6,7 @@ layout: default
 ### Лекции
 
 * Лекция 1. [Что такое Scala?](lectures/scala_lecture_1.html)
+* Лекция 3. [Scala basic II. От type конструкторов до коллекций](lectures/scala_lecture_3/index.html)
 * Лекция 4. [Функциональное программирование. Концепция (PowerPoint)](lectures/scala_lecture_4.pptx)
 
 
