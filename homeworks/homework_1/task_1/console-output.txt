@@ -1,0 +1,27 @@
+[akergez@fedora naumen.scala.course.2023.autumn]$ scala
+Welcome to Scala 3.3.1 (11.0.20, Java OpenJDK 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+
+scala> val sayHello = (greeting: String, name: String) => {
+     |    s"$greeting, Scala! This is $name" }
+val sayHello: (String, String) => String = Lambda$1406/0x00000008406f2840@165aa43a
+
+scala> println(sayHello("Hello", "Egor"))
+Hello, Scala! This is Egor
+
+scala> println(sayHello("Hola", "Egor"))
+Hola, Scala! This is Egor
+
+scala> println(sayHello("Guten Tag", "Egor"))
+Guten Tag, Scala! This is Egor
+
+scala> println(sayHello("Hello", "Egor".reverse))
+Hello, Scala! This is rogE
+
+scala> println(sayHello("Hola", "Egor".reverse))
+Hola, Scala! This is rogE
+
+scala> println(sayHello("Guten Tag", "Egor".reverse))
+Guten Tag, Scala! This is rogE
+
+scala>
