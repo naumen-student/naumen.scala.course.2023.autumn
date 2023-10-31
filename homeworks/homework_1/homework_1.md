@@ -1,59 +1,34 @@
-# Домашнее задание №1 (курс Scala, Naumen)
+C:\Users\pichu>scala
+Welcome to Scala 3.3.1 (21, Java Java HotSpot(TM) 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
 
-## 0. Перед тем как приступить к заданиям
+scala> val n = "Fedor Pichugin"
+val n: String = Fedor Pichugin
 
-### Установка Scala
-Инструкция для установки Scala находится тут - https://www.scala-lang.org/download/
+scala> println("Hello Scala! This is " + n)
+Hello Scala! This is Fedor Pichugin
 
-### Cheatsheet
-Для первоначального освоения основных ситнаксических конструкций Scala предлагаем воспользоваться cheatsheet (шпаргалка) - <a>https://alvinalexander.com/downloads/scala/Scala-Cheat-Sheet-devdaily.pdf</a>
+scala> println("Hola Scala! This is " + n)
+Hola Scala! This is Fedor Pichugin
 
+scala> println("Gutten tag Scala! This is " + n)
+Gutten tag Scala! This is Fedor Pichugin
 
-## 1. Использование REPL
+scala> val nr = n.reverse
+val nr: String = niguhciP rodeF
 
-Для выполнения данного задания вам понадобится использовать REPL.
+scala> nr
+val res2: String = niguhciP rodeF
 
-У скалы есть как минимум 2 варианта REPL:
-- стандартный, который идет вместе самим компилятором - <a>https://downloads.lightbend.com/scala/2.12.10/scala-2.12.10.msi</a>
-- Ammonite - разработанный отдельно от комплиятора и имеющий с более мощный функционал, но запускающийся только под Linux/Mac - <a>https://ammonite.io/#Ammonite-REPL</a>
+scala> println("Hello Scala! This is " + nr)
+Hello Scala! This is niguhciP rodeF
 
-Используйте REPL и запрограммируйте следующее:
+scala> val s = "Scala! This is "
+val s: String = "Scala! This is "
 
-- Вывести на консоль "Hello Scala! This is ${здесь ваше имя}"
-- Затем поменяйте приветственное слово ("Hello") на пару других приветственных слов, например, "Hola" и "Guten tag". Выведите результаты замен на консоль.
-- Затем для каждого варианта приветствия замените своё имя на его перевернутое значение (пример: "Artem Sokolov" -> "volokoS metrA"). Результаты таких замен также выведите на консоль.
+scala> s
+val res3: String = "Scala! This is "
 
-*Примечание: Постарайтесь переиспользовать максимальное количество кода (переменных, строковых литералов, функций и т.д). На данном этапе это не является сколько-либо важным для цели выполнения задания, однако позволяет вам лишний раз попрактиковаться. Вообще программирование с помощью REPL подразумевает скорее отсуствие соблюдения принципов чистоты кода (именование переменных, переиспользование одинаковых кусков кода, DRY, YAGNI и прочих) и позволяет в непринужденной и интерактивной манере попрактиковаться в использовании языка или проверить какую-то идею.*
-
-Результат предоставить в виде текстового файла всего текста из консоли начиная с запуска REPL. Для этого в репозитории создана папка и пустой файл куда необходимо положить результат - ```homeworks/homework_1/task_1/console-output.txt```
-
-Пример содержимого файла:
-```
-C:\Users\doter>scala                                                                                                    Picked up JAVA_TOOL_OPTIONS: -Dorg.lwjgl.opengl.Window.undecorated=true                                                 Welcome to Scala 2.13.1 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_161).                                            Type in expressions for evaluation. Or try :help.                                                                                                                                                                                               scala> val a = "Hello Scala! This is Artem Sokolov"                                                                     a: String = Hello Scala! This is Artem Sokolov                                                                                                                                                                                                  scala> println (a)                                                                                                      Hello Scala! This is Artem Sokolov                                                                                                                                                                                                              scala>               
-```
-## 2. Использование Worksheet
-
-Для целей обучения есть очень удобный способ работы с кодом на Scala - worksheet. Worksheet позволяет иметья интерактивность и наглядность каждой строчки кода, при этом позволяет работать с кодом в рамках целого файла.
-
-Две наиболее удобных альтернативы для этого:
-- Scastie - онлайн компилятор и среда исполнения Scala кода с возможностью работать в режиме worksheet - https://scastie.scala-lang.org/
-- файл worksheet в IntelliJ IDEA - https://www.jetbrains.com/help/idea/work-with-scala-worksheet-and-ammonite.html
-
-Для выполнения задания необходимо сделать следующее:
-- Перенесите весь свой код из п.1 в формат worksheet и добейтесь того, что он точно также комплиируется и выполняется.
-- Зарефакторите код (например, выделите одинаковые части строки в переменные, объедините изменяющиеся части в коллекции, выделите в функцию код который выводит строки на консоль и т.д.)
-
-Результат предоставить в виде ссылки на ваш сниппет кода, сохраненный в https://scastie.scala-lang.org/ (не забудьте проверить что по сгенерированной ссылке лежит именно то что вы хотите предоставить и в дальнейшем не изменяйте данный сниппет). Сылку записать в файл  ```homeworks/homework_1/task_2/scastie-url.txt```
-
-## 3. Использование SBT
-
-Для первоначального знакомства с SBT предлагаем работать через IntelliJ IDEA.
-
-Инструкция по созданию нового SBT проекта в IDEA - https://docs.scala-lang.org/getting-started/intellij-track/building-a-scala-project-with-intellij-and-sbt.html 
-
-Необходимо создать новый проект, проверить что всё работает, запустив его как описано в инструкции (будте готовы к тому что проект прогружается несколько минут, а затем при первоначальном запуске может начать скачивать зависимости из интернета).
-
-Далее необходимо перенести код из п.2 вместо текущего "Hello world" (в тело объекта ```object Main extends App```) и исполнить его с помощью SBT (команда sbt run в консоли).
-
-Результат - после всех манипуляций скопировать папку sbt проекта в папку результатов (```homeworks/homework_1/task_3```) и закоммитить в git всю папку проекта со всеми файлами.
+scala> println("Gutten tag " + s + nr)
+Gutten tag Scala! This is niguhciP rodeF
 
