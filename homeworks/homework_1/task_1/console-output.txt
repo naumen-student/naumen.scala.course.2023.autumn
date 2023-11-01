@@ -1,0 +1,21 @@
+C:\Users\ptrnk>Scala
+Welcome to Scala 2.13.12 (OpenJDK 64-Bit Server VM, Java 21.0.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> println("Hello Scala! This is Полина")
+Hello Scala! This is Полина
+
+scala> println("Hi Scala! This is Полина")
+Hi Scala! This is Полина
+
+scala> println("Привет Scala! This is Полина")
+Привет Scala! This is Полина
+
+scala> println("Hello Scala! This is анилоП")
+Hello Scala! This is анилоП
+
+scala> println("Hi Scala! This is анилоП")
+Hi Scala! This is анилоП
+
+scala> println("Привет Scala! This is анилоП")
+Привет Scala! This is анилоП
