@@ -1,0 +1,36 @@
+➜  ~ cs launch scala:2.13.12
+Welcome to Scala 2.13.12 (OpenJDK 64-Bit Server VM, Java 19.0.2).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Danil Zaichkin"
+val name: String = Danil Zaichkin
+
+scala> val greeting1 = "Hello"
+val greeting1: String = Hello
+
+scala> val greeting2 = "Hola"
+val greeting2: String = Hola
+
+scala> val greeting3 = "Guten tag"
+val greeting3: String = Guten tag
+
+scala> def sayHello(greeting: String, name: String): Unit = println(s"$greeting Scala! This is $name")
+def sayHello(greeting: String, name: String): Unit
+
+scala> sayHello(greeting1, name)
+Hello Scala! This is Danil Zaichkin
+
+scala> sayHello(greeting2, name)
+Hola Scala! This is Danil Zaichkin
+
+scala> sayHello(greeting3, name)
+Guten tag Scala! This is Danil Zaichkin
+
+scala> sayHello(greeting1, name.reverse)
+Hello Scala! This is nikhciaZ linaD
+
+scala> sayHello(greeting2, name.reverse)
+Hola Scala! This is nikhciaZ linaD
+
+scala> sayHello(greeting3, name.reverse)
+Guten tag Scala! This is nikhciaZ linaD
