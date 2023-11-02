@@ -1,0 +1,54 @@
+PS C:\Users\Maria> scala
+Welcome to Scala 2.12.10 (Java HotSpot(TM) 64-Bit Server VM, Java 18.0.2.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> val a = "Hello Scala! This is Mary Medvedeva"
+a: String = Hello Scala! This is Mary Medvedeva
+
+scala> println(a)
+Hello Scala! This is Mary Medvedeva
+
+scala> val a = "Hola Scala! This is Mary Medvedeva"
+a: String = Hola Scala! This is Mary Medvedeva
+
+scala> println(a)
+Hola Scala! This is Mary Medvedeva
+
+scala> val a = "Bonjour Scala! This is Mary Medvedeva"
+a: String = Bonjour Scala! This is Mary Medvedeva
+
+scala> println(a)
+Bonjour Scala! This is Mary Medvedeva
+
+scala> val a = "Guten tag Scala! This is Mary Medvedeva"
+a: String = Guten tag Scala! This is Mary Medvedeva
+
+scala> println(a)
+Guten tag Scala! This is Mary Medvedeva
+
+scala> val a = "Guten tag Scala! This is avedevdeM yraM"
+a: String = Guten tag Scala! This is avedevdeM yraM
+
+scala> println(a)
+Guten tag Scala! This is avedevdeM yraM
+
+scala> val a = "Hello Scala! This is avedevdeM yraM"
+a: String = Hello Scala! This is avedevdeM yraM
+
+scala> println(a)
+Hello Scala! This is avedevdeM yraM
+
+scala> val b = "Guten tag Scala! This is avedevdeM yraM"
+b: String = Guten tag Scala! This is avedevdeM yraM
+
+scala> val c = "Hola Scala! This is avedevdeM yraM"
+c: String = Hola Scala! This is avedevdeM yraM
+
+scala> println(a)
+Hello Scala! This is avedevdeM yraM
+
+scala> println(b)
+Guten tag Scala! This is avedevdeM yraM
+
+scala> println(c)
+Hola Scala! This is avedevdeM yraM
