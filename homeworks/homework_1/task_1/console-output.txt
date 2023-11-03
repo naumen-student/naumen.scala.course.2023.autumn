@@ -1,0 +1,53 @@
+Microsoft Windows [Version 10.0.19044.3086]
+(c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+C:\Users\Egor>scala -version
+Scala code runner version 3.3.1 -- Copyright 2002-2023, LAMP/EPFL
+
+C:\Users\Egor>sbt console
+[warn] Neither build.sbt nor a 'project' directory in the current directory: "C:\Users\Egor"
+c) continue
+q) quit
+?q
+
+C:\Users\Egor>scala
+Welcome to Scala 3.3.1 (1.8.0_181, Java Java HotSpot(TM) Client VM).
+Type in expressions for evaluation. Or try :help.
+
+scala>
+val myName = "Egor Zykov"
+-- [E018] Syntax Error: --------------------------------------------------------
+1 |intln(val myName = "Egor Zykov"
+  |      ^^^
+  |      expression expected but val found
+  |
+  | longer explanation available when compiling with `-explain`
+
+scala> val myName = "Egor Zykov"
+val myName: String = Egor Zykov
+
+scala> myName
+val res0: String = Egor Zykov
+
+scala> println(myName)
+Egor Zykov
+
+scala> println(f"Hello Scala! This is ${myName}")
+Hello Scala! This is Egor Zykov
+
+scala> println(f"Hello Scala! This is ${myName.reverse}")
+Hello Scala! This is vokyZ rogE
+
+scala> println(f"Ola Scala! This is ${myName}")
+Ola Scala! This is Egor Zykov
+
+scala> println(f"Ola Scala! This is ${myName.reverse}")
+Ola Scala! This is vokyZ rogE
+
+scala> println(f"Guten morgen Scala! This is ${myName}")
+Guten morgen Scala! This is Egor Zykov
+
+scala> println(f"Guten morgen Scala! This is ${myName.reverse}")
+Guten morgen Scala! This is vokyZ rogE
+
+scala>
