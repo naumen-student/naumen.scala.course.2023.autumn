@@ -1,0 +1,47 @@
+C:\Users\Dengo>scala
+Welcome to Scala 2.12.10 (Java HotSpot(TM) 64-Bit Server VM, Java 20.0.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> var name = "Denis Golov"
+name: String = Denis Golov
+
+scala> var greeting = "Hello"
+greeting: String = Hello
+
+scala> println(s"$greeting Scala! This is $name")
+Hello Scala! This is Denis Golov
+
+scala> greeting = "Hola"
+greeting: String = Hola
+
+scala> println(s"$greeting Scala! This is $name")
+Hola Scala! This is Denis Golov
+
+scala> greeting = "Guten tag"
+greeting: String = Guten tag
+
+scala> println(s"$greeting Scala! This is $name")
+Guten tag Scala! This is Denis Golov
+
+scala> name = name.reverse
+name: String = voloG sineD
+
+scala> greeting = "Hello"
+greeting: String = Hello
+
+scala> println(s"$greeting Scala! This is $name")
+Hello Scala! This is voloG sineD
+
+scala> greeting = "Hola"
+greeting: String = Hola
+
+scala> println(s"$greeting Scala! This is $name")
+Hola Scala! This is voloG sineD
+
+scala> greeting = "Guten tag"
+greeting: String = Guten tag
+
+scala> println(s"$greeting Scala! This is $name")
+Guten tag Scala! This is voloG sineD
+
+scala>
