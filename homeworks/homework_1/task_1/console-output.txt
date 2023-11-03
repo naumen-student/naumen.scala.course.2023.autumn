@@ -1,0 +1,35 @@
+scala> var a = "Hello Scala! This is Grisha"
+var a: String = Hello Scala! This is Grisha
+
+scala> println("Hello Scala! This is Grisha")
+Hello Scala! This is Grisha
+
+scala> println("Hello Scala! This is Grisha".replaceAll("Hello", "Hola"))
+Hola Scala! This is Grisha
+
+scala> println("Hello Scala! This is Grisha".replaceAll("Hello", "Guten tag"))
+Guten tag Scala! This is Grisha
+
+scala> var reverseName = "ahsirG"
+var reverseName: String = ahsirG
+
+scala> println("Hello Scala! This is Grisha".replaceAll("Grisha", reverseName))
+Hello Scala! This is ahsirG
+
+scala> var greeting = "Hello Scala! This is Grisha"
+var greeting: String = Hello Scala! This is Grisha
+
+scala> var name = "Grisha"
+var name: String = Grisha
+
+scala> println(greeting.replaceAll(name, reverseName))
+Hello Scala! This is ahsirG
+
+scala> var hello = "Hello"
+var hello: String = Hello
+
+scala> println(greeting.replaceAll(name, reverseName).replaceAll(hello, "Hola"))
+Hola Scala! This is ahsirG
+
+scala> println(greeting.replaceAll(name, reverseName).replaceAll(hello, "Guten tag"))
+Guten tag Scala! This is ahsirG
