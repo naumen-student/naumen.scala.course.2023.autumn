@@ -1,0 +1,25 @@
+/Users/al.menshikov/.sdkman/candidates/java/17.0.7-tem/bin/java "-javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=61285:/Applications/IntelliJ IDEA.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath "/Users/al.menshikov/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.12.10.jar:/Users/al.menshikov/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.12.10.jar:/Users/al.menshikov/.ivy2/cache/org.scala-lang.modules/scala-xml_2.12/bundles/scala-xml_2.12-1.0.6.jar:/Users/al.menshikov/.ivy2/cache/org.scala-lang/scala-compiler/jars/scala-compiler-2.12.10.jar:/Users/al.menshikov/Library/Application Support/JetBrains/IntelliJIdea2023.1/plugins/Scala/lib/runners.jar" scala.tools.nsc.MainGenericRunner -usejavacp -Xnojline
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 17.0.7).
+Type in expressions for evaluation. Or try :help.
+
+scala> def printHello(helloWord: String, name: String) = println(s"$helloWord Scala! This is $name")
+printHello: (helloWord: String, name: String)Unit
+
+scala> val name = "Aleksandr Menshikov"
+name: String = Aleksandr Menshikov
+
+scala> printHello("Hello", name)
+Hello Scala! This is Aleksandr Menshikov
+
+scala> for {
+     |   name <- List(name, name.reverse)
+     |   helloWord <- List("Hi", "Hola", "Guten tag")
+     | } printHello(helloWord, name)
+Hi Scala! This is Aleksandr Menshikov
+Hola Scala! This is Aleksandr Menshikov
+Guten tag Scala! This is Aleksandr Menshikov
+Hi Scala! This is vokihsneM rdnaskelA
+Hola Scala! This is vokihsneM rdnaskelA
+Guten tag Scala! This is vokihsneM rdnaskelA
+
+scala>
