@@ -1,0 +1,25 @@
+C:\Users\artyo\OneDrive\Рабочий стол\Scala\Naumen\naumen.scala.course.2023.autumn>scala
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 1.8.0_302).
+Type in expressions for evaluation. Or try :help.
+
+scala> val greets = List("Hello", "Hola", "Guten tag")
+greets: List[String] = List(Hello, Hola, Guten tag)
+
+scala> val name = "Artem"
+name: String = Artem
+
+scala> val names = List(name, name.reverse)
+names: List[String] = List(Artem, metrA)
+
+scala> val greetings = (greeting: String, name: String) => s"$greeting Scala! This is $name"
+greetings: (String, String) => String = $$Lambda$1079/1956477953@1d3a03fe
+
+scala> names.flatMap(n => greets.map(g => greetings(g, n))).foreach(greet => println(greet))
+Hello Scala! This is Artem
+Hola Scala! This is Artem
+Guten tag Scala! This is Artem
+Hello Scala! This is metrA
+Hola Scala! This is metrA
+Guten tag Scala! This is metrA
+
+scala>

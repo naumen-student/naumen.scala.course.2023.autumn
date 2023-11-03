@@ -1,0 +1,11 @@
+[debug] Packaging C:\Users\artyo\OneDrive\Рабочий стол\Scala\Naumen\naumen.scala.course.2023.autumn\homeworks\homework_1\task_3\target\scala-2.13\task_3_2.13-0.1.jar ...
+[debug] Input file mappings:
+[debug] 	example
+[debug] 	  C:\Users\artyo\OneDrive\Рабочий стол\Scala\Naumen\naumen.scala.course.2023.autumn\homeworks\homework_1\task_3\target\scala-2.13\classes\example
+[debug] 	example\Main$.class
+[debug] 	  C:\Users\artyo\OneDrive\Рабочий стол\Scala\Naumen\naumen.scala.course.2023.autumn\homeworks\homework_1\task_3\target\scala-2.13\classes\example\Main$.class
+[debug] 	example\Main$delayedInit$body.class
+[debug] 	  C:\Users\artyo\OneDrive\Рабочий стол\Scala\Naumen\naumen.scala.course.2023.autumn\homeworks\homework_1\task_3\target\scala-2.13\classes\example\Main$delayedInit$body.class
+[debug] 	example\Main.class
+[debug] 	  C:\Users\artyo\OneDrive\Рабочий стол\Scala\Naumen\naumen.scala.course.2023.autumn\homeworks\homework_1\task_3\target\scala-2.13\classes\example\Main.class
+[debug] Done packaging.
