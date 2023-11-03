@@ -1,0 +1,20 @@
+scala-cli
+Welcome to Scala 3.2.0 (17.0.8, Java OpenJDK 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+                                                                                                                                                           
+scala>   def greeter(greet: String => String): String => String = name => greet(name)
+def greeter(greet: String => String): String => String
+                                                                                                                                                           
+scala>   val greets: List[String => String] = List(name => s"Hello scala! This is ${name}",name => s"Hola scala! This is ${name}", name => s"Guttag,${name} ")
+val greets: List[String => String] = List(rs$line$2$$$Lambda$1460/0x00000070014c8410@390a07a0, rs$line$2$$$Lambda$1461/0x0000007001508000@674e4c82, rs$line$2$$$Lambda$1462/0x00000070015083d0@572b4072)
+                                                                                                                                                           
+scala>   val name = "Konstantin"
+val name: String = Konstantin
+                                                                                                                                                           
+scala> greets.map(greeter).map(_(name))
+val res0: List[String] = List(Hello scala! This is Konstantin, Hola scala! This is Konstantin, "Guttag,Konstantin ")
+                                                                                                                                                           
+scala> greets.map(greeter).map(_(name.reverse))
+val res1: List[String] = List(Hello scala! This is nitnatsnoK, Hola scala! This is nitnatsnoK, "Guttag,nitnatsnoK ")
+                                                                                                                                                           
+scala> 
