@@ -1,0 +1,27 @@
+PS C:\Users\kaire\Documents\Scala\naumen.scala.course.2023.autumn> scala
+Welcome to Scala 2.13.12 (OpenJDK 64-Bit Server VM, Java 11.0.16.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> def printGreetings(name: String, greetings: List[String] = List("Hello")): Unit = {greetings.foreach(greeting => println(s"$greeting Scala! This is $name"))}
+def printGreetings(name: String, greetings: List[String]): Unit
+
+scala> val name = "Andrey Komendantov"
+val name: String = Andrey Komendantov
+
+scala> printGreetings(name)
+Hello Scala! This is Andrey Komendantov
+
+scala> val greetingsList = List("Hello","Hola","Guten tag")
+val greetingsList: List[String] = List(Hello, Hola, Guten tag)
+
+scala> printGreetings(name, greetingsList)
+Hello Scala! This is Andrey Komendantov
+Hola Scala! This is Andrey Komendantov
+Guten tag Scala! This is Andrey Komendantov
+
+scala> printGreetings(name.reverse, greetingsList)
+Hello Scala! This is votnadnemoK yerdnA
+Hola Scala! This is votnadnemoK yerdnA
+Guten tag Scala! This is votnadnemoK yerdnA
+
+scala>
