@@ -1,0 +1,24 @@
+Welcome to Scala 3.3.1 (11.0.21, Java OpenJDK 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+                                                                                
+scala> val greeting = "Hello"
+val greeting: String = Hello
+                                                                                
+scala> val name = "Guldena"   | 
+val name: String = Guldena
+                                                                                
+                                                                                
+scala> println(s"$greeting Scala! This is $name")
+Hello Scala! This is Guldena
+                                                                                
+scala> println(s"Guten tag Scala! This is ${name.reverse}")
+Guten tag Scala! This is anedluG
+                                                                                
+scala> println(s"Hola Scala! This is $name")
+Hola Scala! This is Guldena
+                                                                                
+scala> println(s"Hola Scala! This is ${name.reverse}")
+Hola Scala! This is anedluG
+                                                                                
+scala> ("Hola", name.reverse)
+val res0: (String, String) = (Hola,anedluG)
