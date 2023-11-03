@@ -1,0 +1,39 @@
+C:\Users\79126>scala
+Welcome to Scala 2.12.10 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_51).
+Type in expressions for evaluation. Or try :help.
+
+scala> var a = "Hello, Scala! This is Lina"
+a: String = Hello, Scala! This is Lina
+
+scala> println(a)
+Hello, Scala! This is Lina
+
+scala> var b = a.replaceAll("Hello", "Hola")
+b: String = Hola, Scala! This is Lina
+
+scala> println(b)
+Hola, Scala! This is Lina
+
+scala> var c = a.replaceAll("Hello", "Guten tag")
+c: String = Guten tag, Scala! This is Lina
+
+scala> println(c)
+Guten tag, Scala! This is Lina
+
+scala> a = a.replaceAll("Lina", "aniL")
+a: String = Hello, Scala! This is aniL
+
+scala> println(a)
+Hello, Scala! This is aniL
+
+scala> b = b.replaceAll("Lina", "aniL")
+b: String = Hola, Scala! This is aniL
+
+scala> println(b)
+Hola, Scala! This is aniL
+
+scala> c = c.replaceAll("Lina", "aniL")
+c: String = Guten tag, Scala! This is aniL
+
+scala> println(c)
+Guten tag, Scala! This is aniL
