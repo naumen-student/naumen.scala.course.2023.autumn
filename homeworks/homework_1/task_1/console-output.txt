@@ -1,0 +1,40 @@
+Microsoft Windows [Version 10.0.19044.1826]
+(c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+C:\Users\user>scala
+Welcome to Scala 2.12.10 (Java HotSpot(TM) 64-Bit Server VM, Java 20.0.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> var res = "Hello Scala! This is Alex Panov"
+res: String = Hello Scala! This is Alex Panov
+
+scala> println(res)
+Hello Scala! This is Alex Panov
+
+scala> var updateRes = res.replace("Hello","Salut")
+updateRes: String = Salut Scala! This is Alex Panov
+
+scala> println(updateRes)
+Salut Scala! This is Alex Panov
+
+scala> var newUpdateRes = res.replace("Hello","Hi")
+newUpdateRes: String = Hi Scala! This is Alex Panov
+
+scala> println(newUpdateRes)
+Hi Scala! This is Alex Panov
+
+scala> var firstReverse = res.replace("Alex Panov",res.reverse.slice(0,10))
+firstReverse: String = Hello Scala! This is vonaP xelA
+
+scala> var secondReverse = updateRes.replace("Alex Panov",updateRes.reverse.slice(0,10))
+secondReverse: String = Salut Scala! This is vonaP xelA
+
+scala> var thirdReverse = newUpdateRes.replace("Alex Panov",newUpdateRes.reverse.slice(0,10))
+thirdReverse: String = Hi Scala! This is vonaP xelA
+
+scala> println(firstReverse+'\n'+secondReverse+'\n'+thirdReverse)
+Hello Scala! This is vonaP xelA
+Salut Scala! This is vonaP xelA
+Hi Scala! This is vonaP xelA
+
+scala>
