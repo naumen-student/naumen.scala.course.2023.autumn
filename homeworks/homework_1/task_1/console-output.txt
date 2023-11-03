@@ -1,0 +1,47 @@
+[knst@fedora ~]$ scala
+Welcome to Scala 2.12.18 (Java HotSpot(TM) 64-Bit Server VM, Java 20).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Konstantin Semenov"
+name: String = Konstantin Semenov
+
+scala> val helloPhrase = s"Hello Scala! This is ${name}"
+helloPhrase: String = Hello Scala! This is Konstantin Semenov
+
+scala> println(helloPhrase)
+Hello Scala! This is Konstantin Semenov
+
+scala> val holaPhrase = helloPhrase.replace("Hello", "Hola")
+holaPhrase: String = Hola Scala! This is Konstantin Semenov
+
+scala> println(holaPhrase)
+Hola Scala! This is Konstantin Semenov
+
+scala> val gutenPhrase = holaPhrase.replace("Hola", "Guten tag")
+gutenPhrase: String = Guten tag Scala! This is Konstantin Semenov
+
+scala> println(gutenPhrase)
+Guten tag Scala! This is Konstantin Semenov
+
+scala> name.reverse
+res3: String = vonemeS nitnatsnoK
+
+scala> val reversPhrase1 = s"Hello Scala! This is ${name.reverse}"
+reversPhrase1: String = Hello Scala! This is vonemeS nitnatsnoK
+
+scala> println(reversPhrase1)
+Hello Scala! This is vonemeS nitnatsnoK
+
+scala> val reversePhrase2 = holaPhrase.replace("Konstantin Semenov", name.reverse)
+reversePhrase2: String = Hola Scala! This is vonemeS nitnatsnoK
+
+scala> println(reversePhrase2)
+Hola Scala! This is vonemeS nitnatsnoK
+
+scala> var revPhrase3 = s"Guten tag Scala! This is ${name.reverse}"
+revPhrase3: String = Guten tag Scala! This is vonemeS nitnatsnoK
+
+scala> println(revPhrase3)
+Guten tag Scala! This is vonemeS nitnatsnoK
+
+scala> 
