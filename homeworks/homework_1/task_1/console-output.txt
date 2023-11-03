@@ -1,0 +1,53 @@
+Loading...
+Welcome to the Ammonite Repl 2.5.11 (Scala 3.2.2 Java 17.0.8.1)
+@ val greeting = "Hello, Scala! This is Slava"
+greeting: String = "Hello, Scala! This is Slava"
+
+@ println(greeting)
+Hello, Scala! This is Slava
+
+
+@ def greeting(greet: String, name: String) = s"${greet}, scala! This is ${name}"
+defined function greeting
+
+@ val greet = "Hello"
+greet: String = "Hello"
+
+@ val name = "Slava"
+name: String = "Slava"
+
+@ println(greeting(greet, name))
+Hello, scala! This is Slava
+
+
+@ val spanishGreet = "Hola"
+spanishGreet: String = "Hola"
+
+@ println(greeting(spanishGreet, name))
+Hola, scala! This is Slava
+
+
+@ val germanGreeting = "Guten tag"
+germanGreeting: String = "Guten tag"
+
+@ println(greeting(germanGreeting, name))
+Guten tag, scala! This is Slava
+
+
+@ val reverseName = name.reverse
+reverseName: String = "avalS"
+
+@ println(greeting(greet, reverseName))
+Hello, scala! This is avalS
+
+
+@ println(greeting(spanishGreet, reverseName))
+Hola, scala! This is avalS
+
+
+@ println(greeting(germanGreeting, reverseName))
+Guten tag, scala! This is avalS
+
+
+@ exit
+Bye!
