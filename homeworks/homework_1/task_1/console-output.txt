@@ -1,0 +1,24 @@
+~ %  cs launch scala
+Welcome to Scala 3.3.1 (11.0.21, Java OpenJDK 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name =  "Dmitrii Miroshnik"
+val name: String = Dmitrii Miroshnik
+
+scala> println("Hello Scala! This is " + name)
+Hello Scala! This is Dmitrii Miroshnik
+
+scala> println("Hola Scala! This is " + name)
+Hola Scala! This is Dmitrii Miroshnik
+
+scala> println("Guten tag Scala! This is " + name)
+Guten tag Scala! This is Dmitrii Miroshnik
+
+scala> println("Hello Scala! This is " + name.reverse)
+Hello Scala! This is kinhsoriM iirtimD
+
+scala> println("Hola Scala! This is " + name.reverse)
+Hola Scala! This is kinhsoriM iirtimD
+
+scala> println("Guten tag Scala! This is " + name.reverse)
+Guten tag Scala! This is kinhsoriM iirtimD
