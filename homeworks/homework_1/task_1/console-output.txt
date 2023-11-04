@@ -1,0 +1,32 @@
+C:\Users\kiril>scala
+Welcome to Scala 3.3.1 (1.8.0_51, Java Java HotSpot(TM) 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+
+scala> val a = scala.io.StdIn.readLine()
+val a: String = Kirill Mikov
+
+scala> val en = "Hello"
+val en: String = Hello
+
+scala> println(en + " World! This is " + a)
+Hello World! This is Kirill Mikov
+
+scala> val b = a.reverse
+val b: String = vokiM lliriK
+
+scala> val hola = "Hola"
+val hola: String = Hola
+
+scala> println(hola + " World! This is " + b)
+Hola World! This is vokiM lliriK
+
+scala> val tag = "Guten tag"
+val tag: String = Guten tag
+
+scala> val result = tag + " World! This is " + b
+val result: String = Guten tag World! This is vokiM lliriK
+
+scala> println(result.reverse)
+Kirill Mikov si sihT !dlroW gat netuG
+
+scala>
