@@ -1,0 +1,26 @@
+C:\Users\User>scala
+Welcome to Scala 2.12.10 (Java HotSpot(TM) 64-Bit Server VM, Java 17).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Otman Anna"
+name: String = Otman Anna
+
+scala> def greeting(greet: String, name: String): String = s"$greet Scala! This is $name"
+greeting: (greet: String, name: String)String
+
+scala> println(greeting("Hello", name))
+Hello Scala! This is Otman Anna
+
+scala> println(greeting("Hola", name))
+Hola Scala! This is Otman Anna
+
+scala> println(greeting("Guten tag", name))
+Guten tag Scala! This is Otman Anna
+
+scala> val greetings = List("Hello", "Hola", "Guten tag")
+greetings: List[String] = List(Hello, Hola, Guten tag)
+
+scala> for (el <- greetings) println(greeting(el, name.reverse))
+Hello Scala! This is annA namtO
+Hola Scala! This is annA namtO
+Guten tag Scala! This is annA namtO
