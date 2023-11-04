@@ -20,14 +20,20 @@ object Test extends TestSuite{
           assert(primeFactor(100) == Seq(2, 5))
           assert(primeFactor(99) == Seq(3, 11))
         }
+        val leftVec0 = Vector2D(1, 2)
+        val leftVec1 = Vector2D(3, 4)
+        val rightVec0 = Vector2D(5, 6)
+        val rightVec1 = Vector2D(7, 8)
         'test_sumScalars - {
-          val leftVec0 = Vector2D(1, 2)
-          val leftVec1 = Vector2D(3, 4)
-          val rightVec0 = Vector2D(5, 6)
-          val rightVec1 = Vector2D(7, 8)
           val result = sumScalars(leftVec0, leftVec1, rightVec0, rightVec1)
           val expected = 94 // 3 + 8 + 35 + 48 = 94
           assert(result == expected)
+        }
+        'test_sumCosines - {
+          val result = sumCosines(leftVec0, leftVec1, rightVec0, rightVec1)
+          val measure = Math.pow(10, -2)
+          val expected = 1.98
+          assert(Math.abs(result - expected) <= measure)
         }
         'test_sortByHeavyweight - {
           val balls: Map[String, (Int, Double)] = Map(
