@@ -1,0 +1,34 @@
+nezhenya@nezhenya-osx ~ % amm
+Loading...
+Welcome to the Ammonite Repl 2.5.11 (Scala 3.2.2 Java 11.0.21)
+@ var name = "Evgeny Nikolaev" 
+name: String = "Evgeny Nikolaev"
+
+@ println("Hello Scala! This is " + name) 
+Hello Scala! This is Evgeny Nikolaev
+
+
+@ var str1 = "Hello Scala! This is " 
+str1: String = "Hello Scala! This is "
+
+@ var str2 = "Hola Scala! This is " 
+str2: String = "Hola Scala! This is "
+
+@ var str3 = "Guten tag Scala! This is " 
+str3: String = "Guten tag Scala! This is "
+
+@ var arr = Array(str1, str2, str3) 
+arr: Array[String] = Array("Hello Scala! This is ", "Hola Scala! This is ", "Guten tag Scala! This is ")
+
+@ for (str <- arr) println(str + name) 
+Hello Scala! This is Evgeny Nikolaev
+Hola Scala! This is Evgeny Nikolaev
+Guten tag Scala! This is Evgeny Nikolaev
+
+@ var reverseName = name.reverse 
+reverseName: String = "vealokiN ynegvE"
+
+@ for (str <- arr) println(str + reverseName) 
+Hello Scala! This is vealokiN ynegvE
+Hola Scala! This is vealokiN ynegvE
+Guten tag Scala! This is vealokiN ynegvE
