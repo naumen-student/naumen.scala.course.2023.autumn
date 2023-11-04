@@ -1,1 +1,9 @@
 .idea
+
+.bloop/
+.bsp/
+.metals/
+
+target/
+
+project/
