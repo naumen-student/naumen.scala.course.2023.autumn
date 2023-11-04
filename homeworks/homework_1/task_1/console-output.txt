@@ -1,0 +1,30 @@
+oo@pp:~$ scala
+Welcome to Scala 2.12.18 (OpenJDK 64-Bit Server VM, Java 17.0.7).
+Type in expressions for evaluation. Or try :help.
+
+scala> var greet:Array[String] = Array("Hello Scala! This is ", "Hola. This is ", "Guten tag. This is ")
+greet: Array[String] = Array("Hello Scala! This is ", "Hola. This is ", "Guten tag. This is ")
+
+scala> var name:String = "Abcdefg Xyz"
+name: String = Abcdefg Xyz
+
+scala> greet(0)+name
+res0: String = Hello Scala! This is Abcdefg Xyz
+
+scala> greet(1)+name
+res1: String = Hola. This is Abcdefg Xyz
+
+scala> greet(2)+name
+res2: String = Guten tag. This is Abcdefg Xyz
+
+scala> greet(0)+ name.reverse
+res3: String = Hello Scala! This is zyX gfedcbA
+
+scala> greet(1)+ name.reverse
+res4: String = Hola. This is zyX gfedcbA
+
+scala> greet(2)+ name.reverse
+res5: String = Guten tag. This is zyX gfedcbA
+
+scala> 
+
