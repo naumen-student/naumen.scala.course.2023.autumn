@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0mC:\Users\polinka\IdeaProjects\SbtExampleProject\src\main\scala\example\Main.scala:1:7: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m@main def run() =[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\polinka\IdeaProjects\SbtExampleProject\src\main\scala\example\Main.scala:3:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0mprintln(s"The oldest person is ${ages.max}")[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
