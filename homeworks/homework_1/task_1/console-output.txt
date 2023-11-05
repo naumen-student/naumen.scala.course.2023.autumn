@@ -1,0 +1,24 @@
+C:\Users\rakta>scala
+Welcome to Scala 2.12.10 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_333).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Timur"
+name: String = Timur
+
+scala> val greetings = Array("Hello", "Hola", "Guten tag")
+greetings: Array[String] = Array(Hello, Hola, Guten tag)
+
+scala> greetings.foreach(greeting => println(s"$greeting Scala! This is $name"))
+Hello Scala! This is Timur
+Hola Scala! This is Timur
+Guten tag Scala! This is Timur
+
+scala> val eman = name.reverse
+eman: String = rumiT
+
+scala> greetings.foreach(greeting => println(s"$greeting Scala! This is $eman"))
+Hello Scala! This is rumiT
+Hola Scala! This is rumiT
+Guten tag Scala! This is rumiT
+
+scala>
