@@ -1,3 +1,7 @@
 .idea
 .metals/
 .vscode/
+.bloop/
+null/
+project/
+.scalafmt.conf
