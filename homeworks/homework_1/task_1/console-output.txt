@@ -1,0 +1,32 @@
+Microsoft Windows [Version 10.0.19045.3570]
+(c) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+C:\Users\administrator>scala
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 11.0.20.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> def greeting(name: String) = s"Hello, scala! This is ${name}."
+greeting: (name: String)String
+
+scala> val name = "Christina"
+name: String = Christina
+
+scala> println(greeting(name))
+Hello, scala! This is Christina.
+
+scala> def spanishGreeting(name: String) = greeting(name).replace("Hello", "Hola")
+spanishGreeting: (name: String)String
+
+scala> println(spanishGreeting(name))
+Hola, scala! This is Christina.
+
+scala> val reversedName = name.reverse
+reversedName: String = anitsirhC
+
+scala> println(greeting(reversedName))
+Hello, scala! This is anitsirhC.
+
+scala> println(spanishGreeting(reversedName))
+Hola, scala! This is anitsirhC.
+
+scala>
