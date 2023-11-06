@@ -1,3 +1,13 @@
+file:///C:/Users/polinka/Documents/GitHub/naumen.scala.course.2023.autumn/homeworks/homework_2/src/main/scala/Exercises.scala
+### java.lang.AssertionError: assertion failed: NoType
+
+occurred in the presentation compiler.
+
+action parameters:
+offset: 4712
+uri: file:///C:/Users/polinka/Documents/GitHub/naumen.scala.course.2023.autumn/homeworks/homework_2/src/main/scala/Exercises.scala
+text:
+```scala
 object Exercises {
 
   /*ПРИМЕР*/
@@ -25,9 +35,9 @@ object Exercises {
   /*Реализовать юнит-тесты в src/test/scala для данной функции.*/
   def primeFactor(number: Int): Seq[Int] = {
     val result: List[Int] = List()
-    for i <- 2 to number
+    for i <- 2 to number - 1
     if number % i == 0
-    do result = result :+ primeFactor(i);
+    do result = result :+ i;
     result.distinct.toSeq;
   }
 
@@ -110,12 +120,38 @@ object Exercises {
   def sortByHeavyweight(
       ballsArray: Map[String, (Int, Double)] = balls
   ): Seq[String] = {
-    ballsArray.toSeq
-      .sortBy { case (material, (radius, density)) =>
-        val pi = java.lang.Math.PI
-        val weight = pi * radius * radius * density
-        weight
-      }
-      .map { case (material, (radius, density)) => material }
+    ballsArray.map{
+        c@@
+    }.sortBy{
+        case (_, (radius, density)) =>
+            val volume = Pi * radius * radius
+            val mass = volume * density
+            mass
+        }.map(_._1)
+    }
   }
+
 }
+
+```
+
+
+
+#### Error stacktrace:
+
+```
+scala.runtime.Scala3RunTime$.assertFailed(Scala3RunTime.scala:8)
+	dotty.tools.dotc.core.Types$TypeBounds.<init>(Types.scala:5141)
+	dotty.tools.dotc.core.Types$AliasingBounds.<init>(Types.scala:5220)
+	dotty.tools.dotc.core.Types$TypeAlias.<init>(Types.scala:5242)
+	dotty.tools.dotc.core.Types$TypeAlias$.apply(Types.scala:5279)
+	dotty.tools.dotc.core.Types$Type.bounds(Types.scala:1732)
+	scala.meta.internal.pc.completions.CaseKeywordCompletion$.contribute(MatchCaseCompletions.scala:154)
+	scala.meta.internal.pc.completions.Completions.advancedCompletions(Completions.scala:433)
+	scala.meta.internal.pc.completions.Completions.completions(Completions.scala:183)
+	scala.meta.internal.pc.completions.CompletionProvider.completions(CompletionProvider.scala:86)
+	scala.meta.internal.pc.ScalaPresentationCompiler.complete$$anonfun$1(ScalaPresentationCompiler.scala:123)
+```
+#### Short summary: 
+
+java.lang.AssertionError: assertion failed: NoType
