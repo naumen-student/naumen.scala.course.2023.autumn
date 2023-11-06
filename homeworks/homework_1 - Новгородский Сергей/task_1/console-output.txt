@@ -1,0 +1,52 @@
+C:\Users\ns-7>Scala
+Welcome to Scala 2.12.10 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_51).
+Type in expressions for evaluation. Or try :help.
+
+scala> val a = ("Hello Scala! This is $Sergey Novgorodskiy")
+a: String = Hello Scala! This is $Sergey Novgorodskiy
+
+scala> println(a)
+Hello Scala! This is $Sergey Novgorodskiy
+
+scala> val a = ("Halo Scala! This is $Sergey Novgorodskiy")
+a: String = Halo Scala! This is $Sergey Novgorodskiy
+
+scala> println(a)
+Halo Scala! This is $Sergey Novgorodskiy
+
+scala> val a = ("Guten Tag Scala! This is $Sergey Novgorodskiy")
+a: String = Guten Tag Scala! This is $Sergey Novgorodskiy
+
+scala> println(a)
+Guten Tag Scala! This is $Sergey Novgorodskiy
+
+scala> println(a).reverse
+<console>:13: error: value reverse is not a member of Unit
+       println(a).reverse
+                  ^
+
+scala> println(a.reverse)
+yiksdorogvoN yegreS$ si sihT !alacS gaT netuG
+
+scala> val a = ("Hello Scala! This is ")
+a: String = "Hello Scala! This is "
+
+scala> val b = ("Halo Scala! This is ")
+b: String = "Halo Scala! This is "
+
+scala> val c = ("Guten tag Scala! This is ")
+c: String = "Guten tag Scala! This is "
+
+scala> val d = ("$Sergey Novgorodskiy".reverse)
+d: String = yiksdorogvoN yegreS$
+
+scala> println(a+d)
+Hello Scala! This is yiksdorogvoN yegreS$
+
+scala> println(b+d)
+Halo Scala! This is yiksdorogvoN yegreS$
+
+scala> println(c+d)
+Guten tag Scala! This is yiksdorogvoN yegreS$
+
+scala>
