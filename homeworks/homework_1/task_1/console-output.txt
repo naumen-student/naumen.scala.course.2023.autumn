@@ -1,0 +1,29 @@
+C:\Users\danil\.jdks\jbr-17.0.8\bin\java.exe "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2023.2.4\lib\idea_rt.jar=50614:C:\Program Files\JetBrains\IntelliJ IDEA 2023.2.4\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files (x86)\scala\lib\scala-library.jar;C:\Program Files (x86)\scala\lib\scala-parser-combinators_2.12-1.0.7.jar;C:\Program Files (x86)\scala\lib\scala-reflect.jar;C:\Program Files (x86)\scala\lib\scala-swing_2.12-2.0.3.jar;C:\Program Files (x86)\scala\lib\scala-xml_2.12-1.0.6.jar;C:\Program Files (x86)\scala\lib\scala-compiler.jar;C:\Users\danil\AppData\Roaming\JetBrains\IntelliJIdea2023.2\plugins\Scala\lib\runners.jar" scala.tools.nsc.MainGenericRunner -usejavacp -Xnojline
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 17.0.8).
+Type in expressions for evaluation. Or try :help.
+
+scala> println("Hello Scala! This is Danil Tribushko")
+Hello Scala! This is Danil Tribushko
+
+scala> println("Hola Scala! This is Danil Tribushko")
+Hola Scala! This is Danil Tribushko
+
+scala> var message: String = "Guten tag Scala! This id Danil Tribushko"
+message: String = Guten tag Scala! This id Danil Tribushko
+
+scala> println(message)
+Guten tag Scala! This id Danil Tribushko
+
+scala> var name: String = "Danil Tribushko"
+name: String = Danil Tribushko
+
+scala> println(s"Bonjur Scala! This is $name")
+Bonjur Scala! This is Danil Tribushko
+
+scala> name = name.reverse
+name: String = okhsubirT linaD
+
+scala> println(s"Hello Scala! This is $name")
+Hello Scala! This is okhsubirT linaD
+
+scala>
