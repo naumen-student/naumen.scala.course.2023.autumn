@@ -16,9 +16,9 @@ object Test extends TestSuite{
     }
 
     'primeFactor - {
-      assert(Exercises.primeFactor(80) == Seq(2, 5))
-      assert(Exercises.primeFactor(98) == Seq(2, 7))
-      assert(Exercises.primeFactor(33) == Seq(3, 11))
+      assert(Exercises.primeFactor(2) == Seq(2))
+      assert(Exercises.primeFactor(54) == Seq(2, 3))
+      assert(Exercises.primeFactor(101) == Seq(2, 3, 17))
     }
 
     'sumByFunc - {
