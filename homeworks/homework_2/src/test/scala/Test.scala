@@ -32,9 +32,8 @@ object Test extends TestSuite{
         'test_sortByHeavyweight - {
             val balls: Map[String, (Int, Double)] = Map(
                 "Aluminum" -> (3, 2.6889), "Tungsten" -> (2, 19.35)
-                // добавьте остальные шарики здесь
             )
-            assert(Exercises.sortByHeavyweight(balls) == Seq("Aluminum", "Tungsten")) // и т.д.
+            assert(Exercises.sortByHeavyweight(balls).equals(Seq("Aluminum", "Tungsten")))
         }
     }
 }

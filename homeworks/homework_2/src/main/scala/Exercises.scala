@@ -32,12 +32,12 @@ object Exercises {
     Число 98 можно разложить на множители 1 * 2 * 7 * 7, результат выполнения функции => Seq(2, 7).*/
     /*Реализовать юнит-тесты в src/test/scala для данной функции.*/
     def primeFactor(number: Int): Seq[Int] = {
-        def loop(number: Int, i: Int, acc: List[Int]): Seq[Int] = {
-            if (number <= 1) acc.distinct.toSeq
-            else if (number % i == 0) loop(number / i, i, i :: acc)
-            else loop(number, i + 1, acc)
+        def factors(number: Int, i: Int = 2, acc: List[Int] = List()): List[Int] = {
+            if (number < 2) acc
+            else if (number % i == 0) factors(number / i, i, i :: acc)
+            else factors(number, i + 1, acc)
         }
-        loop(number, 2, List())
+        factors(number).distinct.sorted
     }
 
 
@@ -87,7 +87,7 @@ object Exercises {
         )
 
     def sortByHeavyweight(ballsArray: Map[String, (Int, Double)] = balls): Seq[String] = {
-        balls.toList
+        ballsArray.toList
           .map { case (name, (radius, density)) =>
               val volume = 4.0 / 3.0 * Math.PI * Math.pow(radius, 3)
               val mass = volume * density
