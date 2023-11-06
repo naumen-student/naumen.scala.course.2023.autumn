@@ -1,0 +1,36 @@
+PS C:\Users\rinat\Desktop\scala\naumen.scala.course.2023.autumn> scala
+Welcome to Scala 2.12.10 (Java HotSpot(TM) Client VM, Java 1.8.0_371).
+Type in expressions for evaluation. Or try :help.
+
+scala> var greet = "Hello"
+greet: String = Hello
+
+scala> var name = "Rinat Gilemshin"
+name: String = Rinat Gilemshin
+
+scala> println(s"${greet} Scala! This is ${name}")
+Hello Scala! This is Rinat Gilemshin
+
+scala> greet = "Guten tag"
+greet: String = Guten tag
+
+scala> println(s"${greet} Scala! This is ${name}")
+Guten tag Scala! This is Rinat Gilemshin
+
+scala> greet = "Hola"
+greet: String = Hola
+
+scala> println(s"${greet} Scala! This is ${name}")
+Hola Scala! This is Rinat Gilemshin
+
+scala> name = name.reverse
+name: String = nihsmeliG taniR
+
+scala> println(s"${greet} Scala! This is ${name}")
+Hola Scala! This is nihsmeliG taniR
+
+scala> greet = "Guten tag"
+greet: String = Guten tag
+
+scala> println(s"${greet} Scala! This is ${name}")
+Guten tag Scala! This is nihsmeliG taniR
