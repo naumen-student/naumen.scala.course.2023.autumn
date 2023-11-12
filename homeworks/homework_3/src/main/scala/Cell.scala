@@ -14,13 +14,14 @@ class StringCell(name: String) extends Cell {
 }
 
 class ReferenceCell(ix: Int, iy: Int, table: Table) extends Cell {
-  override def toString: String = ""
+  override def toString: String = toStringImp()
 
   private def toStringImp(cellsHistory: Set[ReferenceCell] = Set.empty[ReferenceCell]): String = table.getCell(ix, iy).map {
     case refCell: ReferenceCell => {
-      if (cellsHistory.contains(refCell)) "cyclic" else cellsHistory += Set(refCell)
+      if (cellsHistory.contains(refCell)) "cyclic" else {
+        refCell.toStringImp(cellsHistory ++ Set(refCell))
+      }
     }
     case cell: Cell => cell.toString
-  }
-
+  }.getOrElse("outOfRange")
 }
