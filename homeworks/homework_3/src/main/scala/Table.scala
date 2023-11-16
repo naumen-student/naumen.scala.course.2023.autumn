@@ -11,9 +11,8 @@ class Table(w: Int, h: Int) {
   }
 
   def setCell(x: Int, y: Int, cell: Cell): Unit = {
-    table(x)(y) = cell
-//    if (getCell(x, y) != None) {
-//
-//    }
+    if (getCell(x, y) != None) {
+      table(x)(y) = cell
+    }
   }
 }
