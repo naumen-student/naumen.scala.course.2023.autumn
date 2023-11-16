@@ -1,0 +1,52 @@
+aleksa@Ubuntu2310:~$ scala
+Welcome to Scala 2.11.12 (OpenJDK 64-Bit Server VM, Java 11.0.20.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> val x=1
+x: Int = 1
+
+scala> val y= x+6
+y: Int = 7
+
+scala> val welcome: java.lang.String="Hello Scala! I am Aleksandra"
+welcome: String = Hello Scala! I am Aleksandra
+
+scala> println(welcome)
+Hello Scala! I am Aleksandra
+
+scala> welcome.reverse
+res1: String = ardnaskelA ma I !alacS olleH
+
+scala> val wel: java.lang.String="Holla Scala! I am Aleksandra"
+wel: String = Holla Scala! I am Aleksandra
+
+scala> wel.reverse
+res2: String = ardnaskelA ma I !alacS alloH
+
+scala> val wel: java.lang.String="Guten Tag Scala! I am Aleksandra"
+wel: String = Guten Tag Scala! I am Aleksandra
+
+scala> wel.reverse
+res3: String = ardnaskelA ma I !alacS gaT netuG
+
+scala> val wel: java.lang.String="Holla Scala! " val name:java.lang.String="Aleksandra Kalugina"
+<console>:1: error: ';' expected but 'val' found.
+val wel: java.lang.String="Holla Scala! " val name:java.lang.String="Aleksandra Kalugina"
+                                          ^
+
+scala> val wel: java.lang.String="Holla Scala! "; val name:java.lang.String="Aleksandra Kalugina"
+wel: String = "Holla Scala! "
+name: String = Aleksandra Kalugina
+
+scala> val wel: java.lang.String="Holla Scala! "; val name.reverse:java.lang.String="Aleksandra Kalugina"
+<console>:12: error: stable identifier required, but scala.this.Predef.augmentString(name).reverse found.
+       val wel: java.lang.String="Holla Scala! "; val name.reverse:java.lang.String="Aleksandra Kalugina"
+                                                           ^
+
+scala> println(wel+name.reverse)
+Holla Scala! anigulaK ardnaskelA
+
+scala> println(wel.reverse+name.reverse)
+ !alacS alloHanigulaK ardnaskelA
+
+scala>
