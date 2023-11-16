@@ -18,14 +18,14 @@ case class ReferenceCell(ix: Int, iy: Int, table: Table) extends Cell {
   override def toString: String = {
     val start = ReferenceCell(ix: Int, iy: Int, table: Table)
     @tailrec
-    def go(cell: Cell): String = {
+    def go(cell: Option[Cell]): String = {
       cell match {
-        case ReferenceCell(_, _, _) if start == cell => "cyclic"
-        case ReferenceCell(ix, iy, table) => go(table.getCell(ix, iy).get)
-        case _ => cell.toString
-
+        case Some(ReferenceCell(_, _, _)) if start == cell.get => "cyclic"
+        case Some(ReferenceCell(ix, iy, table)) => go(table.getCell(ix, iy))
+        case None => "outOfRange"
+        case _ => cell.get.toString
       }
     }
-    go(table.getCell(ix, iy).get)
+    go(table.getCell(ix, iy))
   }
 }
