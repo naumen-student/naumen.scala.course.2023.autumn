@@ -11,7 +11,8 @@ object Test extends TestSuite {
     override def tests: Tests = Tests {
         'firstTask - (1 to 5).foreach { _ =>
             val testList = generateRandomList(50)
-            val sumValue = testList(Random.nextInt(testList.size)) + testList(Random.nextInt(testList.size))
+            // Random.nextInt принимает положительные числа из-за чего валится при testList = List(), что возможно в текущей реализации тестов
+            val sumValue = testList(Random.nextInt(testList.size + 1)) + testList(Random.nextInt(testList.size + 1))
             assert(Exercises.findSumImperative(testList, sumValue) == Exercises.findSumFunctional(testList, sumValue))
         }
 
@@ -19,6 +20,7 @@ object Test extends TestSuite {
             'itWorks - {
                 (1 to 5).foreach { _ =>
                     val testList = generateRandomList(50)
+
                     assert(Exercises.simpleRecursion(testList) == Exercises.tailRecRecursion(testList))
                 }
             }

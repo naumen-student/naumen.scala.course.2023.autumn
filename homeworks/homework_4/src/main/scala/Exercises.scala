@@ -1,3 +1,7 @@
+import cats.syntax.all._
+import scala.annotation.tailrec
+import scala.util.Try
+import scala.util.Random
 
 object Exercises {
 
@@ -10,7 +14,7 @@ object Exercises {
      * Стоит воспользоваться методами, которые предоставляет объект List или рекурсией.
      * Страница с полезностями List: https://alvinalexander.com/scala/list-class-methods-examples-syntax/
      */
-    def findSumImperative(items: List[Int], sumValue: Int): (Int, Int) = {
+   def findSumImperative(items: List[Int], sumValue: Int): (Int, Int) = {
         var result: (Int, Int) = (-1, -1)
         for (i <- 0 until items.length) {
             for (j <- 0 until items.length) {
@@ -23,7 +27,17 @@ object Exercises {
     }
 
     def findSumFunctional(items: List[Int], sumValue: Int) = {
-        (-1, -1)
+        val itemsR = items.zipWithIndex.reverse
+
+        itemsR
+          .map{ case (v,i) => sumValue - v -> i}
+          .collectFirstSome{ 
+            case (v1,i) => 
+              itemsR.collectFirst{ 
+               case (v2, j) if v2 == v1 && j != i => i -> j
+              }
+          }
+            .getOrElse( -1 -> -1)
     }
 
 
@@ -49,7 +63,16 @@ object Exercises {
     }
 
     def tailRecRecursion(items: List[Int]): Int = {
-        1
+        
+      @tailrec
+      def step(tail: List[Int], index: Int, acc: Int): Int =
+        tail match {
+          case h :: t if h % 2 == 0 => step(t, index - 1, h * acc + index)
+          case h :: t => step(t, index - 1, -1 * h * acc + index)
+          case _ => acc
+        }
+
+      step(items.reverse, items.size, 1)
     }
 
     /**
@@ -60,7 +83,19 @@ object Exercises {
      */
 
     def functionalBinarySearch(items: List[Int], value: Int): Option[Int] = {
-        None
+        // А зачем? А нафига? И где условие что items отсортирован?
+        val sortedItems = items.toArray
+        // TODO: Добавить сдвиг l и r, чтобы обойти случай когда r = l + 1
+        @tailrec
+        def step(l: Int, r: Int): Option[Int] = 
+          sortedItems((l + r) / 2) match {
+            case v if value == v => ((l + r) / 2).some
+            case _ if l == r => None
+            case v if value < v => step(l, math.floor((l + r) / 2f).toInt)
+            case v if value > v => step(math.ceil((l + r) / 2f).toInt, r)
+          }
+
+        Try(step(0, sortedItems.size - 1)).toOption.flatten
     }
 
     /**
@@ -71,10 +106,10 @@ object Exercises {
      * Именем является строка, не содержащая иных символов, кроме буквенных, а также начинающаяся с заглавной буквы.
      */
 
-    def generateNames(namesСount: Int): List[String] = {
-        if (namesСount < 0) throw new Throwable("Invalid namesCount")
-        Nil
-    }
+    def generateNames(namesСount: Int): List[String] = 
+      List.fill(namesСount)(
+        s"Nig${Random.alphanumeric.take(30).filter(!_.isDigit).mkString.toLowerCase()}"
+      )
 
 }
 
@@ -111,14 +146,19 @@ object SideEffectExercise {
 
 
     class PhoneServiceSafety(unsafePhoneService: SimplePhoneService) {
-        def findPhoneNumberSafe(num: String) = ???
+        def findPhoneNumberSafe(num: String) = Option(unsafePhoneService.findPhoneNumber(num))
 
-        def addPhoneToBaseSafe(phone: String) = ???
+        def addPhoneToBaseSafe(phone: String) = Try(unsafePhoneService.addPhoneToBase(phone))
 
-        def deletePhone(phone: String) = ???
+        def deletePhone(phone: String) = unsafePhoneService.deletePhone(phone)
     }
 
     class ChangePhoneServiceSafe(phoneServiceSafety: PhoneServiceSafety) extends ChangePhoneService {
-        override def changePhone(oldPhone: String, newPhone: String): String = ???
+        override def changePhone(oldPhone: String, newPhone: String): String = {
+          phoneServiceSafety.findPhoneNumberSafe(oldPhone)
+            .map(phoneServiceSafety.deletePhone)
+
+            phoneServiceSafety.addPhoneToBaseSafe(newPhone).as("ok").get
+        }
     }
 }
