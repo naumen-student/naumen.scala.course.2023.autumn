@@ -1,4 +1,5 @@
 import utest._
+import scala.collection.mutable.ArrayBuffer
 
 object Test extends TestSuite {
     val tests = Tests {
