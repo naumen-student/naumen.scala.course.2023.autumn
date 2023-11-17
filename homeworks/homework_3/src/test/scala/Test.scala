@@ -3,7 +3,7 @@ import utest._
 object Test extends TestSuite {
     val tests = Tests {
         'test_createTable - {
-            val table = new Table(3, 3)
+            val table = Table(3, 3)
             for (i <- 0 until 9) {
                 assert(table.getCell(i / 3, i % 3).map(_.toString) == Some("empty"))
             }
@@ -13,9 +13,9 @@ object Test extends TestSuite {
             assert(table.getCell(8, 9).map(_.toString) == None)
         }
         'test_numberCell - {
-            val table = new Table(2, 2)
-            val cellInt00 = new NumberCell(5)
-            val cellInt11 = new NumberCell(2147483647)
+            val table = Table(2, 2)
+            val cellInt00 = NumberCell(5)
+            val cellInt11 = NumberCell(2147483647)
             table.setCell(0, 0, cellInt00)
             table.setCell(1, 1, cellInt11)
             assert(table.getCell(0, 0).map(_.toString) == Some("5"))
@@ -24,9 +24,9 @@ object Test extends TestSuite {
             assert(table.getCell(1, 1).map(_.toString) == Some("2147483647"))
         }
         'test_stringCell - {
-            val table = new Table(2, 2)
-            val cellStr01 = new StringCell("01")
-            val cellStr10 = new StringCell("10")
+            val table = Table(2, 2)
+            val cellStr01 =StringCell("01")
+            val cellStr10 = StringCell("10")
             table.setCell(0, 1, cellStr01)
             table.setCell(1, 0, cellStr10)
             assert(table.getCell(0, 0).map(_.toString) == Some("empty"))
@@ -35,19 +35,19 @@ object Test extends TestSuite {
             assert(table.getCell(1, 1).map(_.toString) == Some("empty"))
         }
         'test_referenceCell - {
-            val table = new Table(3, 3)
+            val table = Table(3, 3)
             /*ix = 0*/
-            val cellStr00 = new StringCell("00")
-            val cellRef01 = new ReferenceCell(0, 2, table)
-            val cellRef02 = new ReferenceCell(0, 1, table)
+            val cellStr00 = StringCell("00")
+            val cellRef01 = ReferenceCell(0, 2, table)
+            val cellRef02 = ReferenceCell(0, 1, table)
             /*ix = 1*/
-            val cellInt10 = new NumberCell(10)
-            val cellInt11 = new NumberCell(11)
-            val cellRef12 = new ReferenceCell(0, 0, table)
+            val cellInt10 = NumberCell(10)
+            val cellInt11 = NumberCell(11)
+            val cellRef12 = ReferenceCell(0, 0, table)
             /*ix = 2*/
-            val cellEmpty20 = new EmptyCell
-            val cellRef21 = new ReferenceCell(1, 1, table)
-            val cellRef22 = new ReferenceCell(2, 1, table)
+            val cellEmpty20 = EmptyCell
+            val cellRef21 = ReferenceCell(1, 1, table)
+            val cellRef22 = ReferenceCell(2, 1, table)
             table.setCell(0, 0, cellStr00)
             table.setCell(0, 1, cellRef01)
             table.setCell(0, 2, cellRef02)
