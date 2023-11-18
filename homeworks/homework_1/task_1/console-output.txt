@@ -1,0 +1,30 @@
+C:\Users\sofas>scala
+Welcome to Scala 2.13.12 (Java HotSpot(TM) 64-Bit Server VM, Java 21).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Sofya Schcadilova"
+val name: String = Sofya Schcadilova
+
+scala> def hello(word: String, name: String): Unit = {println(word + " Scala! This is " + name)}
+def hello(word: String, name: String): Unit
+
+scala> hello("Hello", name)
+Hello Scala! This is Sofya Schcadilova
+
+scala> hello("Hola", name)
+Hola Scala! This is Sofya Schcadilova
+
+scala> hello("Guten tag", name)
+Guten tag Scala! This is Sofya Schcadilova
+
+scala> val namere = name.reverse
+val namere: String = avolidachcS ayfoS
+
+scala> hello("Hello", namere)
+Hello Scala! This is avolidachcS ayfoS
+
+scala> hello("Hola", namere)
+Hola Scala! This is avolidachcS ayfoS
+
+scala> hello("Guten tag", namere)
+Guten tag Scala! This is avolidachcS ayfoS
