@@ -1,3 +1,4 @@
+import scala.annotation.tailrec
 
 object Exercises {
 
@@ -22,8 +23,20 @@ object Exercises {
         result
     }
 
-    def findSumFunctional(items: List[Int], sumValue: Int) = {
-        (-1, -1)
+    def findSumFunctional(items: List[Int], sumValue: Int): (Int, Int) = {
+        @tailrec
+        def loop(items_last: List[Int], currIndex: Int, lastFound: (Int, Int)): (Int, Int) = items_last match {
+            case Nil => lastFound
+            case head :: tail =>
+                items.indexOf(sumValue - head) match {
+                    case otherIndex if otherIndex != -1 && otherIndex != currIndex =>
+                        loop(tail, currIndex + 1, (currIndex, otherIndex))
+                    case _ =>
+                        loop(tail, currIndex + 1, lastFound)
+                }
+        }
+
+        loop(items, 0, (-1, -1))
     }
 
 
@@ -48,9 +61,24 @@ object Exercises {
         }
     }
 
-    def tailRecRecursion(items: List[Int]): Int = {
-        1
+    def tailRecRecursion(items: List[Int], index: Int = 1): Int = {
+        @tailrec
+        def helper(items: List[Int], index: Int=1, acc: Int): Int = {
+            items match {
+                case head :: tail =>
+                    val newAcc = if (head % 2 == 0) {
+                        head * acc + index
+                    } else {
+                        -1 * head * acc + index
+                    }
+                    helper(tail, index - 1, newAcc)
+                case _ => acc
+            }
+        }
+
+        helper(items.reverse, items.length, 1)
     }
+
 
     /**
      * Задание №3
@@ -59,8 +87,27 @@ object Exercises {
      * Если ответ найден, то возвращается Some(index), если нет, то None
      */
 
-    def functionalBinarySearch(items: List[Int], value: Int): Option[Int] = {
-        None
+    def functionalBinarySearch(items: List[Int], value: Int)(implicit ord: Ordering[Int]): Option[Int] = {
+        @tailrec
+        def binarySearchRecursive(low: Int, high: Int): Option[Int] = {
+            if (low > high) {
+                None
+            } else {
+                val mid = low + (high - low) / 2
+                val midValue = items(mid)
+                val comparison = ord.compare(midValue, value)
+
+                if (comparison == 0) {
+                    Some(mid)
+                } else if (comparison < 0) {
+                    binarySearchRecursive(mid + 1, high)
+                } else {
+                    binarySearchRecursive(low, mid - 1)
+                }
+            }
+        }
+
+        binarySearchRecursive(0, items.length - 1)
     }
 
     /**
@@ -72,8 +119,15 @@ object Exercises {
      */
 
     def generateNames(namesСount: Int): List[String] = {
-        if (namesСount < 0) throw new Throwable("Invalid namesCount")
-        Nil
+        val alphabet = 'A' to 'Z'
+
+        def generateName: String = {
+            val nameLength = scala.util.Random.nextInt(10) + 1 // случайная длина имени от 1 до 10
+            val name = (1 to nameLength).map(_ => alphabet(scala.util.Random.nextInt(alphabet.length))).mkString
+            name.charAt(0).toString + name.substring(1).toLowerCase
+        }
+
+        List.fill(namesСount)(generateName)
     }
 
 }
