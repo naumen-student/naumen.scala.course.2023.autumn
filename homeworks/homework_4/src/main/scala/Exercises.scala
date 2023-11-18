@@ -1,4 +1,5 @@
 import scala.annotation.tailrec
+import scala.util.{Failure, Success, Try}
 
 object Exercises {
 
@@ -118,16 +119,16 @@ object Exercises {
      * Именем является строка, не содержащая иных символов, кроме буквенных, а также начинающаяся с заглавной буквы.
      */
 
-    def generateNames(namesСount: Int): List[String] = {
+    def generateNames(namesCount: Int): List[String] = {
         val alphabet = 'A' to 'Z'
 
         def generateName: String = {
-            val nameLength = scala.util.Random.nextInt(10) + 1 // случайная длина имени от 1 до 10
+            val nameLength = scala.util.Random.nextInt(10) + 1
             val name = (1 to nameLength).map(_ => alphabet(scala.util.Random.nextInt(alphabet.length))).mkString
             name.charAt(0).toString + name.substring(1).toLowerCase
         }
 
-        List.fill(namesСount)(generateName)
+        List.fill(namesCount)(generateName)
     }
 
 }
@@ -165,14 +166,23 @@ object SideEffectExercise {
 
 
     class PhoneServiceSafety(unsafePhoneService: SimplePhoneService) {
-        def findPhoneNumberSafe(num: String) = ???
+        def findPhoneNumberSafe(num: String) = Option(unsafePhoneService.findPhoneNumber(num))
 
-        def addPhoneToBaseSafe(phone: String) = ???
+        def addPhoneToBaseSafe(phone: String) = Try(unsafePhoneService.addPhoneToBase(phone))
 
-        def deletePhone(phone: String) = ???
+        def deletePhone(phone: String) = Try(unsafePhoneService.deletePhone(phone))
     }
 
     class ChangePhoneServiceSafe(phoneServiceSafety: PhoneServiceSafety) extends ChangePhoneService {
-        override def changePhone(oldPhone: String, newPhone: String): String = ???
+        override def changePhone(oldPhone: String, newPhone: String): String = {
+            phoneServiceSafety.findPhoneNumberSafe(oldPhone)
+              .map(phoneServiceSafety.deletePhone)
+
+            phoneServiceSafety.addPhoneToBaseSafe(newPhone) match {
+                case Success(_)=>
+                    "ok"
+                case Failure(exception) => exception.toString
+            }
+        }
     }
 }
