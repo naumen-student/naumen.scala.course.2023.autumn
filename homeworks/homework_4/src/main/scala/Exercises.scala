@@ -107,7 +107,7 @@ object Exercises {
             }
         }
 
-        binarySearchRecursive(0, items.length -1)
+        binarySearchRecursive(0,items.length -1)
     }
 
     /**
