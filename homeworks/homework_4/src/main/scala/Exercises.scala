@@ -140,10 +140,7 @@ object SideEffectExercise {
 
     class PhoneServiceSafety(unsafePhoneService: SimplePhoneService) {
         def findPhoneNumberSafe(num: String): Option[String] = {
-            unsafePhoneService.findPhoneNumber(num) match {
-                case null => None
-                case x => Some(x)
-            }
+            Option(unsafePhoneService.findPhoneNumber(num))
         }
 
         def addPhoneToBaseSafe(phone: String): Either[Throwable, Unit] = {
