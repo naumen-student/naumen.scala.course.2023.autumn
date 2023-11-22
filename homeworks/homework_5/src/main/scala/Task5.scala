@@ -14,12 +14,37 @@ object Task5 extends App {
   sealed trait MyEither[+E, +A] {
     def isError: Boolean
   }
-  object MyEither {
-    def apply[A](value: A): MyEither[Nothing, A] = ???
-    def error[E, A](error: E): MyEither[E, A] = ???
-    def possibleError[A](f: => A): MyEither[Throwable, A] = ???
 
-    implicit def myEitherMonad[E]: MonadError[MyEither, E] = ???
+  object MyEither {
+    final case class Right[A](value: A) extends MyEither[Nothing, A] {
+      def isError: Boolean = false
+    }
+
+    final case class Left[E](error: E) extends MyEither[E, Nothing] {
+      def isError: Boolean = true
+    }
+    def apply[A](value: A): MyEither[Nothing, A] = Right(value)
+    def error[E, A](error: E): MyEither[E, A] = Left(error)
+    def possibleError[A](f: => A): MyEither[Throwable, A] = Try(f) match {
+      case Success(value) => Right(value)
+      case Failure(exception) => Left(exception)
+    }
+
+    implicit def myEitherMonad[E]: MonadError[MyEither, E] = new MonadError[MyEither, E] {
+      def pure[A](x: A): MyEither[E, A] = Right(x)
+
+      override def flatMap[A, B](fa: MyEither[E, A])(f: A => MyEither[E, B]): MyEither[E, B] = fa match {
+        case Right(a) => f(a)
+        case Left(e) => Left(e)
+      }
+
+      override def handleError[A](fa: MyEither[E, A])(f: E => A): MyEither[E, A] = fa match {
+        case Right(a) => Right(a)
+        case Left(e) => Right(f(e))
+      }
+
+      override def raiseError[A](fa: MyEither[E, A])(e: => E): MyEither[E, A] = Left(e)
+    }
   }
 
   object MyEitherSyntax {
