@@ -87,24 +87,20 @@ object Exercises {
      * Если ответ найден, то возвращается Some(index), если нет, то None
      */
 
-    def functionalBinarySearch(items: List[Int], value: Int): Option[Int] = {
-        if (items.isEmpty) {
+    @tailrec
+    def functionalBinarySearch(items: List[Int], value: Int, minValue: Int = 0): Option[Int] = {
+        val midValue: Int = minValue + (items.length - 1 - minValue) / 2
+        if (items.isEmpty || minValue > items.length - 1) {
             None
-        } else {
-            @tailrec
-            def recursiveSearchHelper(items: List[Int], value: Int, leftValue: Int, rightValue: Int): Option[Int] = {
-                if (leftValue > rightValue) {
-                    None
-                } else {
-                    val mid = leftValue + (rightValue - leftValue) / 2
-                    items(mid) match {
-                        case midValue if midValue == value => Some(mid)
-                        case midValue if midValue > value => recursiveSearchHelper(items, value, leftValue, mid - 1)
-                        case _ => recursiveSearchHelper(items, value, mid + 1, rightValue)
-                    }
-                }
-            }
-            recursiveSearchHelper(items, value, 0, items.length - 1)
+        }
+        else if (items(midValue) < value) {
+            functionalBinarySearch(items, value, midValue + 1)
+        }
+        else if (items(midValue) > value) {
+            functionalBinarySearch(items.slice(0, midValue), value, minValue)
+        }
+        else {
+            Some(midValue)
         }
     }
 
@@ -118,13 +114,18 @@ object Exercises {
 
     def generateNames(namesСount: Int): List[String] = {
         if (namesСount < 0) throw new Throwable("Invalid namesCount")
-        else if (namesСount == 0) List.empty
-        else List.iterate("Name", namesСount)(_ =>
-            Random
-              .shuffle(('a' to 'z').map(_.toString) ++ ('а' to 'я').map(_.toString))
-              .take(5)
-              .mkString
-              .capitalize)
+        else if (namesСount == 0) {
+            List.empty
+        }
+        else {
+            List.iterate("Name", namesСount)(_ =>
+                Random
+                  .shuffle(('a' to 'z').map(_.toString) ++ ('а' to 'я').map(_.toString))
+                  .take(5)
+                  .mkString
+                  .capitalize
+            )
+        }
     }
 
 }
@@ -175,10 +176,9 @@ object SideEffectExercise {
     class ChangePhoneServiceSafe(phoneServiceSafety: PhoneServiceSafety) extends ChangePhoneService {
         override def changePhone(oldPhone: String, newPhone: String): String = {
             phoneServiceSafety.findPhoneNumberSafe(oldPhone).map(phoneServiceSafety.deletePhone)
-
             phoneServiceSafety.addPhoneToBaseSafe(newPhone) match {
-                case Right(_) => "ok"
                 case Left(exception) => exception
+                case Right(_) => "ok"
             }
         }
     }
