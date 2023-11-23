@@ -1,0 +1,522 @@
+2023.11.06 18:05:50 INFO  Started: Metals version 1.1.0 in folders 'C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn' for client Visual Studio Code 1.84.0.
+2023.11.06 18:05:52 WARN  Build server is not auto-connectable.
+2023.11.06 18:05:52 WARN  no build tool detected in workspace 'C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2023.11.06 18:08:20 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:08:25 INFO  no build target found for C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala. Using presentation compiler with project's scala-library version: 3.3.1
+2023.11.06 18:08:29 INFO  time: code lens generation in 7.95s
+2023.11.06 18:08:29 INFO  time: code lens generation in 7.95s
+2023.11.06 18:17:17 INFO  time: code lens generation in 1.54s
+2023.11.06 18:17:17 INFO  time: code lens generation in 1.15s
+ноя 06, 2023 6:18:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 49
+2023.11.06 18:18:47 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:19:39 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:19:50 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:21:16 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+Exception in thread "pool-3-thread-1" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 18:21:17 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:21:19 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:22:40 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:26:51 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+Exception in thread "pool-3-thread-2" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 18:27:58 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+ноя 06, 2023 6:28:01 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 623
+Exception in thread "pool-3-thread-3" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 18:29:31 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:32:37 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:33:16 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:39:52 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:40:08 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:40:14 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:41:00 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:41:12 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:42:07 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:44:04 ERROR Failed to tokenize input for semantic tokens for C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+scala.meta.tokenizers.TokenizeException: <input>:57: error: unclosed comment
+    /*
+    ^
+	at scala.meta.internal.tokenizers.Reporter.incompleteInputError(Reporter.scala:27)
+	at scala.meta.internal.tokenizers.Reporter.incompleteInputError$(Reporter.scala:26)
+	at scala.meta.internal.tokenizers.Reporter$$anon$1.incompleteInputError(Reporter.scala:33)
+	at scala.meta.internal.tokenizers.Reporter.incompleteInputError(Reporter.scala:29)
+	at scala.meta.internal.tokenizers.Reporter.incompleteInputError$(Reporter.scala:29)
+	at scala.meta.internal.tokenizers.Reporter$$anon$1.incompleteInputError(Reporter.scala:33)
+	at scala.meta.internal.tokenizers.LegacyScanner.skipNestedComments(LegacyScanner.scala:52)
+	at scala.meta.internal.tokenizers.LegacyScanner.skipToCommentEnd(LegacyScanner.scala:71)
+	at scala.meta.internal.tokenizers.LegacyScanner.fetchToken(LegacyScanner.scala:313)
+	at scala.meta.internal.tokenizers.LegacyScanner.nextToken(LegacyScanner.scala:211)
+	at scala.meta.internal.tokenizers.LegacyScanner.foreach(LegacyScanner.scala:1011)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.uncachedTokenize(ScalametaTokenizer.scala:24)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.$anonfun$tokenize$1(ScalametaTokenizer.scala:17)
+	at scala.collection.concurrent.TrieMap.getOrElseUpdate(TrieMap.scala:962)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.tokenize(ScalametaTokenizer.scala:17)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer$$anon$2.apply(ScalametaTokenizer.scala:332)
+	at scala.meta.tokenizers.Api$XtensionTokenizeDialectInput.tokenize(Api.scala:25)
+	at scala.meta.tokenizers.Api$XtensionTokenizeInputLike.tokenize(Api.scala:14)
+	at scala.meta.internal.metals.SemanticTokensProvider$.getTokens(SemanticTokensProvider.scala:28)
+	at scala.meta.internal.metals.SemanticTokensProvider$.provide(SemanticTokensProvider.scala:89)
+	at scala.meta.internal.metals.Compilers.$anonfun$semanticTokens$3(Compilers.scala:539)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2023.11.06 18:44:05 ERROR Failed to tokenize input for semantic tokens for C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+scala.meta.tokenizers.TokenizeException: <input>:53: error: unclosed comment
+    /*
+    ^
+	at scala.meta.internal.tokenizers.Reporter.incompleteInputError(Reporter.scala:27)
+	at scala.meta.internal.tokenizers.Reporter.incompleteInputError$(Reporter.scala:26)
+	at scala.meta.internal.tokenizers.Reporter$$anon$1.incompleteInputError(Reporter.scala:33)
+	at scala.meta.internal.tokenizers.Reporter.incompleteInputError(Reporter.scala:29)
+	at scala.meta.internal.tokenizers.Reporter.incompleteInputError$(Reporter.scala:29)
+	at scala.meta.internal.tokenizers.Reporter$$anon$1.incompleteInputError(Reporter.scala:33)
+	at scala.meta.internal.tokenizers.LegacyScanner.skipNestedComments(LegacyScanner.scala:52)
+	at scala.meta.internal.tokenizers.LegacyScanner.skipToCommentEnd(LegacyScanner.scala:71)
+	at scala.meta.internal.tokenizers.LegacyScanner.fetchToken(LegacyScanner.scala:313)
+	at scala.meta.internal.tokenizers.LegacyScanner.nextToken(LegacyScanner.scala:211)
+	at scala.meta.internal.tokenizers.LegacyScanner.foreach(LegacyScanner.scala:1011)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.uncachedTokenize(ScalametaTokenizer.scala:24)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.$anonfun$tokenize$1(ScalametaTokenizer.scala:17)
+	at scala.collection.concurrent.TrieMap.getOrElseUpdate(TrieMap.scala:962)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer.tokenize(ScalametaTokenizer.scala:17)
+	at scala.meta.internal.tokenizers.ScalametaTokenizer$$anon$2.apply(ScalametaTokenizer.scala:332)
+	at scala.meta.tokenizers.Api$XtensionTokenizeDialectInput.tokenize(Api.scala:25)
+	at scala.meta.tokenizers.Api$XtensionTokenizeInputLike.tokenize(Api.scala:14)
+	at scala.meta.internal.metals.SemanticTokensProvider$.getTokens(SemanticTokensProvider.scala:28)
+	at scala.meta.internal.metals.SemanticTokensProvider$.provide(SemanticTokensProvider.scala:89)
+	at scala.meta.internal.metals.Compilers.$anonfun$semanticTokens$3(Compilers.scala:539)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+
+2023.11.06 18:44:12 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:46:47 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 18:48:12 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+Downloading https://repo1.maven.org/maven2/org/scalameta/scalafmt-core_2.13/3.7.14/scalafmt-core_2.13-3.7.14.pom
+Downloaded https://repo1.maven.org/maven2/org/scalameta/scalafmt-core_2.13/3.7.14/scalafmt-core_2.13-3.7.14.pom
+Downloading https://repo1.maven.org/maven2/org/scalameta/scalafmt-config_2.13/3.7.14/scalafmt-config_2.13-3.7.14.pom
+Downloading https://repo1.maven.org/maven2/org/scalameta/scalafmt-sysops_2.13/3.7.14/scalafmt-sysops_2.13-3.7.14.pom
+Downloaded https://repo1.maven.org/maven2/org/scalameta/scalafmt-config_2.13/3.7.14/scalafmt-config_2.13-3.7.14.pom
+Downloaded https://repo1.maven.org/maven2/org/scalameta/scalafmt-sysops_2.13/3.7.14/scalafmt-sysops_2.13-3.7.14.pom
+Downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.13/2.5.0/scala-collection-compat_2.13-2.5.0.pom
+Downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.11/scala-compiler-2.13.11.pom
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.13/2.5.0/scala-collection-compat_2.13-2.5.0.pom
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.11/scala-compiler-2.13.11.pom
+Downloading https://repo1.maven.org/maven2/org/scalameta/scalafmt-core_2.13/3.7.14/scalafmt-core_2.13-3.7.14.jar
+Downloading https://repo1.maven.org/maven2/org/scalameta/scalafmt-config_2.13/3.7.14/scalafmt-config_2.13-3.7.14.jar
+Downloading https://repo1.maven.org/maven2/org/scalameta/scalafmt-sysops_2.13/3.7.14/scalafmt-sysops_2.13-3.7.14.jar
+Downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.11/scala-compiler-2.13.11.jar
+Downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.13/2.5.0/scala-collection-compat_2.13-2.5.0.jar
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.13/2.5.0/scala-collection-compat_2.13-2.5.0.jar
+Downloaded https://repo1.maven.org/maven2/org/scalameta/scalafmt-config_2.13/3.7.14/scalafmt-config_2.13-3.7.14.jar
+Downloaded https://repo1.maven.org/maven2/org/scalameta/scalafmt-sysops_2.13/3.7.14/scalafmt-sysops_2.13-3.7.14.jar
+Downloaded https://repo1.maven.org/maven2/org/scalameta/scalafmt-core_2.13/3.7.14/scalafmt-core_2.13-3.7.14.jar
+2023.11.06 18:48:32 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+Downloaded https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.11/scala-compiler-2.13.11.jar
+2023.11.06 18:48:54 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:02:58 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+ноя 06, 2023 7:04:05 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\.metals\.reports\metals-full\2023-11-06\r_compiler-error_19-04-05-217.md
+ноя 06, 2023 7:04:06 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\.metals\.reports\metals-full\2023-11-06\r_compiler-error_19-04-06-299.md
+2023.11.06 19:04:27 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+Exception in thread "pool-3-thread-4" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+ноя 06, 2023 7:04:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1444
+ноя 06, 2023 7:05:12 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1513
+2023.11.06 19:05:31 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:06:58 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:07:50 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:07:50 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+ноя 06, 2023 7:07:50 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1649
+2023.11.06 19:07:50 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:08:46 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:10:05 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:10:06 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:10:16 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:10:43 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+ноя 06, 2023 7:11:29 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1860
+2023.11.06 19:11:30 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:12:16 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:12:23 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:12:24 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+Exception in thread "pool-3-thread-5" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 19:12:24 WARN  Using indexes to guess the definition of divBy3Or7
+2023.11.06 19:12:24 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+Exception in thread "pool-3-thread-6" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 19:12:36 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:12:36 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+ноя 06, 2023 7:12:36 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2017
+2023.11.06 19:12:40 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:12:41 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+Exception in thread "pool-3-thread-7" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 19:12:42 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:12:42 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:12:42 WARN  Using indexes to guess the definition of primeFactor
+Exception in thread "pool-3-thread-8" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 19:12:42 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:12:49 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:12:49 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:12:49 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:12:54 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:13:05 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:13:05 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:13:05 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:13:05 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:13:05 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:13:05 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:13:23 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:13:23 WARN  Using indexes to guess the definition of sumScalars
+2023.11.06 19:13:23 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:13:24 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:13:24 WARN  Using indexes to guess the definition of sumScalars
+2023.11.06 19:13:24 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:13:30 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:13:30 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:13:30 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+ноя 06, 2023 7:13:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint fallbackResponseError
+SEVERE: Internal error: java.nio.file.FileSystemNotFoundException: C:\Program%2520Files\Java\jdk-1.8\src.zip
+java.util.concurrent.CompletionException: java.nio.file.FileSystemNotFoundException: C:\Program%2520Files\Java\jdk-1.8\src.zip
+	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:292)
+	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:308)
+	at java.util.concurrent.CompletableFuture.uniAccept(CompletableFuture.java:661)
+	at java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:646)
+	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)
+	at java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:1990)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$future$1(CancelTokens.scala:40)
+	at scala.meta.internal.metals.CancelTokens$.$anonfun$future$1$adapted(CancelTokens.scala:38)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:484)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.nio.file.FileSystemNotFoundException: C:\Program%2520Files\Java\jdk-1.8\src.zip
+	at com.sun.nio.zipfs.ZipFileSystem.<init>(ZipFileSystem.java:120)
+	at com.sun.nio.zipfs.ZipFileSystemProvider.newFileSystem(ZipFileSystemProvider.java:117)
+	at java.nio.file.FileSystems.newFileSystem(FileSystems.java:326)
+	at java.nio.file.FileSystems.newFileSystem(FileSystems.java:276)
+	at scala.meta.internal.io.PlatformFileIO$.newFileSystem(PlatformFileIO.scala:104)
+	at scala.meta.internal.mtags.MtagsEnrichments$XtensionURIMtags.toAbsolutePath(MtagsEnrichments.scala:126)
+	at scala.meta.internal.mtags.MtagsEnrichments$XtensionStringMtags.$anonfun$toAbsolutePath$4(MtagsEnrichments.scala:181)
+	at scala.meta.internal.mtags.MtagsEnrichments$XtensionStringMtags.withTryDecode$1(MtagsEnrichments.scala:158)
+	at scala.meta.internal.mtags.MtagsEnrichments$XtensionStringMtags.toAbsolutePath(MtagsEnrichments.scala:181)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionString.toAbsolutePath(MetalsEnrichments.scala:645)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionString.toAbsolutePath(MetalsEnrichments.scala:642)
+	at scala.meta.internal.metals.Compilers.$anonfun$definition$3(Compilers.scala:752)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionJavaList.map(MetalsEnrichments.scala:236)
+	at scala.meta.internal.metals.Compilers.$anonfun$definition$2(Compilers.scala:751)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	... 3 more
+
+2023.11.06 19:13:30 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:13:36 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:13:37 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:13:37 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:13:37 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:13:37 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:14:09 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+ноя 06, 2023 7:14:09 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2310
+2023.11.06 19:14:13 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:14:13 WARN  Using indexes to guess the definition of sortByHeavyweight
+2023.11.06 19:14:13 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:14:13 WARN  Using indexes to guess the definition of sortByHeavyweight
+2023.11.06 19:14:14 WARN  Using indexes to guess the definition of sortByHeavyweight
+2023.11.06 19:14:14 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:14:14 WARN  Using indexes to guess the definition of sortByHeavyweight
+2023.11.06 19:14:14 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:14:14 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:14:17 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:18:03 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:18:06 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:20:12 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:25:01 WARN  Using indexes to guess the definition of sortByHeavyweight
+2023.11.06 19:25:09 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:25:10 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:25:55 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:25:59 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:26:29 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:28:31 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:28:35 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:29:06 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:30:01 WARN  Using indexes to guess the definition of primeFactor
+2023.11.06 19:30:01 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:30:01 WARN  Using indexes to guess the definition of primeFactor
+Exception in thread "pool-3-thread-9" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 19:33:29 WARN  Using indexes to guess the definition of Vector2D
+2023.11.06 19:33:29 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:34:07 WARN  Using indexes to guess the definition of Vector2D
+2023.11.06 19:34:07 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:34:07 WARN  Using indexes to guess the definition of Exercises
+ноя 06, 2023 7:34:24 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3294
+2023.11.06 19:34:44 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:34:50 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+ноя 06, 2023 7:34:50 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3378
+2023.11.06 19:34:50 WARN  Using indexes to guess the definition of Vector2D
+2023.11.06 19:35:08 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:35:09 WARN  Using indexes to guess the definition of sumScalars
+2023.11.06 19:35:09 WARN  Using indexes to guess the definition of sumScalars
+2023.11.06 19:35:09 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:35:10 WARN  Using indexes to guess the definition of Exercises
+ноя 06, 2023 7:35:10 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3450
+2023.11.06 19:35:10 WARN  Using indexes to guess the definition of sumScalars
+2023.11.06 19:35:17 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:37:06 WARN  Using indexes to guess the definition of Vector2D
+Exception in thread "pool-3-thread-10" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 19:37:14 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:37:14 WARN  Using indexes to guess the definition of Vector2D
+ноя 06, 2023 7:37:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3550
+2023.11.06 19:37:55 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:37:55 WARN  Using indexes to guess the definition of Vector2D
+2023.11.06 19:37:55 WARN  Using indexes to guess the definition of Vector2D
+2023.11.06 19:38:02 WARN  Using indexes to guess the definition of Vector2D
+2023.11.06 19:38:30 WARN  Using indexes to guess the definition of sumScalars
+2023.11.06 19:38:30 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:38:30 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:38:32 WARN  Using indexes to guess the definition of sumScalars
+2023.11.06 19:38:32 WARN  Using indexes to guess the definition of Exercises
+ноя 06, 2023 7:38:32 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3668
+Exception in thread "pool-3-thread-11" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 19:38:34 WARN  Using indexes to guess the definition of sumScalars
+ноя 06, 2023 7:38:34 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3683
+2023.11.06 19:38:34 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:38:45 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:38:45 WARN  Using indexes to guess the definition of sumScalars
+ноя 06, 2023 7:38:45 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3723
+2023.11.06 19:39:09 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:39:09 WARN  Using indexes to guess the definition of Vector2D
+ноя 06, 2023 7:39:09 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3783
+2023.11.06 19:39:49 WARN  Using indexes to guess the definition of sumScalars
+2023.11.06 19:39:53 WARN  Using indexes to guess the definition of Vector2D
+ноя 06, 2023 7:39:54 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3879
+2023.11.06 19:39:57 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:39:57 WARN  Using indexes to guess the definition of Vector2D
+2023.11.06 19:40:51 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:40:58 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:40:58 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:41:01 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+ноя 06, 2023 7:41:53 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3990
+2023.11.06 19:41:53 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:42:36 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:42:36 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:42:37 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:42:37 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:42:38 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:42:38 WARN  Using indexes to guess the definition of Vector2D
+2023.11.06 19:42:38 WARN  Using indexes to guess the definition of Vector2D
+2023.11.06 19:42:46 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:42:46 WARN  Using indexes to guess the definition of Vector2D
+Exception in thread "pool-3-thread-12" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 19:43:38 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:43:41 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:43:41 WARN  Using indexes to guess the definition of Vector2D
+Exception in thread "pool-3-thread-13" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 19:44:09 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:44:21 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:44:21 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:44:21 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:44:23 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:44:23 WARN  Using indexes to guess the definition of sumCosines
+ноя 06, 2023 7:44:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 4197
+2023.11.06 19:44:24 WARN  Using indexes to guess the definition of sumCosines
+2023.11.06 19:44:25 WARN  Using indexes to guess the definition of sumCosines
+ноя 06, 2023 7:44:41 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 4264
+2023.11.06 19:44:45 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:46:08 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+ноя 06, 2023 7:46:38 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 4391
+Exception in thread "pool-3-thread-14" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+Exception in thread "pool-3-thread-15" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+Exception in thread "pool-3-thread-16" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 19:47:19 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:47:35 WARN  Using indexes to guess the definition of balls
+Exception in thread "pool-3-thread-17" java.lang.Error: java.lang.InterruptedException
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1155)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:230)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	... 2 more
+2023.11.06 19:47:37 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:47:41 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:47:41 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:47:44 WARN  Using indexes to guess the definition of divBy3Or7
+2023.11.06 19:47:44 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\test\scala\Test.scala
+2023.11.06 19:47:48 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\src\main\scala\Exercises.scala
+2023.11.06 19:48:54 WARN  Using indexes to guess the definition of sumOfDivBy3Or5
+2023.11.06 19:48:54 WARN  Using indexes to guess the definition of primeFactor
+2023.11.06 19:48:54 WARN  Using indexes to guess the definition of Exercises
+2023.11.06 19:48:55 WARN  Using indexes to guess the definition of sumScalars
+2023.11.06 19:50:55 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\build.sbt
+2023.11.06 19:50:55 WARN  Could not find semantic tokens for: file:///C:/Users/polinka/Documents/GitHub/naumen.scala.course.2023.autumn/homeworks/homework_2/build.sbt
+2023.11.06 19:50:55 WARN  Could not find semantic tokens for: file:///C:/Users/polinka/Documents/GitHub/naumen.scala.course.2023.autumn/homeworks/homework_2/build.sbt
+ноя 06, 2023 7:51:02 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 4628
+2023.11.06 19:52:12 WARN  no build target for: C:\Users\polinka\Documents\GitHub\naumen.scala.course.2023.autumn\homeworks\homework_2\build.sbt
+2023.11.06 19:52:12 WARN  Could not find semantic tokens for: file:///C:/Users/polinka/Documents/GitHub/naumen.scala.course.2023.autumn/homeworks/homework_2/build.sbt
+2023.11.06 19:52:13 WARN  Could not find semantic tokens for: file:///C:/Users/polinka/Documents/GitHub/naumen.scala.course.2023.autumn/homeworks/homework_2/build.sbt
