@@ -32,7 +32,8 @@ object Test extends TestSuite {
             'simpleSearch - (1 to 5).foreach { _ =>
                 val testList = generateRandomList(50).distinct.sorted
                 val result = Random.nextInt(testList.size)
-                assert(Exercises.functionalBinarySearch(testList, testList(result)).contains(result))
+                val my = Exercises.functionalBinarySearch(testList, testList(result))
+                assert(my.contains(result))
             }
 
             'empty - {
