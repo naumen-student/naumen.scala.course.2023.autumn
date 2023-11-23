@@ -1,7 +1,7 @@
 import scala.annotation.tailrec
 import scala.util.{Failure, Random, Success, Try}
 
-object Exercises extends App{
+object Exercises {
 
     /**
      * Задание №1
@@ -25,15 +25,13 @@ object Exercises extends App{
     }
 
 
-    def findSumFunctional(items: List[Int], sumValue: Int) = {
+    def findSumFunctional(items: List[Int], sumValue: Int): (Int, Int) = {
         val listWithIndex = items.zipWithIndex
         listWithIndex.foldLeft((-1, -1))((acc1, el1) => listWithIndex.foldLeft(acc1)((acc2, el2) =>
             if (el1._1 + el2._1 == sumValue && el1._2 != el2._2) (el1._2, el2._2)
             else acc2
         ))
     }
-
-
 
     /**
      * Задание №2
