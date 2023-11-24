@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+import scala.util.{Random, Try}
 
 object Exercises {
 
@@ -22,8 +24,23 @@ object Exercises {
         result
     }
 
-    def findSumFunctional(items: List[Int], sumValue: Int) = {
-        (-1, -1)
+    def findSumFunctional(items: List[Int], sumValue: Int): (Int, Int) = {
+        @tailrec
+        def helper(remainingItems: List[Int], index: Int, result: (Int, Int) = (-1, -1)): (Int, Int) = {
+            remainingItems match {
+                case Nil => result
+                case head :: tail =>
+                    val complimentIndex = items.indexOf(sumValue - head)
+                    if (complimentIndex != -1 && complimentIndex != index) {
+                        helper(tail, index + 1, (index, complimentIndex))
+                    } else {
+                        helper(tail, index + 1, result)
+                    }
+
+            }
+        }
+
+        helper(items, 0)
     }
 
 
@@ -49,7 +66,13 @@ object Exercises {
     }
 
     def tailRecRecursion(items: List[Int]): Int = {
-        1
+        items.zipWithIndex.foldRight(1) { case ((item, idx), acc) =>
+            if (item % 2 == 0) {
+                item * acc + idx + 1
+            } else {
+                -1 * item * acc + idx + 1
+            }
+        }
     }
 
     /**
@@ -60,7 +83,23 @@ object Exercises {
      */
 
     def functionalBinarySearch(items: List[Int], value: Int): Option[Int] = {
-        None
+        @tailrec
+        def search(low: Int, high: Int): Option[Int] = {
+            if (low > high) {
+                None
+            } else {
+                val mid = (low + high) / 2
+                if (items(mid) == value) {
+                    Some(mid)
+                } else if (items(mid) > value) {
+                    search(low, mid - 1)
+                } else {
+                    search(mid + 1, high)
+                }
+            }
+        }
+
+        search(0, items.length - 1)
     }
 
     /**
@@ -71,9 +110,22 @@ object Exercises {
      * Именем является строка, не содержащая иных символов, кроме буквенных, а также начинающаяся с заглавной буквы.
      */
 
-    def generateNames(namesСount: Int): List[String] = {
-        if (namesСount < 0) throw new Throwable("Invalid namesCount")
-        Nil
+    def generateNames(namesCount: Int): List[String] = {
+        if (namesCount < 0) {
+            throw new Throwable("Invalid namesCount")
+        } else if (namesCount == 0) {
+            List.empty
+        } else {
+            val name = generateName()
+            if (name.matches("([A-Z]|[А-Я])([a-z]|[а-я])*")) name :: generateNames(namesCount - 1)
+            else generateNames(namesCount)
+        }
+    }
+
+    private def generateName(): String = {
+        val letters = ('a' to 'z') ++ ('А' to 'Я')
+        val random = new scala.util.Random
+        Stream.continually(random.nextInt(letters.size)).map(letters).take(5).mkString
     }
 
 }
@@ -111,14 +163,23 @@ object SideEffectExercise {
 
 
     class PhoneServiceSafety(unsafePhoneService: SimplePhoneService) {
-        def findPhoneNumberSafe(num: String) = ???
+        def findPhoneNumberSafe(num: String): Option[String] = Option(unsafePhoneService.findPhoneNumber(num))
 
-        def addPhoneToBaseSafe(phone: String) = ???
+        def addPhoneToBaseSafe(phone: String): Either[String, Unit] =
+            Try(unsafePhoneService.addPhoneToBase(phone)).toEither.left.map(_.getMessage)
 
-        def deletePhone(phone: String) = ???
+        def deletePhone(phone: String): Either[String, Unit] =
+            Try(unsafePhoneService.deletePhone(phone)).toEither.left.map(_.getMessage)
     }
 
     class ChangePhoneServiceSafe(phoneServiceSafety: PhoneServiceSafety) extends ChangePhoneService {
-        override def changePhone(oldPhone: String, newPhone: String): String = ???
+        override def changePhone(oldPhone: String, newPhone: String): String = {
+            phoneServiceSafety.findPhoneNumberSafe(oldPhone).map(phoneServiceSafety.deletePhone)
+            phoneServiceSafety.addPhoneToBaseSafe(newPhone) match {
+                case Right(_) =>
+                    "ok"
+                case Left(exception) => exception
+            }
+        }
     }
 }
