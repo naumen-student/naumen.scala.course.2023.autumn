@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+import scala.util.{Random, Try}
 
 object Exercises {
 
@@ -22,10 +24,21 @@ object Exercises {
         result
     }
 
-    def findSumFunctional(items: List[Int], sumValue: Int) = {
-        (-1, -1)
+    def findSumFunctional(items: List[Int], sumValue: Int): (Int, Int) = {
+        items.zipWithIndex
+          .flatMap { case (a, ind1) =>
+              items.zipWithIndex.collect { case (b, ind2) if ind1 != ind2 && a + b == sumValue => (ind1, ind2) }
+          }
+          .lastOption
+          .getOrElse((-1, -1))
     }
 
+
+    def main(args: Array[String]): Unit = {
+        val testList: List[Int] = List(268887775, 672085131, 1092998511, 797155206, -2013969991, -828344674, -133301439, -1463785192, 1186430636, 993362444, 808258113, 1254241019, -1754519820, -52135679, -1127141896, -810010600, -1276254678, 1566251524, -1056818726, 2096388829, -1815835467, -526318760, 1978938079, -1246056131, 1912554880, -382711643, 1260412498)
+        println(simpleRecursion(testList))
+        println(tailRecRecursion(testList))
+    }
 
     /**
      * Задание №2
@@ -49,8 +62,18 @@ object Exercises {
     }
 
     def tailRecRecursion(items: List[Int]): Int = {
-        1
+
+        @scala.annotation.tailrec
+        def tailRecRecursionAcc(remainingItems: List[Int], currentIndex: Int, accumulator: Int): Int = remainingItems match {
+            case x :: tail =>
+                val updatedAcc = if (x % 2 == 0) x * accumulator + currentIndex else -x * accumulator + currentIndex
+                tailRecRecursionAcc(tail, currentIndex - 1, updatedAcc)
+            case Nil => accumulator
+        }
+
+        tailRecRecursionAcc(items.reverse, items.size, 1)
     }
+
 
     /**
      * Задание №3
@@ -59,9 +82,24 @@ object Exercises {
      * Если ответ найден, то возвращается Some(index), если нет, то None
      */
 
+
     def functionalBinarySearch(items: List[Int], value: Int): Option[Int] = {
-        None
+        @scala.annotation.tailrec
+        def functionalBinarySearchAcc(sortedItems: List[Int], left: Int, right: Int): Option[Int] = {
+            if (left > right) None
+            else {
+                val mid = left + (right - left) / 2
+                sortedItems(mid) match {
+                    case midValue if midValue == value => Some(mid)
+                    case midValue if midValue < value => functionalBinarySearchAcc(sortedItems, mid + 1, right)
+                    case midValue if midValue > value => functionalBinarySearchAcc(sortedItems, left, mid - 1)
+                }
+            }
+        }
+
+        functionalBinarySearchAcc(items.sorted, 0, items.length - 1)
     }
+
 
     /**
      * Задание №4
@@ -70,10 +108,29 @@ object Exercises {
      *
      * Именем является строка, не содержащая иных символов, кроме буквенных, а также начинающаяся с заглавной буквы.
      */
+    private val alphabet = "qwertyuiopasdfghjklzxcvbnm"
 
-    def generateNames(namesСount: Int): List[String] = {
-        if (namesСount < 0) throw new Throwable("Invalid namesCount")
-        Nil
+    def generateNames(namesCount: Int): List[String] = {
+        def getRandomChar: Char = alphabet(Random.nextInt(alphabet.length))
+
+        def getName(len: Int): String = {
+            @tailrec
+            def getLineAcc(n: Int, acc: String): String =
+                n match {
+                    case 0 => acc
+                    case _ => getLineAcc(n - 1, acc + getRandomChar)
+                }
+
+            getLineAcc(len - 1, getRandomChar.toUpper.toString)
+        }
+
+        @tailrec
+        def genNamesAcc(len: Int, acc: List[String] = List.empty[String]): List[String] = len match {
+            case 0 => acc
+            case _ => genNamesAcc(len - 1, getName(10) :: acc)
+        }
+
+        genNamesAcc(namesCount)
     }
 
 }
@@ -96,6 +153,7 @@ object Exercises {
  */
 
 object SideEffectExercise {
+
     import Utils._
 
     class SimpleChangePhoneService(phoneService: SimplePhoneService) extends ChangePhoneService {
@@ -111,14 +169,21 @@ object SideEffectExercise {
 
 
     class PhoneServiceSafety(unsafePhoneService: SimplePhoneService) {
-        def findPhoneNumberSafe(num: String) = ???
+        def findPhoneNumberSafe(num: String): Option[String] = Option[String](unsafePhoneService.findPhoneNumber(num))
 
-        def addPhoneToBaseSafe(phone: String) = ???
+        def addPhoneToBaseSafe(phone: String): Either[String, Unit] =
+            Try(unsafePhoneService.addPhoneToBase(phone)).toEither.swap.map { x => x.getMessage }.swap
 
-        def deletePhone(phone: String) = ???
+        def deletePhone(phone: String): Option[Unit] = findPhoneNumberSafe(phone).map(unsafePhoneService.deletePhone)
     }
 
     class ChangePhoneServiceSafe(phoneServiceSafety: PhoneServiceSafety) extends ChangePhoneService {
-        override def changePhone(oldPhone: String, newPhone: String): String = ???
+        override def changePhone(oldPhone: String, newPhone: String): String = {
+            phoneServiceSafety.deletePhone(oldPhone)
+            phoneServiceSafety.addPhoneToBaseSafe(newPhone) match {
+                case Left(err) => err
+                case Right(_) => "ok"
+            }
+        }
     }
 }
