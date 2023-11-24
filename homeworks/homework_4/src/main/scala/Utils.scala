@@ -4,7 +4,13 @@ object Utils {
     class PhoneBase(private val phones: mutable.ListBuffer[String]) {
         def insert(phone: String): Unit = phones += phone
         def list(): List[String] = phones.toList
-        def delete(phone: String): Unit = phones.filter(_ != phone)
+
+//        def delete(phone: String): Unit = phones.filter(_ != phone)
+
+        def delete(phone: String): Unit = {
+            val index = phones.indexOf(phone)
+            if (index != -1) phones.remove(index)
+          }
 
     }
 
