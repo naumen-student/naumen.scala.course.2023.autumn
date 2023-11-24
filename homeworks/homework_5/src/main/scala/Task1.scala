@@ -1,6 +1,8 @@
+import Task1.ShowSyntax.ShowOps
+
 /*
   Задание №1
-  В задание уже описан тайп класс и синтакс для него.
+  В задание уже описан тайп класс и синтаксис для него.
   Вам необходимо в объекте ShowInstance описать инстансы тайп класса
   для типа Cat и Box.
   Тип Cat, в соответствии с тем, какого конкретно наследника этого типа мы хотим показать,
@@ -45,9 +47,22 @@ object Task1 extends App {
   }
 
   object ShowInstance {
-    implicit val catShow: Show[Cat] = ???
+    implicit val catShow: Show[Cat] = new Show[Cat] {
+      def show(cat: Cat): String = cat match {
+        case VeryLittleCat(name) => s"очень маленький кот $name"
+        case LittleCat(name) => s"маленький кот $name"
+        case NormalCat(name) => s"кот $name"
+        case BigCat(name) => s"большой кот $name"
+        case VeryBigCat(name) => s"очень большой кот $name"
+      }
+    }
 
-    implicit def boxShow[A: Show]: Show[Box[A]] = ???
+    implicit def boxShow[A: Show]: Show[Box[A]] = new Show[Box[A]] {
+      def show(box: Box[A]): String = box match {
+        case BoxWith(value) => s"${value.show} в коробке"
+        case EmptyBox => "пустая коробка"
+      }
+    }
   }
 
   object ShowSyntax {
