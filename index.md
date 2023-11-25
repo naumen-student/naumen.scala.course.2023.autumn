@@ -10,6 +10,7 @@ layout: default
 * Лекция 3. [Scala basic II. От type конструкторов до коллекций](lectures/scala_lecture_3/index.html)
 * Лекция 4. [Функциональное программирование. Концепция (PowerPoint)](lectures/scala_lecture_4.pptx)
 * Лекция 5. [Функциональное программирование. Type classes и абстракции для ФП](lectures/scala_lecture_5.html)
+* Практика [Функциональное программирование. База данных библиотеки](lectures/practice2)
 
 
 ### Домашние задания
