@@ -11,34 +11,16 @@ import cats.implicits._
 object Task2 extends App {
   case class RadiusVector(x: Int, y: Int)
   object RadiusVector {
-    implicit val monoid: Monoid[RadiusVector] = new Monoid[RadiusVector] {
-      def empty: RadiusVector = RadiusVector(0, 0)
-      def combine(x: RadiusVector, y: RadiusVector): RadiusVector = RadiusVector(x.x + y.x, x.y + y.y)
-    }
+    implicit val monoid: Monoid[RadiusVector] = ???
   }
-  case class DegreeAngle(angle: Double)
+  case class DegreeAngle(angel: Double)
   object DegreeAngle {
-    implicit val monoid: Monoid[DegreeAngle] = new Monoid[DegreeAngle] {
-      def empty: DegreeAngle = DegreeAngle(0)
-      def combine(x: DegreeAngle, y: DegreeAngle): DegreeAngle = DegreeAngle((x.angle + y.angle) % 360)
-    }
+    implicit val monoid: Monoid[DegreeAngle] = ???
   }
 
   case class SquareMatrix[A : Monoid](values: ((A, A, A), (A, A, A), (A, A, A)))
   object SquareMatrix {
-    implicit def monoid[A: Monoid]: Monoid[SquareMatrix[A]] = new Monoid[SquareMatrix[A]] {
-      def empty: SquareMatrix[A] = SquareMatrix(
-        (Monoid[A].empty, Monoid[A].empty, Monoid[A].empty),
-        (Monoid[A].empty, Monoid[A].empty, Monoid[A].empty),
-        (Monoid[A].empty, Monoid[A].empty, Monoid[A].empty))
-
-      def combine(x: SquareMatrix[A], y: SquareMatrix[A]): SquareMatrix[A] =
-        SquareMatrix(
-          (Monoid[A].combine(x.values._1._1, y.values._1._1), Monoid[A].combine(x.values._1._2, y.values._1._2), Monoid[A].combine(x.values._1._3, y.values._1._3)),
-          (Monoid[A].combine(x.values._2._1, y.values._2._1), Monoid[A].combine(x.values._2._2, y.values._2._2), Monoid[A].combine(x.values._2._3, y.values._2._3)),
-          (Monoid[A].combine(x.values._3._1, y.values._3._1), Monoid[A].combine(x.values._3._2, y.values._3._2), Monoid[A].combine(x.values._3._3, y.values._3._3))
-        )
-    }
+    implicit def monoid[A: Monoid]: Monoid[SquareMatrix[A]] = ???
   }
 
   val radiusVectors = Vector(RadiusVector(0, 0), RadiusVector(0, 1), RadiusVector(-1, 1))
