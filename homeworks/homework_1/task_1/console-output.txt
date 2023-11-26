@@ -1,0 +1,35 @@
+PS C:\Users\alexi> scala
+Welcome to Scala 2.12.10 (Java HotSpot(TM) 64-Bit Server VM, Java 11.0.10).
+Type in expressions for evaluation. Or try :help.
+
+scala> def helloFormat (hello: String, name: String) : String = s"$hello Scala! This is $name"
+helloFormat: (hello: String, name: String)String
+
+scala> def printHello (hellos: Array[String], name: String)
+     |   {
+     |     for(hello <- hellos) println(helloFormat(hello:  String, name: String))
+     |   }
+printHello: (hellos: Array[String], name: String)Unit
+
+scala> def run()
+     |   {
+     |     val person = "Kalinin Alexander"
+     |     val hellos = Array("Hello", "Hola", "Guten Tag", "Szia", "Ohayo")
+     |     printHello(hellos: Array[String], person: String)
+     |     printHello(hellos: Array[String], person.reverse: String)
+     |   }
+run: ()Unit
+
+scala> run()
+Hello Scala! This is Kalinin Alexander
+Hola Scala! This is Kalinin Alexander
+Guten Tag Scala! This is Kalinin Alexander
+Szia Scala! This is Kalinin Alexander
+Ohayo Scala! This is Kalinin Alexander
+Hello Scala! This is rednaxelA ninilaK
+Hola Scala! This is rednaxelA ninilaK
+Guten Tag Scala! This is rednaxelA ninilaK
+Szia Scala! This is rednaxelA ninilaK
+Ohayo Scala! This is rednaxelA ninilaK
+
+scala>
