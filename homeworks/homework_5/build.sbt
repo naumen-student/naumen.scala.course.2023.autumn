@@ -10,5 +10,5 @@ testFrameworks += new TestFramework("utest.runner.Framework")
 
 lazy val root = (project in file("."))
   .settings(
-    name := "homework-1"
+    name := "homework_5"
   )
