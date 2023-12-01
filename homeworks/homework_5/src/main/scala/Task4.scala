@@ -16,7 +16,7 @@ object Task4 extends App {
     def pure[A](value: A): F[E, A]
     def flatMap[A, B](fa: F[E, A])(f: A => F[E, B]): F[E, B]
 
-    def map[A, B](fa: F[E, A])(f: A => B): F[E, B] = ???
+    def map[A, B](fa: F[E, A])(f: A => B): F[E, B] = flatMap(fa)(a => pure(f(a)))
 
     def raiseError[A](fa: F[E, A])(error: => E):  F[E, A]
     def handleError[A](fa: F[E, A])(handle: E => A): F[E, A]
@@ -28,10 +28,28 @@ object Task4 extends App {
 
     def error[E, A](error: E): EIO[E, A] = EIO[E, A](Left(error))
 
-    def possibleError[A](f: => A): EIO[Throwable, A] = ???
+    def possibleError[A](f: => A): EIO[Throwable, A] =
 
-    implicit def monad[E]: MonadError[EIO, E] = ???
-  }
+    def possibleError[A](f: => A): EIO[Throwable, A] = Try(f) match {
+      case Success(value) => EIO(Right(value))
+      case Failure(exception) => EIO(Left(exception))
+    }
+
+    implicit def monad[E]: MonadError[EIO, E] = new MonadError[EIO, E] {
+      def pure[A](value: A): EIO[E, A] = EIO(Right(value))
+
+      def flatMap[A, B](fa: EIO[E, A])(f: A => EIO[E, B]): EIO[E, B] = fa.value match {
+        case Left(e) => EIO(Left(e))
+        case Right(a) => f(a)
+      }
+
+      def raiseError[A](fa: EIO[E, A])(error: => E): EIO[E, A] = EIO(Left(error))
+
+      def handleError[A](fa: EIO[E, A])(handle: E => A): EIO[E, A] = fa.value match {
+        case Left(e) => EIO(Right(handle(e)))
+        case Right(a) => EIO(Right(a))
+      }
+    }
 
   object EIOSyntax {
     implicit class EIOOps[E, A](val eio: EIO[E, A]) {
@@ -44,4 +62,4 @@ object Task4 extends App {
         EIO.monad.handleError(eio)(f)
     }
   }
-}
+
