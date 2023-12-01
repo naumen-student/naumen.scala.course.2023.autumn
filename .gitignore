@@ -1,1 +1,5 @@
 .idea
+.metals
+.vscode/
+homeworks/homework_2/
+homeworks/homework_3/.scalafmt.conf
