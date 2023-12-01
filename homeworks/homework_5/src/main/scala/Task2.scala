@@ -17,12 +17,12 @@ object Task2 extends App {
       override def combine(v1: RadiusVector, v2: RadiusVector): RadiusVector = RadiusVector(v1.x + v2.x, v1.y + v2.y)
     }
   }
-  case class DegreeAngle(angel: Double)
+  case class DegreeAngle(angle: Double)
   object DegreeAngle {
     implicit val monoid: Monoid[DegreeAngle] = new Monoid[DegreeAngle] {
       override def empty: DegreeAngle = DegreeAngle(0)
 
-      override def combine(x: DegreeAngle, y: DegreeAngle): DegreeAngle = DegreeAngle((x.angel + y.angel) % 360)
+      override def combine(x: DegreeAngle, y: DegreeAngle): DegreeAngle = DegreeAngle((x.angle + y.angle) % 360)
     }
   }
 
