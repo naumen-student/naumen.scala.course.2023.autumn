@@ -1,0 +1,34 @@
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 16.0.2).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Artsybashev Gregory"
+name: String = Artsybashev Gregory
+
+scala> val en = "Hello"
+en: String = Hello
+
+scala> val sp = "Hola"
+sp: String = Hola
+
+scala> val ger = "Guten tag"
+ger: String = Guten tag
+
+scala> def hello(greet: String, name: String): Unit = {println(s"$greet Scala! This is $name")}
+hello: (greet: String, name: String)Unit
+
+scala> hello(en, name)
+Hello Scala! This is Artsybashev Gregory
+
+scala> hello(sp, name)
+Hola Scala! This is Artsybashev Gregory
+
+scala> hello(ger, name)
+Guten tag Scala! This is Artsybashev Gregory
+
+scala> val list = List(en, sp, ger)
+list: List[String] = List(Hello, Hola, Guten tag)
+
+scala> for (gr <- list) hello(gr, name.reverse)
+Hello Scala! This is yrogerG vehsabystrA
+Hola Scala! This is yrogerG vehsabystrA
+Guten tag Scala! This is yrogerG vehsabystrA
