@@ -1,0 +1,4 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/d.miroshnik/IdeaProjects/naumen.scala.course.2023.autumn/homeworks/homework_5/src/main/scala/Task1.scala:38:42: value show is not a member of type parameter A[0m
+[0m[[0m[31merror[0m] [0m[0m        case BoxWith(value) => s"${value.show} в коробке"[0m
+[0m[[0m[31merror[0m] [0m[0m                                         ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
