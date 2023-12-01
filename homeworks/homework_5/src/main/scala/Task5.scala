@@ -9,17 +9,48 @@ import scala.util.{Failure, Success, Try}
   3) Написать функции apply, error, possibleError
  */
 object Task5 extends App {
+
   import Task4.MonadError
 
   sealed trait MyEither[+E, +A] {
     def isError: Boolean
   }
-  object MyEither {
-    def apply[A](value: A): MyEither[Nothing, A] = ???
-    def error[E, A](error: E): MyEither[E, A] = ???
-    def possibleError[A](f: => A): MyEither[Throwable, A] = ???
 
-    implicit def myEitherMonad[E]: MonadError[MyEither, E] = ???
+  case class RightAnalogue[+E, +A](value: A) extends MyEither[E, A] {
+    override def isError: Boolean = false
+  }
+
+  case class LeftAnalogue[+E, +A](value: E) extends MyEither[E, A] {
+    override def isError: Boolean = true
+  }
+
+  object MyEither {
+
+    def apply[A](value: A): MyEither[Nothing, A] = RightAnalogue(value)
+
+    def error[E, A](error: E): MyEither[E, A] = LeftAnalogue(error)
+
+    def possibleError[A](f: => A): MyEither[Throwable, A] = Try(f) match {
+      case Failure(exception) => LeftAnalogue(exception)
+      case Success(value) => RightAnalogue(value)
+    }
+
+    implicit def myEitherMonad[E]: MonadError[MyEither, E] = new MonadError[MyEither, E] {
+      override def pure[A](value: A): MyEither[E, A] = MyEither(value)
+
+      override def flatMap[A, B](fa: MyEither[E, A])(f: A => MyEither[E, B]): MyEither[E, B] = fa match {
+        case RightAnalogue(value) => f(value)
+        case LeftAnalogue(value) => LeftAnalogue(value)
+      }
+
+      override def raiseError[A](fa: MyEither[E, A])(error: => E): MyEither[E, A] = LeftAnalogue(error)
+
+      override def handleError[A](fa: MyEither[E, A])(handle: E => A): MyEither[E, A] =
+        fa match {
+          case RightAnalogue(value) => RightAnalogue(value)
+          case LeftAnalogue(error) => RightAnalogue(handle(error))
+        }
+    }
   }
 
   object MyEitherSyntax {
