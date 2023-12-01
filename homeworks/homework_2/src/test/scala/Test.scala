@@ -10,3 +10,39 @@ object Test extends TestSuite{
         }
     }
 }
+
+'test_sumOfDivBy3Or5 - {
+    assert(Exercises.sumOfDivBy3Or5(3,6)==14)
+    assert(Exercises.sumOfDivBy3Or5(1, 5) == 8)
+    assert(Exercises.sumOfDivBy3Or5(4, 6) == 11)
+    assert(Exercises.sumOfDivBy3Or5(1, 20) == 98)
+}
+
+'test_primeFactor - {
+    assert(Exercises.primeFactor(7) == Seq(7))
+    assert(Exercises.primeFactor(60) == Seq(2, 2, 3, 5))
+    assert(Exercises.primeFactor(44) == Seq(2, 2, 11))
+    assert(Exercises.primeFactor(1) == Seq.empty
+}
+
+'test_sumScalars - {
+    assert(Exercises.sumScalars(Vector2D(0, 0), Vector2D(1, 4), Vector2D(1, 2), Vector2D(0, 2)) == 4)
+    assert(Exercises.sumScalars(Vector2D(1, 4), Vector2D(3, 2), Vector2D(0, 8), Vector2D(8, 2)) == 27)
+    assert(Exercises.sumScalars(Vector2D(4, 0), Vector2D(0, 2), Vector2D(0, 13), Vector2D(8, 0)) == 0)
+    assert(Exercises.sumScalars(Vector2D(1, 1), Vector2D(0, 1), Vector2D(1, 1), Vector2D(1, -1)) == 1)
+}
+
+'test_sumCosines - {
+    assert(Exercises.sumCosines(Vector2D(0, 0), Vector2D(0, 0), Vector2D(0, 0), Vector2D(0, 0)).isNaN)
+    assert((Exercises.sumCosines(Vector2D(1, 1), Vector2D(1, 1), Vector2D(1, 1), Vector2D(1, 1)) - 2.0).abs < 1e-6)
+    assert(Exercises.sumCosines(Vector2D(-4, -4), Vector2D(2, 2), Vector2D(3, 3), Vector2D(-1, -1)) == -2)
+}
+
+'test_sortByHeavyweight - {
+    assert(Exercises.sortByHeavyweight(Map.empty) == Seq.empty)
+    assert(Exercises.sortByHeavyweight(Map("a" -> (0, 0))) == Seq("a"))
+    assert(Exercises.sortByHeavyweight(Map("Tungsten" -> (2, 19.35), "Graphite" -> (12, 2.1), "Iron" -> (3, 7.874))) ==
+      Seq("Tungsten", "Iron", "Graphite"))
+}
+}
+}

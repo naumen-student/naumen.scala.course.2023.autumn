@@ -73,5 +73,20 @@ object Test extends TestSuite {
                 }
             }
         }
+        'test_refcelladvanced' - {
+            val table = new Table(1, 5)
+            val cellRef00 = new ReferenceCell(0, 1, table)
+            val cellRef01 = new ReferenceCell(0, 2, table)
+            val cellRef02 = new ReferenceCell(0, 3, table)
+            val cellRef03 = new ReferenceCell(0, 4, table)
+            val cellRef04 = new ReferenceCell(0, 1, table)
+            table.setCell(0, 0, cellStr00)
+            table.setCell(0, 1, cellStr01)
+            table.setCell(0, 2, cellStr02)
+            table.setCell(0, 3, cellStr03)
+            table.setCell(0, 4, cellStr04)
+
+            asseert(table.getCell(0, 0).map(_.toString).contains('cyclic'))
+        }
     }
 }
