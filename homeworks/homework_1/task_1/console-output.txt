@@ -1,0 +1,32 @@
+C:\Users\as-pa>scala
+Welcome to Scala 3.3.1 (11.0.16.1, Java OpenJDK 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+
+scala> val greetEn="Hello"
+val greetEn: String = Hello
+
+scala> val personName="Andrew"
+val personName: String = Andrew
+
+scala> val printer= (greet:String, name:String)=> {println(s"${greet}, scala! This is ${name}")}
+val printer: (String, String) => Unit = Lambda$1651/0x0000000800869040@4e4af370
+
+scala> printer(greetEn, personName)
+Hello, scala! This is Andrew
+
+scala> val difGreets = "Guten tag" :: "Hola" :: greetEn ::Nil
+val difGreets: List[String] = List(Guten tag, Hola, Hello)
+
+scala> difGreets.foreach((a)=>printer(a, personName))
+Guten tag, scala! This is Andrew
+Hola, scala! This is Andrew
+Hello, scala! This is Andrew
+
+scala> difGreets.foreach((a)=>printer(a, personName.reverse))
+Guten tag, scala! This is werdnA
+Hola, scala! This is werdnA
+Hello, scala! This is werdnA
+
+
+
+scala>
