@@ -1,0 +1,19 @@
+C:\Users\Пользователь>scala
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 17.0.8).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name:String = "Игорь"
+name: String = Игорь
+
+scala> val greats: List[String] = "Hello" :: "Hola" :: "Guten tag" :: Nil
+greats: List[String] = List(Hello, Hola, Guten tag)
+
+scala> for (great <- greats) println(s"${great} Scala! This is ${name}")
+Hello Scala! This is Игорь
+Hola Scala! This is Игорь
+Guten tag Scala! This is Игорь
+
+scala> for (great <- greats) println(s"${great} Scala! This is ${name.reverse}")
+Hello Scala! This is ьрогИ
+Hola Scala! This is ьрогИ
+Guten tag Scala! This is ьрогИ
