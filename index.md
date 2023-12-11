@@ -11,6 +11,7 @@ layout: default
 * Лекция 4. [Функциональное программирование. Концепция (PowerPoint)](lectures/scala_lecture_4.pptx)
 * Лекция 5. [Функциональное программирование. Type classes и абстракции для ФП](lectures/scala_lecture_5.html)
 * Практика [Функциональное программирование. База данных библиотеки](lectures/practice2)
+* Лекция 7. [Функциональное программирование. База данных библиотеки](lectures/scala_lecture_7/index.html)
 
 
 ### Домашние задания
