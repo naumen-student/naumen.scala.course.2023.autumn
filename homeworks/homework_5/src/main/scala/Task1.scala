@@ -45,10 +45,14 @@ object Task1 extends App {
   }
 
   object ShowInstance {
-    implicit val catShow: Show[Cat] = ???
+    implicit val catShow: Show[Cat] = new Show[Cat]
 
-    implicit def boxShow[A: Show]: Show[Box[A]] = ???
+    def greet(cat: Cat): String = s"${cat.name} name:Kitty "
   }
+
+    implicit def boxShow[A: Show]: Show[Box[A]] = new Show[Box[A] {
+      def greet(box: Box):String= s"${box.A} value: "
+    }
 
   object ShowSyntax {
     implicit class ShowOps[A](val a: A) {

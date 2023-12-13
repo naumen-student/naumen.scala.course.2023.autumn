@@ -11,16 +11,20 @@ import cats.implicits._
 object Task2 extends App {
   case class RadiusVector(x: Int, y: Int)
   object RadiusVector {
-    implicit val monoid: Monoid[RadiusVector] = ???
+    implicit val monoid: Monoid[RadiusVector] = new Monoid[RadiusVector]
+    def greet(radiusVector: RadiusVector): Int = s"${radiusVector.monoid} "
   }
+
   case class DegreeAngle(angel: Double)
   object DegreeAngle {
-    implicit val monoid: Monoid[DegreeAngle] = ???
+    implicit val monoid: Monoid[DegreeAngle] = new Monoid[DegreeAngle]
+    def greet(degreeAngle: DegreeAngle):Double=s"${degreeAngle.monoid} "
   }
 
   case class SquareMatrix[A : Monoid](values: ((A, A, A), (A, A, A), (A, A, A)))
   object SquareMatrix {
-    implicit def monoid[A: Monoid]: Monoid[SquareMatrix[A]] = ???
+    implicit def monoid[A: Monoid]: Monoid[SquareMatrix[A]] = new Monoid[SquareMatrix[A]]
+    def greet(squareMatrix: SquareMatrix):[A:Monoid]=s"${squreMatrix[A].monoid}"
   }
 
   val radiusVectors = Vector(RadiusVector(0, 0), RadiusVector(0, 1), RadiusVector(-1, 1))
@@ -46,6 +50,7 @@ object Task2 extends App {
     )
   )
   Monoid[SquareMatrix[Int]].combineAll(matrixes)
+
   //  [0, 0, 0]
   //  |1, 1, 1|
   //  [0, 0, 0]
