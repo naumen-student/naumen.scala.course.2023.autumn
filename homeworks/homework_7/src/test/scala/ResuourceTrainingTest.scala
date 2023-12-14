@@ -1,13 +1,13 @@
 package ru.dru
 
-
+import ru.dru.BreakfastTest.suite
 import zio.Scope
 import zio.test.{Spec, TestEnvironment, ZIOSpecDefault, assertTrue}
 import zio._
 
 import java.io.{BufferedReader, BufferedWriter, FileReader, FileWriter}
 
-object ResourceTrainingTest extends ZIOSpecDefault {
+object ResuourceTrainingTest extends ZIOSpecDefault {
 
   override def spec: Spec[TestEnvironment with Scope, Any] = suite("ResuourceTraining") (
     test("test reader 1") {
