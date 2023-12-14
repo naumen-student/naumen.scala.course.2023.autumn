@@ -1,6 +1,6 @@
 package ru.dru
 
-import ru.dru.BreakfastTest.suite
+//import ru.dru.BreakfastTest.suite
 import zio.Scope
 import zio.test.{Spec, TestEnvironment, ZIOSpecDefault, assertTrue}
 import zio._
