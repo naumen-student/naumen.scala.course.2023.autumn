@@ -1,3 +1,4 @@
+import scala.annotation.tailrec
 
 object Exercises {
 
@@ -23,7 +24,18 @@ object Exercises {
     }
 
     def findSumFunctional(items: List[Int], sumValue: Int) = {
-        (-1, -1)
+      @tailrec
+      def tail(index: Int): (Int, Int) = {
+        if (index >= items.length) (-1, -1)
+        else {
+          val sumDiff = sumValue - items(index)
+          val newIndex = items.indexOf(sumDiff)
+          if (newIndex != index && newIndex != -1) (newIndex, index)
+          else tail(index + 1)
+        }
+      }
+
+      tail(0)
     }
 
 
@@ -49,7 +61,17 @@ object Exercises {
     }
 
     def tailRecRecursion(items: List[Int]): Int = {
-        1
+      @tailrec
+      def tail(items: List[Int], index: Int, acc: Int = 1): Int = {
+        items match {
+          case ::(head, tl) =>
+            if (head % 2 == 0) tail(tl, index - 1, head * acc + index)
+            else tail(tl, index - 1, -head * acc + index)
+          case _ => acc
+        }
+      }
+
+      tail(items.reverse, items.size)
     }
 
     /**
@@ -59,8 +81,19 @@ object Exercises {
      * Если ответ найден, то возвращается Some(index), если нет, то None
      */
 
-    def functionalBinarySearch(items: List[Int], value: Int): Option[Int] = {
-        None
+    @tailrec
+    def functionalBinarySearch(items: List[Int], value: Int, idx: Int = 0): Option[Int] = {
+      if (items == Nil) return None
+      if (items.length == 1) {
+        items.indices.find(items(_) == value)
+      }
+      else {
+        val c = items.length / 2
+        if (items(c) == value) Some(idx + c)
+        else if (items(c) > value) functionalBinarySearch(items.take(c), value, idx)
+        else functionalBinarySearch(items.drop(c), value, idx + c)
+
+      }
     }
 
     /**
@@ -71,9 +104,11 @@ object Exercises {
      * Именем является строка, не содержащая иных символов, кроме буквенных, а также начинающаяся с заглавной буквы.
      */
 
-    def generateNames(namesСount: Int): List[String] = {
-        if (namesСount < 0) throw new Throwable("Invalid namesCount")
-        Nil
+    @tailrec
+    def generateNames(namesСount: Int, acc: List[String] = Nil): List[String] = {
+      if (namesСount < 0) throw new Throwable("Invalid namesCount")
+      if (namesСount == 0) acc
+      else generateNames(namesСount - 1, ("a" * (namesСount)).capitalize :: acc)
     }
 
 }
@@ -111,14 +146,39 @@ object SideEffectExercise {
 
 
     class PhoneServiceSafety(unsafePhoneService: SimplePhoneService) {
-        def findPhoneNumberSafe(num: String) = ???
+      def findPhoneNumberSafe(num: String): Option[String] =
+        Option(unsafePhoneService.findPhoneNumber(num))
 
-        def addPhoneToBaseSafe(phone: String) = ???
 
-        def deletePhone(phone: String) = ???
+      def addPhoneToBaseSafe(phone: String): Either[String, Unit] = {
+        if (checkPhoneNumber(phone)) {
+          findPhoneNumberSafe(phone) match {
+            case Some(value) => Left(s"Phone number ${value} already exists")
+            case None => Right(unsafePhoneService.addPhoneToBase(phone))
+          }
+        }
+        else Left("Invalid phone string")
+      }
+
+      def deletePhone(phone: String): Either[String, Unit] = {
+        findPhoneNumberSafe(phone) match {
+          case Some(value) => Right(unsafePhoneService.deletePhone(value))
+          case None => Left(s"Phone number ${phone} not found")
+        }
+      }
     }
 
     class ChangePhoneServiceSafe(phoneServiceSafety: PhoneServiceSafety) extends ChangePhoneService {
-        override def changePhone(oldPhone: String, newPhone: String): String = ???
+      override def changePhone(oldPhone: String, newPhone: String): String = {
+        phoneServiceSafety.deletePhone(oldPhone) match {
+          case Left(value) => value
+          case Right(_) => phoneServiceSafety.addPhoneToBaseSafe(newPhone) match {
+            case Left(value) => value
+            case Right(_) => "ok"
+          }
+        }
+
+
+      }
     }
 }
