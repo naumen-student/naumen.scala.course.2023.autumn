@@ -1,0 +1,29 @@
+scala> var a = "Hello, Scala! This is Pasha"
+var a: String = Hello, Scala! This is Pasha
+
+scala> println(a)
+Hello, Scala! This is Pasha
+
+scala> var hola_a = a.replaceAll("Hello", "Hola")
+var hola_a: String = Hola, Scala! This is Pasha
+
+scala> println(hola_a)
+Hola, Scala! This is Pasha
+
+scala> var guten_tag_a = a.replaceAll("Hello", "Guten tag")
+var guten_tag_a: String = Guten tag, Scala! This is Pasha
+
+scala> println(guten_tag_a)
+Guten tag, Scala! This is Pasha
+
+scala> var guten_tag_a_reverse = guten_tag_a.replaceAll("Pasha", "ahsaP")
+var guten_tag_a_reverse: String = Guten tag, Scala! This is ahsaP
+
+scala> println(guten_tag_a_reverse)
+Guten tag, Scala! This is ahsaP
+
+scala> var hola_a_reverse = hola_a.replaceAll("Pasha", "ahsaP")
+var hola_a_reverse: String = Hola, Scala! This is ahsaP
+
+scala> println(hola_a_reverse)
+Hola, Scala! This is ahsaP
