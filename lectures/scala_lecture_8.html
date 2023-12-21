@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Libraries</title>
+
+    <meta name="description" content="Scala libraries">
+    <meta name="author" content="">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css" id="theme">
+    <link rel="stylesheet" href="css/hljs/vs.css" id="highlight-theme">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal lecture2">
+    <div class="footer">
+            <span class="corp-name"><b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspNAUMEN</b>
+    </div>
+    <div class="slides">
+        <section>
+            <h2>ZIO</h2>
+            <h3><span class="corp-name">Экосистема ZIO и другие библиотеки</span></h3>
+            <p>Соломеин Илья</p>
+        </section>
+    </div>
+    <div class="slides">
+        <section>
+            <h2>В этой лекции</h2>
+            <ul>
+                <li>Рассмотрим библиотеки для написания бэкенда</li>
+                <li>Обзор ряда библиотек из экосистемы ZIO</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Задача</h2>
+            <p>Необходимо написать сервер, предоставляющий API для фронтового приложения.</p>
+            <p>Суть приложения: просмотр и редактирование расписания занятий студентов.</p>
+            <p>Технические требования:</p>
+            <ul>
+                <li>Детали работы сервера (адрес БД, пароли и т.п.) передавать через конфигурационный файл;</li>
+                <li>Работа с базой данных;</li>
+                <li>Ответы от сервера в формате JSON;</li>
+                <li>Документация к API;</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>HTTP4S</h2>
+        </section>
+        <section>
+            <h2>HTTP4S</h2>
+            <p>http4s предоставляет стандартный интерфейс для определение http сервера и клиента</p>
+            <p>Из этого следует, что существует несколько реализаций http4s</p>
+            <img src="img/lecture_8/backend-integrations.png">
+            <p>Далее будем использовать Ember</p>
+        </section>
+        <section>
+            <h2>HTTP4S</h2>
+            <p>Основную абстракцию, описывающую работу сервера, можно описать как функцию:</p>
+            <div class="code-block"><pre><code class="scala">Request => Response</code></pre></div>
+            <p>Но не для каждого Request определён соответствующий Response. Выразим это в типах:</p>
+            <div class="code-block"><pre><code class="scala">Request => Option[Response]</code></pre></div>
+            <p>Так же нам хотелось бы иметь некоторый контекст выполнения:</p>
+            <div class="code-block"><pre><code class="scala">Request => F[Option[Response]]</code></pre></div>
+            <p>В http4s для этого типа используется алиас <b>HttpRoutes[F[_]]</b>.</p>
+            <p>В действительности, в http4s этот алиас определяется чуть сложнее:</p>
+            <div class="code-block"><pre><code class="scala">type HttpRoutes[F[_]] = Kleisli[OptionT[F, *], Request[F], Response[F]]
+case class Kleisli[F[_], -A, B](run: A => F[B])
+case class OptionT[F[_], A](value: F[Option[A]])
+type HttpRoutes[F[_]] = Request[F] => F[Option[Response[F]]]</code></pre></div>
+        </section>
+        <section>
+            <h2>HTTP4S</h2>
+            <p>Для описания роутов http4s предоставляет специальную dsl (domain-specific language):</p>
+            <div class="code-block"><pre><code class="scala">
+  // Для query params описываем объекты, чтобы достать значения из конкретных параметров
+  object OrderingQueryParam extends QueryParamDecoderMatcher[String]("order")
+  object StudentNameParam extends QueryParamDecoderMatcher[String]("name")
+
+  def appRoutes[F[_] : Monad]: HttpRoutes[F] = {
+    val dsl = Http4sDsl[F]
+    // Импортируем функции для описания роутов
+    import dsl._
+
+    HttpRoutes.of[F] {
+      // GET запрос с параметром в пути роута
+      case GET -> Root / "student" / UUIDVar(studentId) => ???
+      // GET запрос с query params
+      case GET -> Root / "students" :? OrderingQueryParam(order) +& StudentNameParam(name) => ???
+      // POST запрос с обращением к телу запроса
+      case req @ POST -> Root / "addLesson" => req.body; ???
+    }
+  }
+</code></pre></div>
+        </section>
+        <section>
+            <h2>HTTP4S</h2>
+            <p>Давайте запустим сервер!</p>
+            <div class="code-block"><pre><code class="scala">  val routes: HttpRoutes[SomeMonad] = appRoutes[SomeMonad]
+
+  val httpApp: Kleisli[AppTask, Request[AppTask], Response[AppTask]] = routes.orNotFound
+  // Request[F] => F[Response[F]] (относительно HttpRoutes[F] пропал Option)
+
+  EmberServerBuilder
+    .default[SomeMonad]    // default[F[_] : Async: Network]
+    .withHost(host"localhost")
+    .withPort(port"7777")
+    .withHttpApp(httpApp)
+    .build                 // после вызова build мы получаем тип Resource[SomeMonad, Server]
+    .useForever            // useForever начинает использование ресурса
+
+  // Важно понимать, что пока перед нами лишь описание запуска сервера
+  // В зависимости от конкретного SomeMonad способы запуска отличаются    </code></pre></div>
+            <p>В качестве SomeMonad мы должны использовать type constructor, для которого </p>
+            <p>в implicit scope существуют инстансы Async и Network. Если мы будем использовать</p>
+            <p>IO из cats-effect, то никаких проблем нет, так как в самой библиотеке необходимые </p>
+            <p>тайп классы для IO уже определены. Но что же делать, если мы хотим использовать ZIO?</p>
+        </section>
+        <section>
+            <h2>Интермедия</h2>
+            <h3>Поговорим про interop</h3>
+            <p>interop - сокращение от interoperation (взаимодействие) - это, в нашем случае, библиотека</p>
+            <p>предоставляющая инстансы тайп-классов для наших типов данных. </p>
+            <p>Тайп-классы из cats являются дефакто стандартом, потому большая часть обобщённых библиотек</p>
+            <p>(http4s в том числе) для абстрагирования используют именно их.</p>
+            <p>Соответственно, чтобы заставить не связанные с cats библиотеки работать нам необходимо</p>
+            <p>откуда-то взять недостающие инстансы тайп-классов, что решают interop-библиотеки.</p>
+            <p></p>
+        </section>
+        <section>
+            <h2>HTTP4S</h2>
+            <p>Давайте запустим сервер c ZIO!</p>
+            <div class="code-block"><pre><code class="scala">
+import zio.interop.catz._
+import zio.Task
+
+object Main extends ZIOAppDefault {
+  val routes = appRoutes[Task]
+  val httpApp = routes.orNotFound
+
+  val server = EmberServerBuilder
+    .default[Task]
+    .withHost(host"localhost")
+    .withPort(port"7777")
+    .withHttpApp(httpApp)
+    .build
+    .useForever
+
+  override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] =
+    server
+}
+            </code></pre></div>
+        </section>
+
+        <section>
+            <h1>Сonfig</h1>
+        </section>
+        <section>
+            <h2>Сonfig</h2>
+            <p>Ключевые фичи zio-config</p>
+            <ul>
+                <li>Возможность использовать различные источники для конфигурации;</li>
+                <li>Автоматическое представление конфига в виде кейс класса (деривация);</li>
+                <li>Проверка ошибок типов, автоматическая валидация и вывод "говорящих" ошибок;</li>
+                <li>Возможность автоматически сгенерировать документацию к конфигурации;</li>
+            </ul>
+            </br>
+            </br>
+            <p>Чтобы смочь воспользоваться всеми возможностями, необходимо подключить ряд библиотек:</p>
+            <div class="code-block"><pre><code class="scala">
+libraryDependencies += "dev.zio" %% "zio-config"          % "version"
+libraryDependencies += "dev.zio" %% "zio-config-magnolia" % "version"
+libraryDependencies += "dev.zio" %% "zio-config-typesafe" % "version"
+libraryDependencies += "dev.zio" %% "zio-config-refined"  % "version"
+            </code></pre></div>
+        </section>
+        <section>
+            <h2>Сonfig</h2>
+            <p>Опишем Layer конфигурации</p>
+            <div class="code-block"><pre><code class="scala">import zio.config.magnolia.deriveConfig
+import zio.config.typesafe._
+
+package object configuration {
+  private val configDescriptor = deriveConfig[AppConfig]
+
+  case class AppConfig(
+      server: ServerConfig,
+      database: DatabaseConfig
+  )
+
+  case class ServerConfig(host: String, port: Int)
+  case class DatabaseConfig(url: String, user: String, password: String)
+
+  object Configuration {
+    // type Layer[+E, +Out] = ZLayer[Any, E, Out]
+    val layer: Layer[zio.Config.Error, AppConfig] =
+      ZLayer.scoped(TypesafeConfigProvider.fromResourcePath().load(configDescriptor))
+  }
+}
+            </code></pre></div>
+        </section>
+        <section>
+            <h2>Сonfig</h2>
+            <p>Но как добавить зависимость к серверу?</p>
+            <div class="code-block"><pre><code class="scala">
+import zio.interop.catz._
+import zio.Task
+
+object Main extends ZIOAppDefault {
+  val routes = appRoutes[Task] // Task не принимает никаких зависимостей Task[A] = ZIO[Any, Throwable, A]
+  val httpApp = routes.orNotFound
+
+  val server = EmberServerBuilder
+    .default[Task] // Здесь ожидается F[_], значит передать, к примеру, RIO[-R, +A] не выйдет
+    .withHost(host"localhost")
+    .withPort(port"7777")
+    .withHttpApp(httpApp)
+    .build
+    .useForever
+
+  override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] =
+    server
+}
+            </code></pre></div>
+        </section>
+        <section>
+            <h2>Сonfig</h2>
+            <p>Решение</p>
+            <div class="code-block"><pre><code class="scala">object Main extends ZIOAppDefault {
+  type AppEnv     = AppConfig   // далее зависимости можно добавлять через with
+  type AppTask[A] = ZIO[AppEnv, Throwable, A]
+
+  val server: ZIO[configuration.AppConfig, Throwable, Unit] = for {
+    config <- ZIO.service[AppConfig]
+    host <- ZIO
+      .fromOption(Host.fromString(config.server.host))
+      .orElseFail(new Throwable("Can't parse host"))
+    port <- ZIO
+      .fromOption(Port.fromInt(config.server.port))
+      .orElseFail(new Throwable("Can't parse port"))
+    httpApp = appRoutes[AppTask].orNotFound
+    _ <- EmberServerBuilder.default[AppTask]
+      .withHost(host).withPort(port)
+      .withHttpApp(httpApp)
+      .build.useForever
+  } yield ()
+
+  override def run: ZIO[Scope, Any, ExitCode] =
+    server
+      .provide(configuration.Configuration.live)
+      .tapErrorCause(err => ZIO.logErrorCause("Server bootstrap failed", err))
+      .exitCode
+}</code></pre></div>
+        </section>
+
+        <section>
+            <h1>tapir</h1>
+        </section>
+        <section>
+            <h2>tapir</h2>
+            <p>Давайте ещё раз взглянем на роуты</p>
+            <div class="code-block"><pre><code class="scala">HttpRoutes.of[F] {
+  // GET запрос с параметром в пути роута
+  case GET -> Root / "student" / UUIDVar(studentId) => ???
+  // GET запрос с query params
+  case GET -> Root / "students" :? OrderingQueryParam(order) +& StudentNameParam(name) => ???
+  // POST запрос с обращением к телу запроса
+  case req @ POST -> Root / "addLesson" => req.body; ???
+}
+</code></pre></div>
+            <p>Здесь можно выделить пару проблем:</p>
+            <ul>
+                <li>Нет типизации. К примеру, в случае с POST неизвестно, что придёт, и что вернётся;</li>
+                <li>Документировать API придётся вручную;</li>
+            </ul>
+            <p>Tapir призван решить наши проблемы.</p>
+        </section>
+        <section>
+            <h2>tapir</h2>
+            <p><i>Declarative, type-safe web endpoints library.</i></p>
+            <img src="img/lecture_8/logo.png" width="200">
+            </br>
+            <p>Ключевые возможности:</p>
+            <ul>
+                <li>Типо-безопасность;</li>
+                <li>Автоматическая генерация документации для эндпоинтов;</li>
+                <li>Есть возможность интеграции с большинством существующих стеков;</li>
+                <li>Трейсинг, метрики, метаданные;</li>
+            </ul>
+        </section>
+        <section>
+            <h2>tapir</h2>
+            <p>Опишем ряд эндпоинтов:</p>
+            <div class="code-block"><pre><code class="scala">  // Endpoint[SECURITY_INPUT, INPUT, ERROR_OUTPUT, OUTPUT, -R]
+
+  import sttp.tapir._
+  import sttp.tapir.json.circe.jsonBody
+  import sttp.tapir.generic.auto._
+
+  val getStudent: Endpoint[Unit, String, String, Student, Any] =
+    endpoint
+      .tag("student").summary("Get student by id in path")
+      .get
+      .in("student" / path[String]("studentId"))
+      .errorOut(stringBody)
+      .out(jsonBody[Student])
+
+  val allStudents: Endpoint[Unit, (String, String), String, List[Student], Any] =
+    endpoint
+      .tag("student")
+      .get
+      .in("students" / query[String]("studentName") and query[String]("orderBy"))
+      .out(jsonBody[List[Student]])
+
+  val addLesson: Endpoint[Unit, LessonDto, String, Unit, Any] =
+    endpoint
+      .tag("lesson")
+      .post
+      .in("lesson" / "add").in(jsonBody[LessonDto])
+      .errorOut(stringBody)
+</code></pre></div>
+        </section>
+        <section>
+            <h2>tapir</h2>
+            <p>Далее добавим для наших эндпоинтов обработчики:</p>
+            <div class="code-block"><pre><code class="scala">import import sttp.tapir.ztapir.RichZEndpoint
+
+def endpoints(lessonRepo: LessonRepo) =
+    NonEmptyList.of(
+      docs.getStudent.zServerLogic { studentId =>
+          ZIO.succeed(Student(s"$studentId", "Richard", "Black"))
+      },
+      docs.allStudents.zServerLogic {
+        case (orderBy, studentName) => ZIO.fail("Not implemented")
+      },
+      docs.addLesson.zServerLogic { dto =>
+          lessonRepo.addLesson(dto).orElseFail("Error")
+      }
+)
+
+// пример частично определённого эндпоинта
+val baseApiAuthEndpoint
+  : ZPartialServerEndpoint[AuthService, String, Principal, Unit, (StatusCode, ErrorResult), Unit, Any] =
+    baseApiPublicEndpoint
+      .securityIn(tapir.header[String]("Authorization"))
+      .zServerSecurityLogic[PrincipalService, Principal] { jwt =>
+        ZIO
+          .serviceWithZIO[PrincipalService](_.checkJwt(jwt))
+      }
+</code></pre></div>
+        </section>
+        <section>
+            <h2>tapir</h2>
+            <p>Соберём из этого http app и добавим swagger:</p>
+            <div class="code-block"><pre><code class="scala">
+val server: ZIO[configuration.AppConfig with SayHelloService, Throwable, Unit] = for {
+    config <- ZIO.service[AppConfig]
+    host <- ZIO.sussed(???)
+    port <- ZIO.sussed(???)
+
+    lessonRepo <- ZIO.service[LessonRepo]
+    apiEndpoints = endpoints.endpoints(lessonRepo).toList
+    swaggerEndpoints = SwaggerInterpreter().fromServerEndpoints(apiEndpoints, "My server", "1.0.0")
+    routes = ZHttp4sServerInterpreter().from(apiEndpoints ++ swaggerEndpoints).toRoutes
+    httpApp = Router("api/" -> routes).orNotFound
+
+    _ <- EmberServerBuilder.default[AppTask]
+      .withHost(host).withPort(port)
+      .withHttpApp(httpApp)
+      .build.useForever
+  } yield ()
+</code></pre></div>
+        </section>
+        <section>
+            <h2>Tapir</h2>
+            <img src="img/lecture_8/swagger.png">
+        </section>
+
+        <section>
+            <h1>circe</h1>
+        </section>
+        <section>
+            <h2>circe</h2>
+            <p><i>A JSON library for Scala powered by Cats</i></p>
+            <p>Основополагающими для библиотеки являются два тайп-класса: <b>Encoder</b> и <b>Decoder</b>.</p>
+            <p>Encoder описывает то, как тип A должен быть представлен в виде json.</p>
+            <p>Decoder, напротив, выражает то, как из json получить конкретный тип A.</p>
+            <div class="code-block"><pre><code class="scala">
+trait Encoder[A] extends Serializable { self =>
+  def apply(a: A): Json
+}
+
+trait Decoder[A] extends Serializable { self =>
+  def apply(c: HCursor): Decoder.Result[A]
+}
+</code></pre></div>
+            <p>Совокупно Encoder и Decoder называют <b>Codec</b>.</p>
+            <p>Tapir требует существование Encoder и Decoder, когда мы пишем jsonBody[A]</p>
+        </section>
+        <section>
+            <h2>circe</h2>
+            <p>Реализуем Encoder и Decoder для кейс класса Student.</p>
+            <div class="code-block"><pre><code class="scala">  case class Student(id: String, name: String, age: Int)
+  object Student {
+    implicit val encoder: Encoder[Student] = new Encoder[Student] {
+      override def apply(a: Student): Json =
+        Json.obj(
+          "id"           -> a.id.asJson,
+          "name_and_age" -> s"${s.name} is ${s.age} years old".asJson
+        )
+    }
+    implicit val decoder: Decoder[Student] = new Decoder[Student] {
+      override def apply(c: HCursor): Result[Student] = for {
+        id   <- c.downField("id").as[String]
+        name <- c.downField("name").as[String]
+        age  <- c.downField("age").as[Int]
+      } yield Student(id, name, age)
+    }
+  }
+
+  val student = Student("id", "Robin", 20)
+  println(student.asJson.noSpaces) // {"id":"id","name_and_age":"Robin is 20 years old"}
+
+  val studentJson = Json.obj(
+    "id" -> "123".asJson,
+    "name" -> "Jack".asJson,
+    "age" -> 13.asJson
+  ).toString()
+  println(decode[Student](studentJson)) // Either[Error, Student]
+</code></pre></div>
+        </section>
+        <section>
+            <h2>circe</h2>
+            <p>В общем случае Encoder и Decoder можно реализовать куда проще:</p>
+            <div class="code-block"><pre><code class="scala">  case class Student(id: String, name: String, age: Int)
+  case class Student(id: String, name: String, age: Int)
+  object Student {
+    // deriveEncoder и deriveDecoder автоматически генерируют для кейс классов
+    // код, в котором ключи - имя поля, значения - значения полей
+    implicit val encoder: Encoder[Student] = deriveEncoder[Student]
+    implicit val decoder: Decoder[Student] = deriveDecoder[Student]
+
+    // Но можно и ещё проще. Codec совмещает в себе сразу и Encoder, и Decoder
+    implicit val codec: Codec[Student] = deriveCodec[Student]
+  }
+
+  // Но и это не предел упрощений
+  import io.circe.generic.JsonCodec
+
+  @JsonCodec case class AnotherStudent(id: String, name: String, age: Int)
+</code></pre></div>
+        </section>
+
+        <section>
+            <h1>quill</h1>
+        </section>
+        <section>
+            <h2>quill</h2>
+            <p><i>Quill provides a QDSL to express queries in Scala and execute them in a target language.</i></p>
+            <p>Ключевые возможности:</p>
+            <ul>
+                <li>Отсутствует необходимость в бойлерплейте для описания схемы БД;</li>
+                <li>Возможность валидации корректносит запросов к БД во время компиляции;</li>
+                <li>Возможность увидеть именно тот запрос, который будет выполняться;</li>
+            </ul>
+        </section>
+        <section>
+            <h2>quill</h2>
+            <p>Поговорим немного о контексте выполнения запросов.</p>
+            <p>Контекст предоставляют интерфейс для выполнения запросов и представляют конкретную БД.</p>
+            <div class="code-block"><pre><code class="scala">
+val ct1 = new SqlMirrorContext(MirrorSqlDialect, Literal) // не делает никаких реальных запросов
+val ct2 = new PostgresZioJdbcContext(Escape) // для подключения к Postgresql
+            </code></pre></div>
+            <p>Контекст дополнительно принимает <b>dialect</b> и <b>naming strategy</b>.</p>
+            <p>Из коробки в quill доступно 5 диалектов:</p>
+            <ul>
+                <li>io.getquill.H2Dialect</li>
+                <li>io.getquill.MySQLDialect</li>
+                <li>io.getquill.PostgresDialect</li>
+                <li>io.getquill.SqliteDialect</li>
+                <li>io.getquill.SQLServerDialect</li>
+                <li>io.getquill.OracleDialect</li>
+            </ul>
+        </section>
+        <section>
+            <h2>quill</h2>
+            <p>Naming strategy - это параметр, определяющий то, как транслируются идентификаторы при обращении к БД.</p>
+            <table>
+                <thead><tr><th>strategy</th><th>example</th></tr></thead>
+                <tbody>
+                    <tr><td>io.getquill.naming.Literal</td><td>some_ident  -&gt; some_ident</td></tr>
+                    <tr><td>io.getquill.naming.Escape</td><td>some_ident  -&gt; "some_ident"</td></tr>
+                    <tr><td>io.getquill.naming.UpperCase</td><td>some_ident  -&gt; SOME_IDENT</td></tr>
+                    <tr><td>io.getquill.naming.LowerCase</td><td>SOME_IDENT  -&gt; some_ident</td></tr>
+                    <tr><td>io.getquill.naming.SnakeCase</td><td>someIdent   -&gt; some_ident</td></tr>
+                    <tr><td>io.getquill.naming.CamelCase</td><td>some_ident  -&gt; someIdent</td></tr>
+                    <tr><td>io.getquill.naming.MysqlEscape</td><td>some_ident  -&gt; `some_ident`</td></tr>
+                    <tr><td>io.getquill.naming.PostgresEscape</td><td>$some_ident -&gt; $some_ident</td></tr>
+                </tbody>
+            </table>
+            <p>Так же есть возможность комбинировать naming strategy с помощью NamingStrategy(SnakeCase, UpperCase)</p>
+        </section>
+        <section>
+            <h2>quill</h2>
+            <p>Примеры запросов</p>
+            <div class="code-block"><pre><code class="scala">  val ctx = new SqlMirrorContext(MirrorSqlDialect, Literal)
+  import ctx._
+
+  case class Student(id: String, name: String, age: Int)
+  case class Lesson(id: String, lessonTitle: String)
+  case class StudentToLesson(studentId: String, lessonId: String)
+
+  val q = quote { // SELECT x1.id, x1.name FROM Student x1 WHERE x1.name = 'John'
+    query[Student].filter(_.name == "John")
+  }
+
+  val q2 = quote { // UPDATE Student AS x2 SET age = (x2.age + 1) WHERE x2.age > 18
+    query[Student].filter(_.age > 18).update(st => st.age -> (st.age + 1))
+  }
+
+  // SELECT x3.id, x3.lessonTitle FROM StudentToLesson studentToLesson
+  //    INNER JOIN Lesson x3 ON x3.id = studentToLesson.lessonId
+  //    WHERE ? = studentToLesson.studentId
+  def lessonsOfStudent(st: Student) = quote {
+    for {
+      studentToLesson <- query[StudentToLesson] if (lift(st.id) == studentToLesson.studentId)
+      lesson <- query[Lesson].join(_.id == studentToLesson.lessonId)
+    } yield lesson
+  }
+
+  run(lessonsOfStudent(Student("123", "John", 19)))            </code></pre></div>
+        </section>
+        <section>
+            <h2>quill</h2>
+            <p>Использование quill в http4s with ZIO backend</p>
+            <div class="code-block"><pre><code class="scala">
+  // Определим для приложения один общий контекст
+  object DBCtx extends PostgresZioJdbcContext(Escape)
+
+  trait StudentRepo {
+    // QIO[T] = ZIO[DataSource, SQLException, T]
+    def find(userId: String): QIO[Option[Student]]
+  }
+
+  final case class StudentRepoImpl(ds: DataSource)
+    extends StudentRepo {
+    import DBCtx._
+    implicit val env: Implicit[DataSource] = Implicit(ds)
+
+    override def find(userId: String): QIO[Option[Student]] =
+      run(query[Student].filter(_.id == lift(userId)).take(1))
+        .implicitly.map(_.headOption)
+  }
+  object StudentRepo {
+    def layer: ZLayer[DataSource, Nothing, StudentRepo] =
+      ZLayer.fromFunction(StudentRepoImpl.apply _)
+  }
+            </code></pre></div>
+        </section>
+        <section>
+            <h2>quill</h2>
+            <p>Транзакции</p>
+            <div class="code-block"><pre><code class="scala">  object DBCtx extends PostgresZioJdbcContext(Escape)
+
+  trait StudentRepo {
+    def delete(id: String): QIO[Unit]
+  }
+  trait LessonRepo {
+    def deleteStudentFromLesson(studentId: String): QIO[Unit]
+  }
+
+  val studentRepo: StudentRepo = ???
+  val lessonRepo: LessonRepo   = ???
+  def deleteStudent(userId: String): ZIO[DataSource, Throwable, Unit] = DBCtx.transaction {
+    for {
+      _ <- lessonRepo.deleteStudentFromLesson(userId)
+      _ <- ZIO.fail(throw new Exception("Oh..."))
+      _ <- studentRepo.delete(userId)
+    } yield ()
+  }
+
+  // def transaction[R <: DataSource, A](op: ZIO[R, Throwable, A]): ZIO[R, Throwable, A]
+            </code></pre></div>
+        </section>
+        <section>
+            <h1>Альтернативы quill</h1>
+
+        </section>
+        <section>
+            <h2>Альтернативы quill</h2>
+            <h3>doobie</h3>
+            <p><i>Doobie is a pure functional JDBC layer for Scala and Cats</i>.</p>
+            <div class="code-block"><pre><code class="scala">
+val xa = Transactor.fromDriverManager[IO](
+  driver = "org.postgresql.Driver", url = "jdbc:postgresql:world", user = "postgres", password = "password", logHandler = None
+)
+
+case class Country(code: String, name: String, population: Long)
+
+def find(n: String): ConnectionIO[Option[Country]] =
+  sql"select code, name, population from country where name = $n".query[Country].option
+
+find("France").transact(xa).unsafeRunSync()
+            </code></pre></div>
+        </section>
+        <section>
+            <h2>Альтернативы quill</h2>
+            <h3>slick</h3>
+            <p><i>Slick is an advanced, comprehensive database access library for Scala with strongly-typed, highly composable APIs</i>.</p>
+            <div class="code-block"><pre><code class="scala">
+final case class Coffee(name: String, price: Double)
+
+class Coffees(tag: Tag) extends Table[Coffee](tag, "COFFEES") {
+  def name  = column[String]("NAME")
+  def price = column[Double]("PRICE")
+  def * = (name, price).mapTo[Coffee]
+}
+
+// TableQuery даёт доступ к slick's API.
+val coffees = TableQuery[Coffees]
+
+coffees += Coffee("Latte", 2.50) // insert data
+
+coffees.map(_.name) // fetching data
+
+coffees.filter(_.price < 10.0).sortBy(_.name) // fetching data
+            </code></pre></div>
+        </section>
+
+        <section>
+            <h1>Ещё способы написать backend</h1>
+        </section>
+
+        <section>
+            <h2>play framework</h2>
+            <p><i>The High Velocity Web Framework For Java and Scala </i></p>
+            <p>Основные возможности:</p>
+            <ul>
+                <li>Stateless;</li>
+                <li>fully asynchronous;</li>
+                <li>Большие возможности к масштабированию;</li>
+                <li>Поддержка Websocket, Comet, EventSource из коробки;</li>
+                <li>Своя встроенная библиотека для сериализации\десериализации JSON;</li>
+                <li>Шаблонизатор - twirl;</li>
+            </ul>
+        </section>
+        <section>
+            <h2>actors (Akka, ZIO Actors)</h2>
+            <p><i>Akka is a toolkit for building highly concurrent, distributed, and resilient message-driven applications for Java and Scala. </i></p>
+            <p><i>ZIO Actors is a high-performance, purely-functional library for building typed actors backed by ZIO.</i></p>
+            <img src="img/lecture_8/akka.png">
+        </section>
+        <section>
+            <h2>ZIO Http</h2>
+            <p><i>ZIO HTTP is a scala library for building http apps. It is powered by ZIO and Netty and aims at being the defacto solution for writing, highly scalable and performant web applications using idiomatic Scala.</i></p>
+            <div class="code-block"><pre><code class="scala">
+import zio._
+import zio.http._
+
+object HelloWorld extends ZIOAppDefault {
+
+  val app: HttpApp[Any] =
+    Routes(
+      Method.GET / "text" -> handler(Response.text("Hello World!"))
+    ).toHttpApp
+
+  override val run =
+    Server.serve(app).provide(Server.default)
+}
+            </code></pre></div>
+        </section>
+        <section>
+            <h2>finagle</h2>
+            <p><i>Finagle is an extensible RPC system for the JVM, used to construct high-concurrency servers.</i></p>
+            <div class="code-block"><pre><code class="scala">
+import com.twitter.finagle.{Http, Service}
+import com.twitter.finagle.http
+import com.twitter.util.{Await, Future}
+
+object Server extends App {
+  val service = new Service[http.Request, http.Response] {
+    def apply(req: http.Request): Future[http.Response] =
+      Future.value(
+        http.Response(req.version, http.Status.Ok)
+      )
+  }
+  val server = Http.serve(":8080", service)
+  Await.ready(server)
+}</code></pre></div>
+        </section>
+
+        <section>
+            <h1>Тестирование</h1>
+        </section>
+
+        <section>
+            <h2>zio test</h2>
+            <div class="code-block"><pre><code class="scala">object Test extends ZIOSpecDefault {
+  object Solver {
+    def solve(a: Double, b: Double, c: Double): ZIO[Any, String, (Double, Double)] =
+      for {
+        _ <- ZIO.when(a == 0.0)(ZIO.fail("Unsolvable"))
+        D <- ZIO.succeed((b * b) - 4 * a * c)
+        x1 <- ZIO
+          .succeed((-b + Math.sqrt(D)) / (2 * a))
+        x2 <- ZIO
+          .succeed((-b - Math.sqrt(D)) / (2 * a))
+      } yield (x1, x2)
+  }
+
+  override def spec: Spec[TestEnvironment with Scope, Any] =
+    suite("Solver")(
+      test("can solve simple equation") {
+        for {
+          res <- Solver.solve(1, 0, 0)
+        } yield assertTrue((0.0, 0.0) == res)
+      },
+      test("can't solve with a = 0") {
+        for {
+          exit <- Solver.solve(0, 1, 1).exit
+        } yield assertTrue(exit == Exit.fail("Unsolvable"))
+      }
+    )
+}</code></pre></div>
+        </section>
+        <section>
+            <h2>zio test</h2>
+            <div class="code-block"><pre><code class="scala">  case class User(id: String, login: String, passwordHash: String)
+  case class RegistrationDto(login: String, password: String)
+
+  trait MailService { def sendMail(to: String, body: String): Task[Unit] }
+  trait UserRepo { def create(login: String, password: String): Task[User] }
+
+  trait RegistrationService { def register(dto: RegistrationDto): Task[String] }
+
+  final private case class RegistrationServiceImpl(userRepo: UserRepo, mailService: MailService)
+      extends RegistrationService {
+    override def register(dto: RegistrationDto): Task[String] = for {
+      user <- userRepo.create(dto.login, dto.password)
+      _    <- mailService.sendMail(dto.login, "Confirmation")
+    } yield user.id
+  }
+  object RegistrationService {
+    val layer: ZLayer[UserRepo with MailService, Nothing, RegistrationService] = ZLayer {
+      for {
+        userRepo    <- ZIO.service[UserRepo]
+        mailService <- ZIO.service[MailService]
+      } yield RegistrationServiceImpl(userRepo, mailService)
+    }
+  }</code></pre></div>
+            <p>Как протестировать RegistrationService?</p>
+        </section>
+        <section>
+            <h2>ZIO Mock</h2>
+            <div class="code-block"><pre><code class="scala">
+  trait MailService { def sendMail(to: String, body: String): Task[Unit] }
+  trait UserRepo    { def create(login: String, password: String, age: Int): Task[User] }
+
+  object MailServiceMock extends Mock[MailService] {
+    object Send extends Effect[(String, String), Throwable, Unit]
+
+    val compose: URLayer[Proxy, MailService] = ZLayer {
+      for {
+        proxy <- ZIO.service[Proxy]
+      } yield new MailService {
+        override def sendMail(to: String, body: String): Task[Unit] = proxy(Send, to, body)
+      }
+    }
+  }
+
+  object UserRepoMock extends Mock[UserRepo] {
+    object Create extends Effect[(String, String, Int), Throwable, User]
+
+    val compose: URLayer[Proxy, UserRepo] = ZLayer {
+      for (proxy <- ZIO.service[Proxy]) yield new UserRepo {
+        override def create(login: String, password: String, age: Int): Task[User] =
+          proxy(Create, login, password, age)
+      }
+    }
+  }</code></pre></div>
+        </section>
+        <section>
+            <h2>ZIO Mock</h2>
+            <div class="code-block"><pre><code class="scala">  override def spec: Spec[TestEnvironment with Scope, Any] =
+    suite("Registration")(
+      test("can register user"){
+        val mockedEmail = MailServiceMock.Send(
+          assertion = Assertion.equalTo(("user@gmail.com", "Confirmation")),
+          result = Expectation.unit
+        ).toLayer
+
+        val mockedUserRepo = UserRepoMock.Create(
+          assertion = Assertion.equalTo(("user@gmail.com", "qwer1234", 18)),
+          result = Expectation.value(User("user_id", "user@gmail.com", "hash"))
+        ).toLayer
+
+        val program = for {
+          registrationService <- ZIO.service[RegistrationService]
+          userId <- registrationService.register(RegistrationDto("user@gmail.com", "qwer1234", 18))
+        } yield userId
+        for {
+          userId <- program.provide(RegistrationService.layer, mockedEmail, mockedUserRepo)
+        } yield assertTrue(userId == "user_id")
+      }
+    )</code></pre></div>
+        </section>
+
+        <section>
+            <h2>Блиц</h2>
+        </section>
+        <section>
+            <h2>ZIO Cache</h2>
+            <div class="code-block"><pre><code class="scala">object ZIOCacheExample extends ZIOAppDefault {
+  def timeConsumingEffect(key: String) =
+    ZIO.sleep(5.seconds).as(key.hashCode)
+
+  def run =
+    for {
+      cache <- Cache.make(
+        capacity = 100,
+        timeToLive = Duration.Infinity,
+        lookup = Lookup(timeConsumingEffect)
+      )
+      result <- cache
+        .get("key1")
+        .zipPar(cache.get("key1"))
+        .zipPar(cache.get("key1"))
+      _ <- ZIO.debug(
+        s"Result of parallel execution of three effects with the same key: $result"
+      )
+
+      hits <- cache.cacheStats.map(_.hits)
+      misses <- cache.cacheStats.map(_.misses)
+      _ <- ZIO.debug(s"Number of cache hits: $hits")
+      _ <- ZIO.debug(s"Number of cache misses: $misses")
+    } yield ()
+
+}</code></pre></div>
+        </section>
+        <section>
+            <h2>chimney</h2>
+            <p><i>The battle-tested Scala library for data transformations</i></p>
+            <div class="code-block"><pre><code class="scala">  import io.scalaland.chimney.dsl._
+  case class User(username: String, address: List[Address])
+  case class UserDTO(username: String, address: List[Address])
+
+  User(
+    Username("John"),
+    List(Address("Paper St", "Somewhere"))
+  ).transformInto[UserDTO]</code></pre></div>
+        </section>
+        <section>
+            <h2>ZIO Optics</h2>
+            <p><i>ZIO Optics is a library that makes it easy to modify parts of larger data structures</i></p>
+            <div class="code-block"><pre><code class="scala">import zio.optics._
+
+case class Developer(name: String, manager: Manager)
+case class Manager(name: String, rating: Rating)
+case class Rating(upvotes: Int, downvotes: Int)
+
+val developerLens = Lens[Developer, Manager](
+  get = developer => Right(developer.manager),
+  set = manager => developer => Right(developer.copy(manager = manager))
+)
+
+val managerLens = Lens[Manager, Rating](
+  get = manager => Right(manager.rating),
+  set = rating => manager => Right(manager.copy(rating = rating))
+)
+
+val ratingLens = Lens[Rating, Int](
+  get = rating => Right(rating.upvotes),
+  set = upvotes => rating => Right(rating.copy(upvotes = upvotes))
+)
+
+val optic = developerLens >>> managerLens >>> ratingLens
+
+val jane    = Developer("Jane", Manager("Steve", Rating(0, 0)))
+val updated = optic.update(jane)(_ + 1)
+</code></pre></div>
+        </section>
+        <section>
+            <h3>Полезные ссылки</h3>
+            <a href="https://zio.dev/ecosystem/">ZIO ecosystem</a>
+            </br>
+            <a href="https://typelevel.org/projects/">Typelevel ecosystem</a>
+        </section>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: false,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: true,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Optional reveal.js plugins
+            dependencies: [
+                {
+                    src: 'lib/js/classList.js', condition: function () {
+                        return !document.body.classList;
+                    }
+                },
+                {
+                    src: 'plugin/markdown/marked.js', condition: function () {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'plugin/markdown/markdown.js', condition: function () {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'plugin/highlight/highlight.js', async: true, condition: function () {
+                        return !!document.querySelector('pre code');
+                    }, callback: function () {
+                        hljs.initHighlightingOnLoad();
+                    }
+                },
+                {src: 'plugin/zoom-js/zoom.js', async: true},
+                {src: 'plugin/notes/notes.js', async: true}
+            ]
+        });
+
+        window.addEventListener("mousedown", handleClick, false);
+        window.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        }, false);
+
+        function handleClick(e) {
+            e.preventDefault();
+            if (e.button === 0) Reveal.next();
+            if (e.button === 2) Reveal.prev();
+        }
+    </script>
+</div>
+</body>
+</html>
