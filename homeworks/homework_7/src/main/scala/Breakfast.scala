@@ -1,7 +1,7 @@
 package ru.dru
 
 import zio.CanFail.canFailAmbiguous1
-import zio.{Duration, Exit, Fiber, Scope, ZIO, ZIOApp, ZIOAppArgs, ZIOAppDefault, durationInt}
+import zio._
 
 import java.time.LocalDateTime
 import scala.concurrent.TimeoutException
@@ -29,12 +29,39 @@ object Breakfast extends ZIOAppDefault {
    * @param teaBrewingTime время заваривания чая
    * @return Мапу с информацией о том, когда завершился очередной этап (eggs, water, saladWithSourCream, tea)
    */
-  def makeBreakfast(eggsFiringTime: Duration,
-                    waterBoilingTime: Duration,
-                    saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
+    
+  type Breakfest = Map[String, LocalDateTime]  
+  def makeBreakfast(
+    eggsFiringTime: Duration,
+    waterBoilingTime: Duration,
+    saladInfoTime: SaladInfoTime,
+    teaBrewingTime: Duration
+  ): ZIO[Any, Throwable, Breakfest] = {
+    val eff: RIO[Ref[Breakfest], Breakfest] = for {
+      teaFiber <- (
+        ZIO.sleep(waterBoilingTime) *>
+          accRes(_.update(_.updated("water", LocalDateTime.now))) *>
+          ZIO.sleep(teaBrewingTime) *>
+          accRes(_.update(_.updated("tea", LocalDateTime.now)))
+      ).fork
+      eggsFiringFiber <- (
+        ZIO.sleep(eggsFiringTime) *> 
+          accRes(_.update(_.updated("eggs", LocalDateTime.now)))
+        ).fork
+      saladFiber <- (
+        ZIO.sleep(saladInfoTime.cucumberTime) *> ZIO.sleep(saladInfoTime.tomatoTime) *>
+          accRes(_.update(_.updated("saladWithSourCream", LocalDateTime.now)))
+      ).fork
+      _ <- teaFiber.join <*> eggsFiringFiber.join <*> saladFiber.join
+      res <- ZIO.serviceWithZIO[Ref[Breakfest]](_.get)
+    } yield res
+    
+    eff.provideLayer(ZLayer.fromZIO(Ref.make(Map.empty[String, LocalDateTime])))
+  }
 
 
+  private def accRes(fRef: Ref[Breakfest] => Task[Unit]) = 
+    ZIO.serviceWithZIO[Ref[Breakfest]](fRef)
 
   override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = ZIO.succeed(println("Done"))
 
