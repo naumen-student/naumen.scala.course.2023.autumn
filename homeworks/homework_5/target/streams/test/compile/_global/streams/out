@@ -1,0 +1,6 @@
+[0m[[0m[33mwarn[0m] [0m[0m/Users/d.miroshnik/IdeaProjects/naumen.scala.course.2023.autumn/homeworks/homework_5/src/test/scala/Test2.scala:26:63: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following inputs: (List(_), _), (List(_, _), _), (Nil, _)[0m
+[0m[[0m[33mwarn[0m] [0m[0m      val matrixs = firstRow.zip(secondRow.zip(thirdRow)).map {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                                              ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mthere was one unchecked warning; re-run with -unchecked for details[0m
+[0m[[0m[33mwarn[0m] [0m[0mtwo warnings found[0m
