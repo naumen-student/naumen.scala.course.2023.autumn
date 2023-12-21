@@ -11,6 +11,7 @@ layout: default
 * Лекция 4. [Функциональное программирование. Концепция (PowerPoint)](lectures/scala_lecture_4.pptx)
 * Лекция 5. [Функциональное программирование. Type classes и абстракции для ФП](lectures/scala_lecture_5.html)
 * Лекция 7. [ZIO. Асинхронность и многопоточность. Управление ресурсами](lectures/scala_lecture_7/index.html)
+* Лекция 8. [ZIO. Экосистема ZIO и другие библиотеки](lectures/scala_lecture_8.html)
 
 
 ### Домашние задания
