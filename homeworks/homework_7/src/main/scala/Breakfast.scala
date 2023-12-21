@@ -1,7 +1,7 @@
 package ru.dru
 
 import zio.CanFail.canFailAmbiguous1
-import zio.{Duration, Exit, Fiber, Scope, ZIO, ZIOApp, ZIOAppArgs, ZIOAppDefault, durationInt}
+import zio.{Duration, Exit, Fiber, Scope, ZIO, ZIOApp, ZIOAppArgs, ZIOAppDefault, durationLong}
 
 import java.time.LocalDateTime
 import scala.concurrent.TimeoutException
@@ -32,9 +32,30 @@ object Breakfast extends ZIOAppDefault {
   def makeBreakfast(eggsFiringTime: Duration,
                     waterBoilingTime: Duration,
                     saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
+                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = {
+    val saladDuration = durationLong(saladInfoTime.tomatoTime.toSeconds + saladInfoTime.cucumberTime.toSeconds)
+    for {
+      startDuration <- ZIO.succeed(LocalDateTime.now())
+      eggsDuration <- ZIO.sleep(eggsFiringTime).as(plusDuration(startDuration, eggsFiringTime)).fork
+      waterDuration <- ZIO.sleep(waterBoilingTime).as(plusDuration(startDuration, waterBoilingTime)).fork
+      saladWithCreamDuration <-
+        ZIO.sleep(saladDuration.seconds).as(plusDurations(startDuration, saladInfoTime.cucumberTime, saladInfoTime.tomatoTime))
+      waterBoiledDuration <- waterDuration.join
+      teaDuration <- ZIO.sleep(teaBrewingTime).as(plusDuration(waterBoiledDuration, teaBrewingTime))
+      eggsFriedDuration <- eggsDuration.join
+    } yield Map(
+      "eggs" -> eggsFriedDuration,
+      "water" -> waterBoiledDuration,
+      "saladWithSourCream" -> saladWithCreamDuration,
+      "tea" -> teaDuration
+    )
+  }
 
+  private def plusDuration(time: LocalDateTime, duration: Duration): LocalDateTime =
+    time.plusSeconds(duration.toSeconds)
 
+  private def plusDurations(time: LocalDateTime, durations: Duration*): LocalDateTime =
+    durations.foldLeft(time)(plusDuration)
 
   override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = ZIO.succeed(println("Done"))
 
