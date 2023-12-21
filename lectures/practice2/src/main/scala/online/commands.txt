@@ -1,3 +1,0 @@
-addClient Ivanov2 Ivan Ivanovich
-addClient Petya
-dropClient Ivanov Ivan Ivanovich

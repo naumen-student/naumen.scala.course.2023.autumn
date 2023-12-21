@@ -10,7 +10,9 @@ layout: default
 * Лекция 3. [Scala basic II. От type конструкторов до коллекций](lectures/scala_lecture_3/index.html)
 * Лекция 4. [Функциональное программирование. Концепция (PowerPoint)](lectures/scala_lecture_4.pptx)
 * Лекция 5. [Функциональное программирование. Type classes и абстракции для ФП](lectures/scala_lecture_5.html)
-* Практика [Функциональное программирование. База данных библиотеки](lectures/practice2)
+* Лекция 6. [ZIO Функциональный эффект (PowerPoint)](lectures/scala_lecture_6.pptx)
+* Лекция 7. [ZIO. Асинхронность и многопоточность. Управление ресурсами](lectures/scala_lecture_7/index.html)
+* Лекция 8. [ZIO. Экосистема ZIO и другие библиотеки](lectures/scala_lecture_8.html)
 
 
 ### Домашние задания
@@ -20,3 +22,5 @@ layout: default
 * [Задание 3](homeworks/homework_3/homework_3.md) [папка в GitHub](https://github.com/naumen-student/naumen.scala.course.2023.autumn/tree/master/homeworks/homework_3)
 * [Задание 4](homeworks/homework_4/homework_4.md) [папка в GitHub](https://github.com/naumen-student/naumen.scala.course.2023.autumn/tree/master/homeworks/homework_4)
 * [Задание 5](homeworks/homework_5/homework_5.md) [папка в GitHub](https://github.com/naumen-student/naumen.scala.course.2023.autumn/tree/master/homeworks/homework_5)
+* [Задание 6](homeworks/homework_6/homework_6.md) [папка в GitHub](https://github.com/naumen-student/naumen.scala.course.2023.autumn/tree/master/homeworks/homework_6)
+* [Задание 7](homeworks/homework_7/homework_7.md) [папка в GitHub](https://github.com/naumen-student/naumen.scala.course.2023.autumn/tree/master/homeworks/homework_7)
