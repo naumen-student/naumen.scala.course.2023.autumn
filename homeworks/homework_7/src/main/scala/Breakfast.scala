@@ -1,7 +1,7 @@
 package ru.dru
 
 import zio.CanFail.canFailAmbiguous1
-import zio.{Duration, Exit, Fiber, Scope, ZIO, ZIOApp, ZIOAppArgs, ZIOAppDefault, durationInt}
+import zio.{Duration, Exit, Fiber, Scope, UIO, ZIO, ZIOApp, ZIOAppArgs, ZIOAppDefault, durationInt}
 
 import java.time.LocalDateTime
 import scala.concurrent.TimeoutException
@@ -32,8 +32,43 @@ object Breakfast extends ZIOAppDefault {
   def makeBreakfast(eggsFiringTime: Duration,
                     waterBoilingTime: Duration,
                     saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
+                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = {
+    for {
+      fiberEggs <- fryEggs(eggsFiringTime).fork
+      fiberWater <- boilWater(waterBoilingTime).fork
+      fiberSalad <- makeSalad(saladInfoTime).fork
+      waterDone <- fiberWater.join
+      fiberTea <- brewTea(teaBrewingTime).fork
+      eggsDone <- fiberEggs.join
+      saladDone <- fiberSalad.join
+      teaDone <- fiberTea.join
+    } yield Map("eggs" -> eggsDone, "water" -> waterDone, "saladWithSourCream" -> saladDone, "tea" -> teaDone)
+  }
 
+  def fryEggs(time: Duration): ZIO[Any, Nothing, LocalDateTime] =
+    ZIO.sleep(time).as(LocalDateTime.now())
+
+  def boilWater(time: Duration): ZIO[Any, Nothing, LocalDateTime] =
+    ZIO.sleep(time).as(LocalDateTime.now())
+
+  def makeSalad(info: SaladInfoTime): ZIO[Any, Nothing, LocalDateTime] =
+    for {
+      _ <- cutCucumbers(info.cucumberTime)
+      _ <- cutTomatoes(info.tomatoTime)
+      done <- addSourCream
+    } yield done
+
+  def cutCucumbers(time: Duration): ZIO[Any, Nothing, Unit] =
+    ZIO.sleep(time)
+
+  def cutTomatoes(time: Duration): ZIO[Any, Nothing, Unit] =
+    ZIO.sleep(time)
+
+  def addSourCream: ZIO[Any, Nothing, LocalDateTime] =
+    ZIO.succeed(LocalDateTime.now())
+
+  def brewTea(time: Duration): ZIO[Any, Nothing, LocalDateTime] =
+    ZIO.sleep(time).as(LocalDateTime.now())
 
 
   override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = ZIO.succeed(println("Done"))
