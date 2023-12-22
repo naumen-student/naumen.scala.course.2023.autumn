@@ -1,10 +1,8 @@
 package ru.dru
 
-import zio.CanFail.canFailAmbiguous1
-import zio.{Duration, Exit, Fiber, Scope, ZIO, ZIOApp, ZIOAppArgs, ZIOAppDefault, durationInt}
+import zio.{Duration, Scope, ZIO, ZIOAppArgs, ZIOAppDefault}
 
 import java.time.LocalDateTime
-import scala.concurrent.TimeoutException
 
 case class SaladInfoTime(tomatoTime: Duration, cucumberTime: Duration)
 
@@ -32,8 +30,28 @@ object Breakfast extends ZIOAppDefault {
   def makeBreakfast(eggsFiringTime: Duration,
                     waterBoilingTime: Duration,
                     saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
+                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = {
+    for {
+      tea <- makeTea(waterBoilingTime, teaBrewingTime).fork
+      eggs <- ZIO.sleep(eggsFiringTime).as(LocalDateTime.now()).fork
+      salad <- makeSalad(saladInfoTime).fork
+      all <- eggs.zip(tea).zip(salad).join
+    } yield Map("eggs" -> all._1, "water" -> all._2._1, "saladWithSourCream" -> all._3, "tea" -> all._2._2)
+  }
 
+  private def makeTea(waterBoilingTime: Duration, teaBrewingTime: Duration) = {
+    for{
+      water <- ZIO.sleep(waterBoilingTime).as(LocalDateTime.now())
+      tea <- ZIO.sleep(teaBrewingTime).as(LocalDateTime.now())
+    } yield (water, tea)
+  }
+
+  private def makeSalad(saladInfoTime: SaladInfoTime) ={
+    for {
+      _ <- ZIO.sleep(saladInfoTime.tomatoTime)
+      _ <- ZIO.sleep(saladInfoTime.cucumberTime)
+    } yield LocalDateTime.now()
+  }
 
 
   override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = ZIO.succeed(println("Done"))
