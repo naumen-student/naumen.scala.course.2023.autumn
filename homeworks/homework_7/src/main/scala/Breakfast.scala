@@ -17,23 +17,45 @@ object Breakfast extends ZIOAppDefault {
    *  1. Нобходимо вскипятить воду (время кипячения waterBoilingTime)
    *  2. Параллельно с этим нужно жарить яичницу eggsFiringTime
    *  3. Параллельно с этим готовим салат:
-   *    * сначала режим  огурцы
-   *    * после этого режим помидоры
-   *    * после этого добавляем в салат сметану
+   * * сначала режим  огурцы
+   * * после этого режим помидоры
+   * * после этого добавляем в салат сметану
    *  4. После того, как закипит вода необходимо заварить чай, время заваривания чая teaBrewingTime
    *  5. После того, как всё готово, можно завтракать
    *
-   * @param eggsFiringTime время жарки яичницы
+   * @param eggsFiringTime   время жарки яичницы
    * @param waterBoilingTime время кипячения воды
-   * @param saladInfoTime информация о времени для приготовления салата
-   * @param teaBrewingTime время заваривания чая
+   * @param saladInfoTime    информация о времени для приготовления салата
+   * @param teaBrewingTime   время заваривания чая
    * @return Мапу с информацией о том, когда завершился очередной этап (eggs, water, saladWithSourCream, tea)
    */
   def makeBreakfast(eggsFiringTime: Duration,
                     waterBoilingTime: Duration,
                     saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
+                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = {
 
+    for {
+      eggsFiber <- ZIO.sleep(eggsFiringTime).as(LocalDateTime.now).fork
+      waterFiber <- ZIO.sleep(waterBoilingTime).as(LocalDateTime.now).fork
+      saladWithSourCreamFiber <- {
+        val tomato = saladInfoTime.tomatoTime
+        val cucumber = saladInfoTime.cucumberTime
+        val saladTime = tomato.plus(cucumber)
+        ZIO.sleep(saladTime).as(LocalDateTime.now)
+          .fork
+      }
+      teaFiber <- ZIO.sleep(teaBrewingTime).as(LocalDateTime.now).fork
+      eggs <- eggsFiber.join
+      water <- waterFiber.join
+      saladWithSourCream <- saladWithSourCreamFiber.join
+      tea <- teaFiber.join
+    } yield Map(
+      "eggs" -> eggs,
+      "water" -> water,
+      "saladWithSourCream" -> saladWithSourCream,
+      "tea" -> tea
+    )
+  }
 
 
   override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = ZIO.succeed(println("Done"))
