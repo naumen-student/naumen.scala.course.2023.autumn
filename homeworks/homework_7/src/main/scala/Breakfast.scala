@@ -29,10 +29,28 @@ object Breakfast extends ZIOAppDefault {
    * @param teaBrewingTime время заваривания чая
    * @return Мапу с информацией о том, когда завершился очередной этап (eggs, water, saladWithSourCream, tea)
    */
-  def makeBreakfast(eggsFiringTime: Duration,
-                    waterBoilingTime: Duration,
-                    saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
+  def makeBreakfast(
+                     eggsFiringTime: Duration,
+                     waterBoilingTime: Duration,
+                     saladInfoTime: SaladInfoTime,
+                     teaBrewingTime: Duration
+                   ): ZIO[Any, Throwable, Map[String, LocalDateTime]] = {
+    val saladTime = saladInfoTime.cucumberTime plus saladInfoTime.tomatoTime
+    for {
+      startTime <- ZIO.succeed(LocalDateTime.now())
+      eggsFiber <- ZIO.sleep(eggsFiringTime).as(startTime plus eggsFiringTime).fork
+      waterFiber <- ZIO.sleep(waterBoilingTime).as(startTime plus waterBoilingTime).fork
+      saladWithSourCreamTime <- ZIO.sleep(saladTime).as(startTime plus saladTime)
+      eggsTime <- eggsFiber.join
+      waterTime <- waterFiber.join
+      teaTime <- ZIO.sleep(teaBrewingTime).as(waterTime plus teaBrewingTime)
+    } yield Map(
+      "eggs" -> eggsTime,
+      "water" -> waterTime,
+      "saladWithSourCream" -> saladWithSourCreamTime,
+      "tea" -> teaTime
+    )
+  }
 
 
 
