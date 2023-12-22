@@ -32,7 +32,20 @@ object Breakfast extends ZIOAppDefault {
   def makeBreakfast(eggsFiringTime: Duration,
                     waterBoilingTime: Duration,
                     saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
+                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] =
+    (makeTea(waterBoilingTime, teaBrewingTime) <&> makeSalad(saladInfoTime) <&> makeEggs(eggsFiringTime))
+      .map {case (teaRes, saladRes, eggsRes) => teaRes + saladRes + eggsRes}
+
+  private def makeTea(waterBoilingTime: Duration, teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] =
+    ZIO.sleep(waterBoilingTime) *> ZIO.succeed("water" -> LocalDateTime.now()).zipWithPar(
+      ZIO.sleep(teaBrewingTime) *> ZIO.succeed("tea" -> LocalDateTime.now()))(Map(_, _))
+
+  private def makeSalad(saladInfoTime: SaladInfoTime): ZIO[Any, Throwable, (String, LocalDateTime)] =
+    ZIO.sleep(saladInfoTime.cucumberTime) *> ZIO.sleep(saladInfoTime.tomatoTime) *>
+      ZIO.succeed("saladWithSourCream" -> LocalDateTime.now())
+
+  private def makeEggs(eggsFiringTime: Duration): ZIO[Any, Throwable, (String, LocalDateTime)] =
+    ZIO.sleep(eggsFiringTime) *> ZIO.succeed("eggs" -> LocalDateTime.now())
 
 
 
