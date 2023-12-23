@@ -7,7 +7,7 @@ import java.awt.Color
 object Utils {
     case class Picture(lines: List[List[Color]])
 
-    class GenerationError(msg: String) extends Throwable {
+    case class GenerationError(msg: String) extends Throwable {
         override def getMessage: String = msg
     }
 
