@@ -1,7 +1,7 @@
 import utils.ColorService.ColorService
 import utils.{ColorService, PictureGenerationService}
 import utils.PictureGenerationService.PictureGenerationService
-import utils.Utils.{GenerationError, _}
+import utils.Utils._
 import zio.{IO, URIO, ZIO}
 
 import java.awt.Color
