@@ -12,17 +12,17 @@ object Test extends TestSuite {
           63, 66, 69, 70, 72, 75, 77, 78, 81, 84, 87, 90, 91, 93, 96, 98, 99)
       )
     }
-    test_sumOfDivBy3Or5 - {
+    'test_sumOfDivBy3Or5 - {
       assert(Exercises.sumOfDivBy3Or5(0, 3) == 3)
-      assert(Exercises.sumOfDivBy3Or5(1, 9) == 25)
-      assert(Exercises.sumOfDivBy3Or5(10, 100) == 2208)
+      assert(Exercises.sumOfDivBy3Or5(1, 9) == 23)
+      assert(Exercises.sumOfDivBy3Or5(10, 50) == 570)
     }
-    test_primeFactor - {
+    'test_primeFactor - {
       assert(Exercises.primeFactor(17) == Seq(17))
       assert(Exercises.primeFactor(20) == Seq(2, 5))
       assert(Exercises.primeFactor(99) == Seq(3, 11))
     }
-    test_sumScalars - {
+    'test_sumScalars - {
       val vector1 = Exercises.Vector2D(0, 1)
       val vector2 = Exercises.Vector2D(1, 0)
       val vector3 = Exercises.Vector2D(1, 50)
@@ -33,16 +33,16 @@ object Test extends TestSuite {
       assert(Exercises.sumScalars(vector3, vector4, vector5, vector6) == 10600)
       assert(Exercises.sumScalars(vector6, vector1, vector4, vector5) == 5060)
     }
-    test_sumCosines - {
+    'test_sumCosines - {
       val vector1 = Exercises.Vector2D(0, 1)
       val vector2 = Exercises.Vector2D(1, 0)
-      val vector3 = Exercises.Vector2D(1, 50)
-      val vector4 = Exercises.Vector2D(50, 1)
+      val vector3 = Exercises.Vector2D(3, 4)
+      val vector4 = Exercises.Vector2D(4, 3)
       assert(Exercises.sumCosines(vector1, vector2, vector3, vector3) == 1)
-      assert(Exercises.sumCosines(vector1, vector2, vector3, vector4) == 0)
+      assert(Exercises.sumCosines(vector1, vector2, vector2, vector1) == 0)
       assert(Exercises.sumCosines(vector1, vector1, vector3, vector3) == 2)
     }
-    test_sortByHeavyweight - {
+    'test_sortByHeavyweight - {
       val ballsArray = Map(
         "Iron" -> (3, 7.874),
         "Tungsten" -> (2, 19.35),

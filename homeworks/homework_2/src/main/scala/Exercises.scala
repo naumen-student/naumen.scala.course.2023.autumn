@@ -16,7 +16,7 @@ object Exercises {
     на 3 или на 5.*/
   /*Реализовать юнит-тесты в src/test/scala для данной функции.*/
   def sumOfDivBy3Or5(iFrom: Int, iTo: Int): Long =
-    (iFrom to iTo).filter(integ => integ % 3 == 0 || num % 5 == 0).sum
+    (iFrom to iTo).filter(integ => integ % 3 == 0 || integ % 5 == 0).sum
 
   /*ЗАДАНИЕ II*/
   /*Реализовать функцию, которая вычисляет все различные простые множители целого числа отличные от 1.
@@ -24,11 +24,21 @@ object Exercises {
     Число 98 можно разложить на множители 1 * 2 * 7 * 7, результат выполнения функции => Seq(2, 7).*/
   /*Реализовать юнит-тесты в src/test/scala для данной функции.*/
   def primeFactor(number: Int): Seq[Int] = {
-    val result: List[Int] = List()
-    for i <- 2 to number
-    if number % i == 0
-    do result = result :+ primeFactor(i);
-    result.distinct.toSeq;
+    var result: Set[Int] = Set()
+    var d = 2
+    var num = number
+    while (d * d <= num) {
+      if (num % d == 0) {
+        num = num / d
+        result += d
+      } else {
+        d += 1
+      }
+    }
+    if (num > 1) {
+      result += num
+    }
+    result.toSeq;
   }
 
   /*ЗАДАНИЕ III*/
