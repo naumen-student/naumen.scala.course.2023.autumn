@@ -10,7 +10,6 @@ import cats.implicits._
  */
 object Task2 extends App {
   case class RadiusVector(x: Int, y: Int)
-
   object RadiusVector {
     implicit val monoid: Monoid[RadiusVector] = new Monoid[RadiusVector] {
       def empty: RadiusVector = RadiusVector(0, 0)
