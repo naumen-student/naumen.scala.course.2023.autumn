@@ -53,5 +53,4 @@ object Exercises {
         task3(size)
           .provideSomeLayer[ColorService](PictureGenerationService.live)
           .provideLayer(ColorService.live)
-
 }
