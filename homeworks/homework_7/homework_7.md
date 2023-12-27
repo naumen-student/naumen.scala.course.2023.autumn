@@ -1,4 +1,4 @@
-# Домашнее задание №5 (курс Scala, Naumen)
+# Домашнее задание №7 (курс Scala, Naumen)
 
 Необходимо выполнить задания, описанные в:
 1. <a href='https://github.com/naumen-student/naumen.scala.course.2023.autumn/tree/master/homeworks/homework_7/src/main/scala'>src/main/scala/Breakfast.scala</a>
