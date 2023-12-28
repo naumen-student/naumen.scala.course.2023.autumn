@@ -32,10 +32,21 @@ object Breakfast extends ZIOAppDefault {
   def makeBreakfast(eggsFiringTime: Duration,
                     waterBoilingTime: Duration,
                     saladInfoTime: SaladInfoTime,
-                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = ???
-
-
-
+                    teaBrewingTime: Duration): ZIO[Any, Throwable, Map[String, LocalDateTime]] = {
+    for {
+      start <- ZIO.succeed(LocalDateTime.now())
+      _ <- ZIO.sleep(waterBoilingTime).fork
+      _ <- ZIO.sleep(eggsFiringTime).fork
+      _ <- (ZIO.sleep(saladInfoTime.cucumberTime) *> ZIO.sleep(saladInfoTime.tomatoTime)).fork
+      _ <- ZIO.sleep(waterBoilingTime.plus(teaBrewingTime))
+      end <- ZIO.succeed(LocalDateTime.now())
+    } yield Map(
+      "eggs" -> start.plusSeconds(eggsFiringTime.toSeconds),
+      "water" -> start.plusSeconds(waterBoilingTime.toSeconds),
+      "saladWithSourCream" -> start.plusSeconds(saladInfoTime.cucumberTime.toSeconds + saladInfoTime.tomatoTime.toSeconds),
+      "tea" -> start.plusSeconds(waterBoilingTime.toSeconds + teaBrewingTime.toSeconds)
+    )
+  }
   override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = ZIO.succeed(println("Done"))
 
 }
