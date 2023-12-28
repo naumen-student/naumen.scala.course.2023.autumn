@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+import scala.util.{Failure, Random, Success, Try}
 
 object Exercises {
 
@@ -22,8 +24,17 @@ object Exercises {
         result
     }
 
-    def findSumFunctional(items: List[Int], sumValue: Int) = {
-        (-1, -1)
+    def findSumFunctional(items: List[Int], sumValue: Int): (Int, Int) = {
+        items
+          .zipWithIndex
+          .flatMap(e => items
+            .zipWithIndex
+            .filter(m => m._1 == sumValue - e._1 && m._2 != e._2)
+            .lastOption
+            .map(m => (e._2, m._2))
+          )
+          .lastOption
+          .getOrElse((-1, -1))
     }
 
 
@@ -49,7 +60,16 @@ object Exercises {
     }
 
     def tailRecRecursion(items: List[Int]): Int = {
-        1
+        @tailrec
+        def rec(items: List[Int], index: Int, acc: Int): Int =
+            items match {
+                case head :: tail =>
+                    if (head % 2 == 0) rec(tail, index - 1, head * acc + index)
+                    else rec(tail, index - 1, -head * acc + index)
+                case _ => acc
+            }
+
+        rec(items.reverse, items.size, 1)
     }
 
     /**
@@ -60,7 +80,20 @@ object Exercises {
      */
 
     def functionalBinarySearch(items: List[Int], value: Int): Option[Int] = {
-        None
+        val itemsArray = items.sorted.toArray
+
+        @tailrec
+        def rec(items: Array[Int], value: Int, left: Int, right: Int): Option[Int] = {
+            val mid: Int = left + (right - left) / 2
+            if (left > right) None
+            else mid match {
+                case _ if items(mid) == value => Some(mid)
+                case _ if items(mid) < value => rec(items, value, mid + 1, right)
+                case _ if items(mid) > value => rec(items, value, left, mid - 1)
+            }
+        }
+
+        rec(itemsArray, value, 0, items.length - 1)
     }
 
     /**
@@ -71,54 +104,66 @@ object Exercises {
      * Именем является строка, не содержащая иных символов, кроме буквенных, а также начинающаяся с заглавной буквы.
      */
 
-    def generateNames(namesСount: Int): List[String] = {
-        if (namesСount < 0) throw new Throwable("Invalid namesCount")
-        Nil
+    def generateNames(namesCount: Int): List[String] = {
+        if (namesCount < 0) throw new Throwable("Invalid namesCount")
+        else List.tabulate(namesCount)(_ =>
+            Random.alphanumeric.filter(_.isLetter).take(5 + Random.nextInt(7)).mkString.toLowerCase().capitalize)
     }
 
-}
+    /**
+     * Задание №5
+     *
+     * Дана реализация сервиса по смене номера SimpleChangePhoneService с методом changePhone
+     * Необходимо написать реализацию этого сервиса с учетом правил работы со сторонними эффектами (SideEffects).
+     *
+     * Для этого необходимо сначала реализовать собственный сервис работы с телефонными номерами (PhoneServiceSafety),
+     * используя при этом методы из unsafePhoneService.
+     * Методы должны быть безопасными, поэтому тип возвращаемых значений необходимо определить самостоятельно.
+     * Рекомендуется воспользоваться стандартными типами Scala (например Option или Either).
+     *
+     * Затем, с использованием нового сервиса, необходимо реализовать "безопасную" версию функции changePhone.
+     * Функция должна возвращать ok в случае успешного завершения или текст ошибки.
+     *
+     * Изменять методы внутри SimplePhoneService не разрешается.
+     */
 
-/**
- * Задание №5
- *
- * Дана реализация сервиса по смене номера SimpleChangePhoneService с методом changePhone
- * Необходимо написать реализацию этого сервиса с учетом правил работы со сторонними эффектами (SideEffects).
- *
- * Для этого необходимо сначала реализовать собственный сервис работы с телефонными номерами (PhoneServiceSafety),
- * используя при этом методы из unsafePhoneService.
- * Методы должны быть безопасными, поэтому тип возвращаемых значений необходимо определить самостоятельно.
- * Рекомендуется воспользоваться стандартными типами Scala (например Option или Either).
- *
- * Затем, с использованием нового сервиса, необходимо реализовать "безопасную" версию функции changePhone.
- * Функция должна возвращать ok в случае успешного завершения или текст ошибки.
- *
- * Изменять методы внутри SimplePhoneService не разрешается.
- */
+    object SideEffectExercise {
 
-object SideEffectExercise {
-    import Utils._
+        import Utils._
 
-    class SimpleChangePhoneService(phoneService: SimplePhoneService) extends ChangePhoneService {
-        override def changePhone(oldPhone: String, newPhone: String): String = {
-            val oldPhoneRecord = phoneService.findPhoneNumber(oldPhone)
-            if (oldPhoneRecord != null) {
-                phoneService.deletePhone(oldPhoneRecord)
+        class SimpleChangePhoneService(phoneService: SimplePhoneService) extends ChangePhoneService {
+            override def changePhone(oldPhone: String, newPhone: String): String = {
+                val oldPhoneRecord = phoneService.findPhoneNumber(oldPhone)
+                if (oldPhoneRecord != null) {
+                    phoneService.deletePhone(oldPhoneRecord)
+                }
+                phoneService.addPhoneToBase(newPhone)
+                "ok"
             }
-            phoneService.addPhoneToBase(newPhone)
-            "ok"
         }
-    }
 
 
-    class PhoneServiceSafety(unsafePhoneService: SimplePhoneService) {
-        def findPhoneNumberSafe(num: String) = ???
+        class PhoneServiceSafety(unsafePhoneService: SimplePhoneService) {
+            def findPhoneNumberSafe(num: String): Option[String] = Option(unsafePhoneService.findPhoneNumber(num))
 
-        def addPhoneToBaseSafe(phone: String) = ???
+            def addPhoneToBaseSafe(phone: String): Either[String, Unit] = Try(unsafePhoneService.addPhoneToBase(phone)) match {
+                case Success(value) => Right(value)
+                case Failure(exception) => Left(exception.getMessage)
+            }
 
-        def deletePhone(phone: String) = ???
-    }
+            def deletePhone(phone: String): Unit = unsafePhoneService.deletePhone(phone)
+        }
 
-    class ChangePhoneServiceSafe(phoneServiceSafety: PhoneServiceSafety) extends ChangePhoneService {
-        override def changePhone(oldPhone: String, newPhone: String): String = ???
+        class ChangePhoneServiceSafe(phoneServiceSafety: PhoneServiceSafety) extends ChangePhoneService {
+            override def changePhone(oldPhone: String, newPhone: String): String =
+                phoneServiceSafety
+                  .findPhoneNumberSafe(oldPhone)
+                  .map(phoneServiceSafety.deletePhone)
+                  .map(_ => phoneServiceSafety.addPhoneToBaseSafe(newPhone) match {
+                      case Right(_) => "ok"
+                      case Left(err) => err
+                  })
+                  .getOrElse("ok")
+        }
     }
 }
