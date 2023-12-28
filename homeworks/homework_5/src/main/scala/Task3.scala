@@ -1,9 +1,10 @@
 import cats._
-import cats.implicits._
+import cats.syntax.all._
+import mouse.all._
 
 import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration.DurationInt
+import scala.concurrent.duration.Duration
 
 /*
   Задание №3
@@ -25,8 +26,26 @@ object Task3 extends App {
   case class Count(word: String, count: Int)
   case class WordsCount(count: Seq[Count])
   object WordsCount {
-    implicit val monoid: Monoid[WordsCount] = ???
+    implicit val monoid: Monoid[WordsCount] = new Monoid[WordsCount] {
+
+      override def combine(x: WordsCount, y: WordsCount): WordsCount =
+        (x.count ++ y.count)
+          .groupBy(_.word)
+          .map { case (word, counts) =>
+            Count(word, counts.foldLeft(0)(_ + _.count))
+          }
+          .toSeq |> WordsCount.apply
+
+      override def empty: WordsCount = WordsCount(Seq())
+
+    }
   }
 
-  def countWords(lines: Vector[String]): WordsCount = ???
+  def countWords(lines: Vector[String]): WordsCount =
+    Await.result(
+      mapReduce[String, WordsCount](lines.flatMap(_.split(" "))) { word =>
+        WordsCount(Seq(Count(word, 1)))
+      },
+      Duration.Inf
+    )
 }
