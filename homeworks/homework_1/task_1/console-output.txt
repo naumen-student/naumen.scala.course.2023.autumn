@@ -1,0 +1,26 @@
+scala>
+
+scala> val name = "Vorotelenko Andrei"
+name: String = Vorotelenko Andrei
+
+scala> printf("Hello Scala! This is ${name}")
+Hello Scala! This is ${name}
+scala> printf("Hello Scala! This is " + name)
+Hello Scala! This is Vorotelenko Andrei
+scala> printf("Hola Scala! This is " + name)
+Hola Scala! This is Vorotelenko Andrei
+scala> printf("Salemetsibe Scala! This is " + name)
+Salemetsibe Scala! This is Vorotelenko Andrei
+scala> name = name.reverse
+<console>:12: error: reassignment to val
+       name = name.reverse
+            ^
+
+scala> name.reverse
+res4: String = ierdnA okneletoroV
+
+scala> printf("Hello Scala! This is " + name)
+Hello Scala! This is Vorotelenko Andrei
+scala> printf("Hello Scala! This is " + name.reverse)
+Hello Scala! This is ierdnA okneletoroV
+scala>
