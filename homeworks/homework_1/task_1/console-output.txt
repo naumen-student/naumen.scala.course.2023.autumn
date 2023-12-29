@@ -1,0 +1,44 @@
+cmbbigis@cmbbigis:~$ scala
+Welcome to Scala 2.11.12 (OpenJDK 64-Bit Server VM, Java 19.0.2).
+Type in expressions for evaluation. Or try :help.
+
+scala> val name = "Nikita Gavrilov"
+name: String = Nikita Gavrilov
+
+scala> val a = f"Hello Scala! This is $name%s"
+a: String = Hello Scala! This is Nikita Gavrilov
+
+scala> println(a)
+Hello Scala! This is Nikita Gavrilov
+
+scala> val b = a.replace("Hello", "Hola")
+b: String = Hola Scala! This is Nikita Gavrilov
+
+scala> println(b)
+Hola Scala! This is Nikita Gavrilov
+
+scala> val c = a.replace("Hello", "Guten Tag")
+c: String = Guten Tag Scala! This is Nikita Gavrilov
+
+scala> println(c)
+Guten Tag Scala! This is Nikita Gavrilov
+
+scala> val a1 = a.replace(name, name.reverse)
+a1: String = Hello Scala! This is volirvaG atikiN
+
+scala> println(a1)
+Hello Scala! This is volirvaG atikiN
+
+scala> val b1 = b.replace(name, name.reverse)
+b1: String = Hola Scala! This is volirvaG atikiN
+
+scala> println(b1)
+Hola Scala! This is volirvaG atikiN
+
+scala> val c1 = c.replace(name, name.reverse)
+c1: String = Guten Tag Scala! This is volirvaG atikiN
+
+scala> println(c1)
+Guten Tag Scala! This is volirvaG atikiN
+
+scala>
