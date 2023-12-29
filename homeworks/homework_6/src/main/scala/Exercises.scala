@@ -1,4 +1,5 @@
 import utils.ColorService.ColorService
+import utils.{ColorService, PictureGenerationService}
 import utils.PictureGenerationService.PictureGenerationService
 import utils.Utils._
 import zio.{IO, Random, URIO, ZIO}
@@ -12,8 +13,7 @@ object Exercises {
      * вернулся None, а в случае упеха Some
      */
     def task1(r: Int, g: Int, b: Int): URIO[ColorService, Option[Color]] =
-        ZIO.serviceWithZIO[ColorService](_.getColor(r, g, b))
-
+        ZIO.serviceWithZIO[ColorService](_.getColor(r, g, b).option)
 
     /**
      * Неободимо модифицировать ZIO объект так, чтобы он возвращал текстовую матрицу цветов вида
@@ -23,7 +23,12 @@ object Exercises {
      */
     def task2(size: (Int, Int)): ZIO[PictureGenerationService, GenerationError, String] =
         ZIO.serviceWithZIO[PictureGenerationService](_.generatePicture(size))
-
+          .map(_
+            .lines
+            .map(_
+              .map(clr => Integer.toUnsignedString(clr.getRGB))
+              .mkString(" "))
+            .mkString("\n"))
 
     /**
      * В задаче необходимо поработать с ошибками
@@ -37,9 +42,15 @@ object Exercises {
         for {
             colorServ <- ZIO.service[ColorService]
             pictureServ <- ZIO.service[PictureGenerationService]
-            color <- colorServ.generateRandomColor()
-            picture <- pictureServ.generatePicture(size)
-            filledPicture <- pictureServ.fillPicture(picture, color)
+            color <- colorServ
+              .generateRandomColor()
+              .mapError(_ => new GenerationError("Не удалось создать цвет"))
+            picture <- pictureServ
+              .generatePicture(size)
+              .mapError(_ => new GenerationError("Ошибка генерации изображения"))
+            filledPicture <- pictureServ
+              .fillPicture(picture, color)
+              .mapError(_ => new GenerationError("Возникли проблемы при заливке изображения"))
         } yield filledPicture
 
     /**
@@ -47,5 +58,7 @@ object Exercises {
      */
     def task4(size: (Int, Int)): IO[GenerationError, Picture] =
         task3(size)
+          .provideSomeLayer[ColorService](PictureGenerationService.live)
+          .provideLayer(ColorService.live)
 
 }
