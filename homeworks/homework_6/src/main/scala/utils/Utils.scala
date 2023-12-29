@@ -11,6 +11,10 @@ object Utils {
         override def getMessage: String = msg
     }
 
+    object GenerateRandomColorError extends GenerationError("Не удалось создать цвет")
+    object GeneratePictureError extends GenerationError("Ошибка генерации изображения")
+    object FillPictureError extends GenerationError("Возникли проблемы при заливке изображения")
+
     val zeroSize = (0, 0)
 
 }
