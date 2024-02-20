@@ -1,0 +1,38 @@
+C:\Users\alina>scala
+Welcome to Scala 2.13.8 (Java HotSpot(TM) 64-Bit Server VM, Java 17).
+Type in expressions for evaluation. Or try :help.
+
+scala> def greet(name: String, greeting: String): Unit = println(s"$greeting Scala! This is $name.")
+def greet(name: String, greeting: String): Unit
+
+scala> val helloGreet = greet(_, "Hello")
+val helloGreet: String => Unit = $Lambda$1086/0x0000000801164000@e7e455d
+
+scala> val holaGreet = greet(_, "Hola")
+val holaGreet: String => Unit = $Lambda$1087/0x0000000801164df8@7a021f49
+
+scala> val gutentagGreet = greet(_, "Guten tag")
+val gutentagGreet: String => Unit = $Lambda$1088/0x0000000801165bf0@61c145cb
+
+scala> val personName = "Alina Mukhametzhanova"
+val personName: String = Alina Mukhametzhanova
+
+scala> helloGreet(personName)
+Hello Scala! This is Alina Mukhametzhanova.
+
+scala> holaGreet(personName)
+Hola Scala! This is Alina Mukhametzhanova.
+
+scala> gutentagGreet(personName)
+Guten tag Scala! This is Alina Mukhametzhanova.
+
+scala> helloGreet(personName.reverse)
+Hello Scala! This is avonahztemahkuM anilA.
+
+scala> holaGreet(personName.reverse)
+Hola Scala! This is avonahztemahkuM anilA.
+
+scala> gutentagGreet(personName.reverse)
+Guten tag Scala! This is avonahztemahkuM anilA.
+
+scala>
