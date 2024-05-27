@@ -1,3 +1,5 @@
+import Task1.ShowSyntax.ShowOps
+
 /*
   Задание №1
   В задание уже описан тайп класс и синтакс для него.
@@ -45,9 +47,19 @@ object Task1 extends App {
   }
 
   object ShowInstance {
-    implicit val catShow: Show[Cat] = ???
 
-    implicit def boxShow[A: Show]: Show[Box[A]] = ???
+    implicit val catShow: Show[Cat] = {
+      case a:VeryLittleCat => s"очень маленький кот ${a.name}"
+      case a:LittleCat => s"маленький кот ${a.name}"
+      case a:NormalCat => s"кот ${a.name}"
+      case a:BigCat => s"большой кот ${a.name}"
+      case a:VeryBigCat => s"очень большой кот ${a.name}"
+    }
+
+    implicit def boxShow[A: Show]: Show[Box[A]] = {
+      case box: BoxWith[Cat] => s"${box.value.show} в коробке"
+      case EmptyBox => s"пустая коробка"
+    }
   }
 
   object ShowSyntax {
