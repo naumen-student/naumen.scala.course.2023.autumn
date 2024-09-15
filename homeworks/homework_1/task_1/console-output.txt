@@ -1,0 +1,22 @@
+C:\Users\andre>scala
+Welcome to Scala 2.12.10 (OpenJDK 64-Bit Server VM, Java 11.0.21).
+Type in expressions for evaluation. Or try :help.
+
+scala> val myName = "Andrew Kuklinov"
+myName: String = Andrew Kuklinov
+
+scala> val greetings = Array("Hello", "Heya", "Good day to you")
+greetings: Array[String] = Array(Hello, Heya, Good day to you)
+
+scala> def hello(greeting: String, name: String): Unit = println(s"${greeting} Scala! This is ${name}")
+hello: (greeting: String, name: String)Unit
+
+scala> for(greeting <- greetings) hello(greeting, myName)
+Hello Scala! This is Andrew Kuklinov
+Heya Scala! This is Andrew Kuklinov
+Good day to you Scala! This is Andrew Kuklinov
+
+scala> for(greeting <- greetings) hello(greeting, myName.reverse)
+Hello Scala! This is vonilkuK werdnA
+Heya Scala! This is vonilkuK werdnA
+Good day to you Scala! This is vonilkuK werdnA
