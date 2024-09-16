@@ -1,0 +1,28 @@
+C:\Users\polinka>sbt console
+[info] welcome to sbt 1.9.7 (Oracle Corporation Java 1.8.0_391)
+[info] loading project definition from C:\Users\polinka\project
+[info] set current project to polinka (in build file:/C:/Users/polinka/)
+[info] Starting scala interpreter...
+Welcome to Scala 2.12.18 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_391).
+Type in expressions for evaluation. Or try :help.
+
+scala>  val name = "Polina"
+name: String = Polina
+
+scala> println(s"Hello Scala! This is $name")
+Hello Scala! This is Polina
+
+scala> val greetings = Array("Hello", "Hola", "Guten tag")
+greetings: Array[String] = Array(Hello, Hola, Guten tag)
+
+scala> greetings.foreach(arg => if(arg!=greetings(0)) println(s"$arg Scala! This is $name"))
+Hola Scala! This is Polina
+Guten tag Scala! This is Polina
+
+scala> val reversedName = name.reverse
+reversedName: String = aniloP
+
+scala> greetings.foreach(arg => println(s"$arg Scala! This is $reversedName"))
+Hello Scala! This is aniloP
+Hola Scala! This is aniloP
+Guten tag Scala! This is aniloP
