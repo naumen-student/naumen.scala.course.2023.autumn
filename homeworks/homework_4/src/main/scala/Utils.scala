@@ -31,6 +31,6 @@ object Utils {
     }
 
     trait ChangePhoneService {
-        def changePhone(oldPhone: String, newPhone: String): String
+        def changePhone(oldPhone: String, newPhone: String): Either[String, String]
     }
 }
