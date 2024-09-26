@@ -1,0 +1,41 @@
+C:\Users\user\.jdks\openjdk-21.0.1\bin\java.exe "-javaagent:C:\_Soft\IntelliJ IDEA Community Edition 2023.2.5\lib\idea_rt.jar=53814:C:\_Soft\IntelliJ IDEA Community Edition 2023.2.5\bin" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\user\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.12.18.jar;C:\Users\user\.ivy2\cache\org.scala-lang\scala-reflect\jars\scala-reflect-2.12.18.jar;C:\Users\user\.ivy2\cache\org.scala-lang.modules\scala-xml_2.12\bundles\scala-xml_2.12-2.1.0.jar;C:\Users\user\.ivy2\cache\org.scala-lang\scala-compiler\jars\scala-compiler-2.12.18.jar;C:\Users\user\AppData\Roaming\JetBrains\IdeaIC2023.2\plugins\Scala\lib\runners.jar scala.tools.nsc.MainGenericRunner -usejavacp -Xnojline
+Welcome to Scala 2.12.18 (OpenJDK 64-Bit Server VM, Java 21.0.1).
+Type in expressions for evaluation. Or try :help.
+
+scala> println("Hello Scala! I'm Viktor Mikhailov")
+Hello Scala! I'm Viktor Mikhailov
+
+scala> for (greeting <- Seq("Hola", "Hello", "Guren tag")) println(s"${greeting} Scala! I'm Viktor Mikhailov")
+Hola Scala! I'm Viktor Mikhailov
+Hello Scala! I'm Viktor Mikhailov
+Guren tag Scala! I'm Viktor Mikhailov
+
+scala> val name = "Viktor Mikhailov"
+name: String = Viktor Mikhailov
+
+scala> val rev_name = name.reverse
+rev_name: String = voliahkiM rotkiV
+
+scala> for (greeting <- Seq("Hola", "Hello", "Guren tag")) { println(s"${greeting} Scala! I'm Viktor Mikhailov")
+     |
+     |
+You typed two blank lines.  Starting a new command.
+
+scala> for (greeting <- Seq("Hola", "Hello", "Guren tag")) {
+     |   print(s"${greeting} Scala!")}
+Hola Scala!Hello Scala!Guren tag Scala!
+scala> for (greeting <- Seq("Hola", "Hello", "Guren tag")) {
+     |   print(s"${greeting} Scala! I'm ${name}")
+     |   print(s"${greeting} Scala! I'm ${rev_name}")
+     | }
+Hola Scala! I'm Viktor MikhailovHola Scala! I'm voliahkiM rotkiVHello Scala! I'm Viktor MikhailovHello Scala! I'm voliahkiM rotkiVGuren tag Scala! I'm Viktor MikhailovGuren tag Scala! I'm voliahkiM rotkiV
+scala> for (greeting <- Seq("Hola", "Hello", "Guren tag")) {
+     |   println(s"${greeting} Scala! I'm ${rev_name}")
+     |   println(s"${greeting} Scala! I'm ${name}")
+     | }
+Hola Scala! I'm voliahkiM rotkiV
+Hola Scala! I'm Viktor Mikhailov
+Hello Scala! I'm voliahkiM rotkiV
+Hello Scala! I'm Viktor Mikhailov
+Guren tag Scala! I'm voliahkiM rotkiV
+Guren tag Scala! I'm Viktor Mikhailov
