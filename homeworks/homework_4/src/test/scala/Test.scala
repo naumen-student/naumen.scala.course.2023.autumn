@@ -10,7 +10,7 @@ object Test extends TestSuite {
     }
     override def tests: Tests = Tests {
         'firstTask - (1 to 5).foreach { _ =>
-            val testList = generateRandomList(50)
+            val testList = generateRandomList(50) ++ List(0) // fix for empty list test
             val sumValue = testList(Random.nextInt(testList.size)) + testList(Random.nextInt(testList.size))
             assert(Exercises.findSumImperative(testList, sumValue) == Exercises.findSumFunctional(testList, sumValue))
         }
