@@ -49,11 +49,10 @@ C:\Users\doter>scala                                                            
 
 Для первоначального знакомства с SBT предлагаем работать через IntelliJ IDEA.
 
-Инструкция по созданию нового SBT проекта в IDEA - https://docs.scala-lang.org/getting-started/intellij-track/building-a-scala-project-with-intellij-and-sbt.html 
+Инструкция по созданию нового SBT проекта в IDEA - https://docs.scala-lang.org/getting-started/intellij-track/building-a-scala-project-with-intellij-and-sbt.html
 
 Необходимо создать новый проект, проверить что всё работает, запустив его как описано в инструкции (будте готовы к тому что проект прогружается несколько минут, а затем при первоначальном запуске может начать скачивать зависимости из интернета).
 
 Далее необходимо перенести код из п.2 вместо текущего "Hello world" (в тело объекта ```object Main extends App```) и исполнить его с помощью SBT (команда sbt run в консоли).
 
 Результат - после всех манипуляций скопировать папку sbt проекта в папку результатов (```homeworks/homework_1/task_3```) и закоммитить в git всю папку проекта со всеми файлами.
-
